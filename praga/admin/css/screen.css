@@ -1,0 +1,17 @@
+/* 
+Title:		Экран стилей и ie/win патчи
+Author: 	dan@simplebits.com
+*/
+
+/* Импорт таблиц стилей и скрыто ie/mac \*/
+@import url("reset.css");
+@import url("main_style.css");
+@import url("form.css");
+@import url("_ie.css");
+/* Конец Импорт \ Скрыто */
+
+/*
+@import url("classes.css");
+@import url("tabsort.css");
+@import url("arrows.css");
+ */

@@ -1,0 +1,58 @@
+/* стиль для вывода страницы в печать */
+
+
+#extra, #activities,
+#footer, #header,
+#inventory tr td #parameters table {
+    display: none;
+}
+
+* { /* Черный шрифт для всех тэгов независимо ни от чего */
+	color: black !important;	
+    } 
+
+h1, h2, p, td, td p, td p a, th {
+    font-family: "Times New Roman", Times, serif !important;
+}
+td, td p, td p a {
+    font-size: 10pt !important;
+}
+
+table tr td p a {
+    text-decoration: none !important;
+}
+
+#content {
+    margin: 0 !important;
+}
+
+#inventory tr.input {
+    display: none;
+}
+
+#inventory th {
+    background: none;
+}
+
+#inventory tr.sub td,
+#inventory th {
+    font-weight: bold !important;
+    font-size: 11pt !important;
+}
+/*
+#inventory tr.sub td {
+    background: none !important;
+}
+*/
+html, body, #container { /* Убирает фоны изображений и цвета */
+	background: white;
+    }
+/* Переопределение размеров и стилей шрифтов в пункты - более логичные для принтеров */
+#realties h1 {
+    font-size: 16pt !important;
+    font-weight: normal !important;
+    }
+
+#realties h1 em {
+    font-weight: bold;
+    }

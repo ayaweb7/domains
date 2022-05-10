@@ -1,0 +1,232 @@
+/* ********************************* */
+/*    СТИЛИ ДЛЯ СТРАНИЧКИ 'SEARCH'   */
+/* ********************************* */
+
+
+/* ******************** */
+/*      СТРУКТУРА       */
+/* ******************** */
+
+span {text-align: center;}
+label {float: left;}
+.blockButton input {display: none;}
+.blockButton label {padding: .2em .5em;}
+.blockButton label:hover {background: #ddd; cursor:pointer; border-radius: 3px;}
+.blockButton input:checked + label {
+	color: black;
+	font-weight: bold; 
+	background: url(../img/inputbg.jpg) top repeat-x; /*dark-blue, #95fc69 lime */
+	border: 1px solid #eef7fd; /* light-blue*/
+	border-radius: 3px;} /* red */
+.inputSubmit:hover {cursor:pointer;}
+
+/* ******************** */
+/*    CALCULATIONS      */
+/* ******************** */
+#initial span {
+	color: #0d6efd; /*light-blue*/
+	font-style: inherit;
+	font-weight: inherit;
+	font-size: 1.25rem;
+}
+
+#result .flexSmall,
+#initial .flexSmall {
+	border-bottom: none;
+}
+/*
+#result .flexTitle {
+	border-bottom: 1px solid #19910f;
+}
+*/
+.blockInput input,
+.blockInput select {
+	border: 1px solid #eef7fd; /* light-blue*/
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: auto;
+	padding-left: 3px;
+    }
+
+.blockInput input {
+	background: url(../img/inputbg.jpg) top repeat-x;/**/
+  }
+
+.blockInput input:hover {
+    border: 1px solid #0d6efd; /* dark-blue*/
+    color: #0d6efd; /* dark-blue*/
+/*    text-shadow: 1px 1px 2px #FFF300; yellow */
+}
+	
+.blockInput select {
+	background-color: #eef7fd; /* light-blue*/
+	}
+
+.blockInput input:focus,
+.blockInput select:focus {
+   border: 1px solid red;  /*#007c37 light-blue*/
+}
+
+/* ********************** */
+/*         SPECIF         */
+/* ********************** */
+table tr .subtitle {
+	background-color: #eef7fd; /* - light-blue*/
+	font-weight: bold;
+}
+
+
+/* ********************** */
+/*    СТИЛИ ДЛЯ DIV-ов    */
+/* ********************** */
+
+
+#divTop {
+	font-size: 1.5em;
+}
+
+.flexBig {
+	display: flex;
+	flex-direction: column;
+/*    background-color: #ccc;#5e1da7;*/
+	align-items: center;/**/	
+/*	padding: 1% 1%;*/
+/*	margin: 0 0%;*/
+	width: 100%;
+}
+
+.flexTitle {
+/*	background-color: lightgreen;*/
+	display: flex;
+	flex-direction: row;
+/*	justify-content: center;*/
+/*	padding: 1% 1%;*/
+/*	margin: 0 1%;*/
+	width: 100%;
+}
+
+.flexMiddle {/**/
+	display: flex;
+	flex-direction: column;
+	/*justify-content: space-around;*/
+	padding: 1% 1%;
+	margin: 1% 1%;
+	width: 100%;
+	
+}
+
+.flexSmall {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;/**/
+	padding: 1% 1%;
+	margin: 0 1%;
+	/*border-bottom: 1px solid #19910f;*/
+}
+/**/
+.blockInput {
+	display: flex;
+	flex-direction: column;
+	/*justify-content: space-evenly;*/
+
+}
+
+.blockButton {
+	flex-direction: row;
+	/*justify-content: space-around;*/
+}
+
+/**/
+.blockInput span,
+.flexSmall span, 
+#divTop {
+	color: #19910f;/* green*/
+	font-style: italic;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.flexOne {/**/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;/**/
+	padding: 1% 1%;
+	margin: 0 1%;
+}
+
+.border-spektr {
+  border-bottom: 1px solid #986D4B; /* light-brown */
+}
+
+#height_hidden,
+#color_hidden {
+	display: none;
+}
+
+#title_search {
+	color: #19910f;/* green */
+    font-weight: bold;
+	font-size: 1.5em;
+}
+
+#title_search em {
+	color: #d01e1e;/* red */
+}
+
+#title_search span {
+	font-style: italic;
+	font-size: 0.9em;/**/
+	color: gray;/* gray */
+}
+
+.img-center {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+/* ************* */
+/*    BUTTONS    */
+/* ************* */
+
+/**/
+.logo {
+	display: flex;
+	width: 10%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+}
+
+.menu {
+	width: 60%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.mobil {
+	width: 25%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.tel {
+	width: 25%;/**/
+	flex-direction: row;
+	align-items: center;
+	font-weight: bold;
+}
+
+.flexPhone {/**/
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;/**/
+	/*padding: 1% 1%;
+	margin: 0 1%;
+	border-bottom: 1px solid #19910f;*/
+}

@@ -1,0 +1,209 @@
+Свойство			Описание
+browser.family		Имя браузера
+browser.name		Имя браузера и его версия
+browser.version		Полная версия браузер
+browser.major		Основной номер версии браузера
+browser.minor		Дополнительный номер версии браузера
+browser.patch		Номер патча браузера
+device.family		Имя устройства
+device.name			Имя устройства и версия
+device.version		Полная версия устройства
+device.major		Основной номер версии устройства
+device.major		Дополнительный номер версии устройства
+device.patch		Номер патча устройства
+device.type			Тип устройства (например, "Desktop" или "Mobile")
+device.manufacturer	Производитель устройства
+os.family			Название операционной системы
+os.name				Полное имя операционной системы
+os.version			Полная версия операционной системы
+os.major			Основной номер версии операционной системы
+os.minor			Дополнительный номер версии операционной системы
+os.patch			Номер патча операционной системы
+
+
+IP: 94.25.225.197
+Location: Vologda, Vologda
+
+{ "ip": "94.25.225.197",
+ "hostname": "client.yota.ru",
+ "city": "Vologda",
+ "region": "Vologda",
+ "country": "RU",
+ "loc": "59.2239,39.8840",
+ "org": "AS31213 PJSC MegaFon",
+ "postal": "160000",
+ "timezone": "Europe/Moscow",
+ "readme": "https://ipinfo.io/missingauth"
+ }
+ 
+IP: 188.168.107.255
+Location: Komi, City: Syktyvkar
+
+{ "ip": "188.168.107.255",
+ "hostname": "255.107.168.188.retail.ttk.ru",
+ "city": "Syktyvkar",
+ "region": "Komi",
+ "country": "RU",
+ "loc": "61.6640,50.8150",
+ "org": "AS15774 Limited Liability Company TTK-Svyaz",
+ "postal": "167000",
+ "timezone": "Europe/Moscow",
+ "readme": "https://ipinfo.io/missingauth" }
+ 
+ 
+ ^CCf6`hCE<^-|y3 Ana GosUslugi
+ 
+ 
+ Help GIT
+ 
+ $ git --help
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           [--super-prefix=<path>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+Translate
+$ git --help
+		   
+использование: git [--version] [--help] [-C <path>] [-c <name> = <value>]
+           [--exec-path [= <path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir = <путь>] [--work-tree = <путь>] [--namespace = <имя>]
+           [--super-prefix = <путь>] [--config-env = <имя> = <envvar>]
+           <команда> [<аргументы>]		   
+		   
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone             Clone a repository into a new directory
+   init              Create an empty Git repository or reinitialize an existing one
+
+Translate
+$ git --help
+   
+Это общие команды Git, используемые в различных ситуациях:
+
+начать рабочую область (см. также: руководство по git help)
+   clone Клонировать репозиторий в новый каталог
+   init Создать пустой репозиторий Git или повторно инициализировать существующий   
+   
+
+work on the current change (see also: git help everyday)
+   add               Add file contents to the index
+   mv                Move or rename a file, a directory, or a symlink
+   restore           Restore working tree files
+   rm                Remove files from the working tree and from the index
+   sparse-checkout   Initialize and modify the sparse-checkout
+
+Translate
+$ git --help
+   
+работать над текущим изменением (см. также: git help каждый день)
+   add Добавить содержимое файла в индекс
+   mv Перемещение или переименование файла, каталога или символической ссылки
+   восстановить Восстановить файлы рабочего дерева
+   rm Удалить файлы из рабочего дерева и из индекса
+   sparse-checkout Инициализировать и изменить sparse-checkout   
+   
+
+examine the history and state (see also: git help revisions)
+   bisect            Use binary search to find the commit that introduced a bug
+   diff              Show changes between commits, commit and working tree, etc
+   grep              Print lines matching a pattern
+   log               Show commit logs
+   show              Show various types of objects
+   status            Show the working tree status
+
+Translate
+$ git --help
+   
+изучить историю и состояние (см. также: git help revisions)
+   bisect Используйте двоичный поиск, чтобы найти фиксацию, которая привела к ошибке
+   diff Показать изменения между коммитами, фиксацией и рабочим деревом и т. д.
+   grep Печатать строки, соответствующие шаблону
+   log Показать журналы фиксации
+   показать Показать различные типы объектов
+   status Показать статус рабочего дерева   
+   
+
+
+grow, mark and tweak your common history
+   branch            List, create, or delete branches
+   commit            Record changes to the repository
+   merge             Join two or more development histories together
+   rebase            Reapply commits on top of another base tip
+   reset             Reset current HEAD to the specified state
+   switch            Switch branches
+   tag               Create, list, delete or verify a tag object signed with GPG
+
+Translate
+$ git --help
+
+расти, отмечать и корректировать вашу общую историю
+   Список веток, создание или удаление веток
+   зафиксировать Записать изменения в репозиторий
+   объединить Объединить две или более историй разработки вместе
+   rebase Reapply фиксируется поверх другой базовой подсказки
+   сброс Сбросить текущую ГОЛОВУ в указанное состояние
+   переключить Переключить ветви
+   tag Создание, перечисление, удаление или проверка объекта тега, подписанного с помощью GPG
+
+
+Translate
+$ git --help
+
+collaborate (see also: git help workflows)
+   fetch             Download objects and refs from another repository
+   pull              Fetch from and integrate with another repository or a local branch
+   push              Update remote refs along with associated objects
+
+Translate
+$ git --help
+
+сотрудничать (см. также: рабочие процессы справки git)
+   fetch Загрузить объекты и ссылки из другого репозитория
+   вытащить Fetch и интегрировать с другим репозиторием или локальной веткой
+   нажмите Обновить удаленные ссылки вместе со связанными объектами
+
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+
+Translate
+$ git --help
+
+'git help -a' и 'git help -g' перечисляют доступные подкоманды и некоторые
+концептуальные руководства. См. 'Git help <command>' или 'git help <concept>'
+читать о конкретной подкоманде или концепции.
+См. «Git help git» для обзора системы.
+
+
+ cd ~/.ssh && ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/Андрей/.ssh/id_rsa): attr.txt
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in attr.txt
+Your public key has been saved in attr.txt.pub
+The key fingerprint is:
+SHA256:uq1uTqmLwzh2dTM5nCB0lTz1AQ/ngl2FK4N4RoELeGE Андрей@User-PC
+The key's randomart image is:
++---[RSA 3072]----+
+|  .E. +o++.+o.   |
+| ..+ o =o B..    |
+|  o o +.oo +.    |
+|   . + + o..     |
+|    . = S o      |
+|     . @         |
+| o  . = +        |
+|o.oo o.o         |
+|..o.o==..        |
++----[SHA256]-----+
+
+
+https://docs.google.com/spreadsheets/d/1fMiH1Lcp1-FAuhGOGoPX9dHaZ2qjxffDeJeeRPs0QJM/edit?usp=sharing

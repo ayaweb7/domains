@@ -1,0 +1,225 @@
+<?php
+//include ("blocks/date_base.php"); /* Соединяемся с базой данных */
+//mysql_query('SET NAMES utf8');
+//$result = mysql_query("SELECT title,meta_d,meta_k,h1,h2,date,month FROM settings WHERE page='house_insert'",$db);
+//
+//$myrow = mysql_fetch_array($result);
+//?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="nikart" content="The Sabotage Rebellion" />
+    <link href="../css/form.css" type="text/css" rel="stylesheet" />
+	<title>Характеристики домов</title>
+</head>
+
+<body>
+<form name="form" action="mysql_house_insert.php" method="post">
+	<table cellspacing="0" cellpadding="1" width="100%" class="tableborder">
+    	<tr>
+ 	      <td class="tablehead">Ввод характеристик домов в базу</td>
+    	</tr>
+        
+        <tr>
+          <td valign="top" width="100%">
+          
+            <table width="100%" cellpadding="3">
+                <tr>
+<!-- ОСНОВНЫЕ -->
+                        <td valign="top" width="20%">
+                          <div><b>ОСНОВНЫЕ</b></div>
+                            
+                            <table align="center" width="100%">
+                                
+                                                          
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Основная улица (street)</span><br/>
+
+						          <select name='street' size='1'>
+                                  <option></option>
+                                  <option>Архангельская</option>
+                                  <option>Восточная</option>
+                                  <option>Глейха</option>
+                                  <option>Гоголя</option>
+                                  <option>Дыбцына</option>
+                                  <option>Зелёная</option>
+                                  <option>Калинина</option>
+                                  <option>Кирова</option>
+                                  <option>Космонавтов</option>
+                                  <option>Куйбышева</option>
+                                  <option>Кутузова</option>
+                                  <option>Ленина</option>
+                                  <option>Лермонтова</option>
+                                  <option>Ломоносова</option>
+                                  <option>Набережная</option>
+                                  <option>Пушкина</option>
+                                  <option>Сафьяна</option>
+                                  <option>Свердлова</option>
+                                  <option>Советская</option>
+                                  <option>Театральная</option>
+                                  <option>Чапаева</option>
+                                  <option>Черёмуха</option>
+                                  <option>Черёмуха (до переезда)</option>
+                                  <option>другое</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                           
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Основной дом (house)</span><br/>
+						          <input type="text" name="house" size="10" value=""/>
+                            </td></tr>
+                            
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Тип (type)</span><br/>
+
+						          <select name='type' size='1'>
+                                  <option>квартира</option>
+                                  <option>секция</option>
+                                  <option>гостинка</option>
+                                  <option>частный сектор</option>
+                                  <option>дача</option>
+                                  <option>дом</option>
+                                  <option>участок</option>
+                                  <option>офисное помещение</option>
+                                  <option>гараж</option>
+                                  <option>другое</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                            
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Стены 1 (wall)</span><br/>
+
+						          <select name='wall' size='1'>
+                                  <option>кирпич</option>
+                                  <option>панель</option>
+                                  <option>дерево</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                             
+                             <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Стены 2 (walls)</span><br/>
+
+						          <select name='walls' size='1'>
+                                  <option>кирпичный</option>
+                                  <option>панельный</option>
+                                  <option>деревянный</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                            
+                            
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Планировка (improved)</span><br/>
+
+						          <select name='improved' size='1'>
+                                  <option>старая</option>
+                                  <option>улучшенная</option>
+                                  <option>сталинская</option>
+                                  <option>секции</option>
+                                  <option>гостинки</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr> 
+                            
+                             <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Этажность (floors)</span><br/>
+
+						          <select name='floors' size='1'>
+                                  <option>1</option>
+                                  <option>2</option>
+								  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                  <option>11</option>
+                                  <option>12</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                             
+                            
+                        </table></td>
+                
+ <!-- ДОПОЛНИТЕЛЬНЫЕ -->               
+                   <td valign="top" width="49%">
+                    <div><b>ДОПОЛНИТЕЛЬНЫЕ</b></div>
+
+                        <table align="center" width="100%">
+                            
+                          <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Дополнительная улица (street_dop)</span><br/>
+
+						          <select name='street_dop' size='1'>
+                                  <option></option>
+                                  <option>Архангельская</option>
+                                  <option>Восточная</option>
+                                  <option>Глейха</option>
+                                  <option>Гоголя</option>
+                                  <option>Дыбцына</option>
+                                  <option>Зелёная</option>
+                                  <option>Калинина</option>
+                                  <option>Кирова</option>
+                                  <option>Космонавтов</option>
+                                  <option>Куйбышева</option>
+                                  <option>Кутузова</option>
+                                  <option>Ленина</option>
+                                  <option>Лермонтова</option>
+                                  <option>Ломоносова</option>
+                                  <option>Набережная</option>
+                                  <option>Пушкина</option>
+                                  <option>Сафьяна</option>
+                                  <option>Свердлова</option>
+                                  <option>Советская</option>
+                                  <option>Театральная</option>
+                                  <option>Чапаева</option>
+                                  <option>Черёмуха</option>
+                                  <option>Черёмуха (до переезда)</option>
+                                  <option>другое</option>
+                                  <option></option>
+                                  </select>
+                             </td></tr>
+                           
+                            <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Дополнительный дом (house_dop)</span><br/>
+						          <input type="text" name="house_dop" size="10" value=""/>
+                              </td></tr>                                
+                                                          
+                              <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Фотография 1 (photo1)</span><br/>
+						          <input type="text" name="photo1" size="30" value="Arhangelskaya9a"/>
+                              </td></tr>
+                              
+                              <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Фотография 2 (photo2)</span><br/>
+						          <input type="text" name="photo2" size="30" value="Arhangelskaya9a-1"/>
+                              </td></tr>
+                              
+                              <tr>
+						      <td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Для ориентации (orientation)</span><br/>
+						          <input type="text" name="orientation" size="80" value=""/>
+                              </td></tr>
+                              
+                        </table></td>
+                        
+
+                        </tr></table>
+
+<input class="inputbuttonflat" type="submit" name="set_filter" value="Отправить данные" style="margin-left:20px;"/>
+<input type="reset" name="set_filter" value="Сбросить"/>
+
+<br/><br/></td></tr></table>
+
+	</form>
+<p><a href="index_admin.php" title="Вернуться в блок администратора">Вернуться в блок <em>администратора</em></a></p>    
+</body>
+</html>

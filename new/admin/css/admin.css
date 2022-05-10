@@ -1,0 +1,270 @@
+/* top */
+#top {
+    position :fixed;
+    bottom :100px;
+    right :5px;
+}
+
+/* ******************** */
+/*        HEADER        */
+/* ******************** */
+
+#header {
+	display: flex;
+	flex-direction: column;/**/
+	/*align-items: stretch;*/
+	background-repeat: round space;
+	/*background-position: left 20%;*/
+	/*background-size: contain;*/
+	/*background-color: #fff;white*/
+	/*padding: 5px;*/
+	margin-bottom: 1%;
+	/*margin-top: 1%;*/
+	/*height: 30%;*/
+	width: 100%;
+}
+
+/* ********************* */
+/*    TABLE INVENTORY    */
+/* ********************* */
+#inventory { /* ����� ����� ��� ������� */
+	clear: both;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 98%; /* 98% - ��-�� ����������� ������������� � IE6 */
+    border-collapse: collapse; /* ������� ������� ������� ����� �������� */
+    margin: 0 auto 1.5em auto; /**/
+}
+
+caption {
+	/*float: left;*/
+	/*position: relative;*/
+	/*padding-top: 1%;*/
+    /*margin-top: 1%;*/
+}
+
+#inventory h1 { /* ����� ��� ��������� ������� */
+    text-align: center;
+    font-size: 2em;
+    color: #19910f;/* green */
+    font-weight: bold;
+}
+	
+#inventory h1 em{ /* ����� ��� ��������� ������� */
+    color: #d01e1e;/* red */
+    }
+#inventory h2 {
+    font-size: 1.2em;
+    text-align: center;
+    padding-bottom: 0.5%;
+    }
+
+#inventory th { /**/
+	font-size: 1em;
+    border: 1px solid #19910f;/*green*/
+    padding: 0; /* 3px 7px 2px 7px���������� ������� � ������� */
+    text-align: center;
+	vertical-align: center;
+    }
+	
+#inventory td {
+	font-size: 0.9em;
+    border: 1px solid #19910f;/*green*/
+	padding: 0px 7px 3px 7px; /**/
+	margin: 1px;
+	vertical-align: center;
+}
+
+#inventory td a {
+	padding: 0.5em;
+}
+	
+#inventory th,
+#inventoty td.ren h3 { /* ����� ��� ������������ ����� ������� */
+    
+    /*padding-top: 5px; */
+    /*padding-bottom: 4px; */
+    background: url(../img/table_bg.png) bottom left;
+    color: #fff300;/* yellow */
+    }
+#inventory tr.alt td { /* ����� ��� ������ ����� ������� */
+    background-color: #eaeaea;
+	}
+
+#inventory th { /* ����� ��� ������ ����� ������� */
+    border: 1px solid #fff300;/* yellow */
+	vertical-align: center;
+    }
+
+#inventory tr.sub td { /* ����� ��� ��������������� ����� ������� */
+    background-color: #fff300;/* yellow */
+    font-size: 1.2em;
+    font-weight: bold;
+	text-align: center;
+	color: #19910f;/* green */
+    }
+
+#inventory tr.sub td em { /* ����� ��� ��������������� ����� ������� */
+    color: #d01e1e;/* red */
+    }
+	
+/* WIDTH COLUMN TABLE INVENTORY_ID */
+#inventory .name_bid {
+	width: 10%;
+	text-align: left;
+	color: #d01e1e;/* red */
+	font-weight: bold;
+	}
+	
+#inventory .id_bid {
+	width: 3%;
+	text-align: right;
+    }
+	
+#inventory .tel_bid {
+	width: 10%;
+	text-align: left;
+    }
+	
+#inventory .mess_bid {
+    width: 30%;
+	text-align: left;
+	font-style: italic;
+	color: #19910f;/* green */
+    }
+	
+#inventory .time_bid {
+	width: 12%;
+	text-align: right;
+	font-size: 0.8em;
+    }
+
+#inventory .host_bid {
+	width: 10%;
+	text-align: left;
+	font-size: 0.8em;
+    }
+
+#inventory .city_bid {
+	width: 5%;
+	text-align: left;
+    }
+	
+#inventory .loc_bid {
+	width: 5%;
+	text-align: center;
+	}
+
+#inventory .browser_bid {
+	width: 10%;
+	text-align: left;
+    }
+
+#inventory .itog {
+	 background-color: #19910f;/* green */
+	 font: 1.2em bold Georgia, 'Times New Roman', Times, serif;
+	 color: #fff300;/* yellow */
+	 text-align: right;
+}
+
+/* ************************ */
+/*    ОСНОВНАЯ НАВИГАЦИЯ    */
+/* ************************ */
+
+/*------------------------------------*\
+	СКАЧАННЫЙ КОД НАВИГАЦИИ
+\*------------------------------------*/
+#nav {
+    float: left;/**/
+	/*width: 98%;*/
+	margin: 0.5em auto 0.5em auto;
+    /*position: absolute;*/
+    background: url(../img/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+	margin-bottom: 1%;/**/
+    }
+
+#nav li {
+	float: left;
+	position: relative;
+	display: block;
+    }
+    
+#nav li a {
+	display: block;
+	padding: 4px 12px;
+	color: #19910f;/*green*/
+    font: bold 1em Arial, sans-serif;
+	background: url(../img/polosa.png) no-repeat;
+	text-decoration: none;
+    text-transform: uppercase;
+    }
+    
+#nav li.first a {
+    background: none;
+}
+
+#nav li a.active, #nav li a:hover {
+    color: #19910f;/*green*/
+    text-shadow: 1px 1px 2px #bebebe;
+    }
+    
+#nav li a em:hover {
+    color: #d01e1e; /*red*/
+    }
+    
+#nav ul { /* ВЫПАДАЮЩИЕ ПУНКТЫ */
+	list-style: none;
+	position: absolute;
+	display: none;
+    -webkit-transition: 0.25s linear opasity;
+    z-index: 5;
+    }
+    
+#nav ul li {
+	padding-top: 1px; 
+	float: none;
+    }
+    
+#nav ul a {
+	white-space: nowrap; 
+	display: block;
+    text-transform: none;
+    }
+    
+#nav li:hover ul { /* Выводим выпадающий пункт при наведении курсора */
+	display: block;
+    }
+    
+#nav li:hover a { 
+	background: url(../img/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+    
+#nav li:hover ul li a:hover { 
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+
+#nav ul li a.first{
+    background: none;
+}
+
+#nav li a.last {
+    padding-right: 0;
+}
+
+#nav ul li ul li a{
+    background: none;
+}
+
+#nav ul{
+    /**/margin: 0;
+}

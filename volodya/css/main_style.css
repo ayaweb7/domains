@@ -1,0 +1,366 @@
+﻿@import url(reset.css);
+/* PRAGA */
+
+
+
+/* ******************** */
+/*    ОСНОВНЫЕ СТИЛИ    */ 
+/* ******************** */
+
+
+/* ******************** */
+/*      STRUKTURA        */
+/* ******************** */
+/*OBERTKA*/
+
+#header{
+   background: url(../images/P1150888.png) 0% 0% no-repeat, url(../images/header_bg.png) top left repeat-x;
+   background-color: #fff;
+   padding: 5px;
+   margin-bottom: 3%;
+   margin-top: 1%;
+   height: 200px;
+   
+}
+/**/
+
+	
+/* ************************************* */
+/* СТИЛИ ДЛЯ ЗАГОЛОВКОВ, АБЗАЦЕВ, ССЫЛОК */
+/* ************************************* */
+p, ul {
+    margin: 1.5em 1em;
+    }
+    
+a {
+    display: block;
+    color: #981793;
+    padding: 10px;
+    text-decoration: none;
+    }
+
+img {
+    max-width: 100%;/**/
+    border: 1px solid #00843e;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    -moz-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    -webkit-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    }
+
+#bold {
+	font-weight: bold;
+}
+
+#italic {
+	font-style: italic;
+}
+
+#bolditalic {
+	font-weight: bold;
+	font-style: italic;
+}
+	
+/* ******************** */
+/*        HEADER        */
+/* ******************** */
+
+
+/**/
+
+	
+/* ************************ */
+/*    ОСНОВНАЯ НАВИГАЦИЯ    */
+/* ************************ */
+
+/*------------------------------------*\
+	СКАЧАННЫЙ КОД НАВИГАЦИИ
+\*------------------------------------*/
+#nav {
+    float: left;
+	width: 100%;
+	margin: 0.5em auto 0em auto;
+    position: relative;
+    background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    }
+
+#nav li {
+	float: left;
+	position: relative;
+	display: block;
+    }
+    
+#nav li a {
+	display: block;
+	padding: 4px 12px;
+	color: #00843e;
+    font: bold 1.6em Arial, sans-serif;
+	background: url(../images/polosa.png) no-repeat;
+	text-decoration: none;
+    text-transform: uppercase;
+    }
+    
+#nav li.first a {
+    background: none;
+}
+
+#nav li a.active, #nav li a:hover {
+    color: #00843e;
+    text-shadow: 1px 1px 2px #bebebe;
+    }
+    
+#nav li a em:hover {
+    color: #D01E1E;
+    }
+    
+#nav ul { /* ВЫПАДАЮЩИЕ ПУНКТЫ */
+	list-style: none;
+	position: absolute;
+	display: none;
+    -webkit-transition: 0.25s linear opasity;
+    z-index: 5;
+    }
+    
+#nav ul li {
+	padding-top: 1px; 
+	float: none;
+    }
+    
+#nav ul a {
+	white-space: nowrap; 
+	display: block;
+    text-transform: none;
+    }
+    
+#nav li:hover ul { /* Выводим выпадающий пункт при наведении курсора */
+	display: block;
+    }
+    
+#nav li:hover a { 
+	background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+    
+#nav li:hover ul li a:hover { 
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+
+
+#nav ul li a.first{
+    background: none;
+}
+
+#nav li a.last {
+    padding-right: 0;
+}
+
+#nav ul li ul li a{
+    background: none;
+}
+
+#nav ul{
+    margin: 0;
+}
+
+/* *************** */
+/*     CONTENT     */
+/* *************** */
+
+
+/* ***************************************************************** */
+/*       Проверка данных и обработка ошибок в JavaScript и PHP       */
+/* ***************************************************************** */
+table.signup {
+	border: 1px solid #999999;
+	font: normal 14px helvetica;
+	color: #444444;
+	}
+
+/* *************** */
+/*     TABLITCA    */
+/* *************** */
+
+#inventory {
+	clear: both;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 98%; /* 98% - ��-�� ����������� ������������� � IE6 */
+    border-collapse: collapse; /* ������� ������� ������� ����� �������� */
+    margin: 0 auto 1.5em auto;
+    }
+
+#inventory td, #inventory th {
+
+    font-size: 0.8em;
+    border: 1px solid #00843e;/**/
+    padding: 3px 7px 2px 7px; /* */
+    text-align: center;
+    }
+
+#inventory th { /* ����� ��� ������������ ����� ������� */
+    
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background: url(../images/table_bg.png) bottom left;
+    color: #FFF300;
+    }
+
+
+/* ********** */
+/*    MENU    */
+/* ********** */
+
+/* ************** */
+/*     FOOTER     */
+/* ************** */
+/*������ ����� ����� (�������)*/
+#footer {
+    background: url(../images/col_bg.png) bottom left;
+    clear: left;
+    width: 100%;
+    }
+
+#footer p {
+    margin: 0;
+    padding-left: 5px;
+    }
+
+#footer a {
+    display: inline; 
+    padding: 0;
+    color: #C6D5FD;
+    
+    }
+
+
+/* ************************* */
+/*    css_19_vvedenie.php    */
+/* ************************* */
+ol ol {
+	list-style-type: lower-alpha;
+	color: red;
+}
+
+.orangegrad {
+background:orange;
+background:linear-gradient(top, #fb0, #f50);
+background:-moz-linear-gradient(top, #fb0, #f50);
+background:-webkit-linear-gradient(top, #fb0, #f50);
+background:-o-linear-gradient(top, #fb0, #f50);
+background:-ms-linear-gradient(top, #fb0, #f50); }
+
+#object1 {
+position :absolute;
+background:pink;
+width :100px;
+height :100px;
+top :100px;
+left :0px;
+}
+
+#object2 {
+position :relative;
+background:lightgreen;
+width :100px;
+height :100px;
+top :-8px;
+left :110px;
+}
+
+#object3 {
+position :fixed;
+background:yellow;
+width :100px;
+height :100px;
+top :100px;
+left :236px;
+}
+
+.bigfirst:first-letter {
+font-size:400%;
+float :left;
+color: fuchsia;
+}
+
+/*
+a:hover {
+color :white;
+background:red;
+}
+
+a:active { color:darkblue; }
+
+*:focus { border:2px dotted #888888; }
+
+a:link { color:blue; }
+a:visited { color:gray; }
+a:hover { color:red; }
+a:active { color:purple; }
+*:focus { background:yellow; }
+*/
+
+#object11 {
+background :lightgreen;
+border-style:solid;
+border-width:1px;
+font-family :Courier New;
+font-size :9px;
+width :100px;
+height :100px;
+padding :5px;
+margin :10px 20px 30px 40px;
+}
+#vvedenie {
+padding :0;
+border :1px solid black;
+background :cyan;
+}
+
+/* *********************** */
+/*    css_21_dostup.php    */
+/* *********************** */
+#box {
+position :absolute;
+background:orange;
+border :1px solid red;
+}
+
+.hiddenO {
+        display: none;
+}
+.visibleO {
+        display: block;
+}
+
+#myDIV {
+    width: 500px;
+    height: 500px;
+    background-color: lightblue;
+    display:none;
+}
+
+#example {
+	position: relative;
+	top:50px;
+	left:10px;
+	width:240px;
+	height:160px;
+    background: #e2e2e2;
+    background: -moz-linear-gradient(top, #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
+    background: -webkit-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    background: -o-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    background: -ms-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    background: linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    padding: 10px;
+   }

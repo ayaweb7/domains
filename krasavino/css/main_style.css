@@ -1,0 +1,603 @@
+﻿/* ******************** */
+/*    ОСНОВНЫЕ СТИЛИ    */ 
+/* ******************** */
+html {
+    margin: 0;
+    padding: 0;
+	font-family: sans-serif;
+    }
+
+body {
+    background: url(../images/foto_kor.jpg) top left repeat-x;
+	font: 76% arial,sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #e7e7de;/*gray*/
+    min-width: 77em;
+    max-width: 120em;
+    width: 98%;
+    
+    }
+    
+#container {
+    /*padding-top: 5%;*/
+   /* margin-top: 3%;*/
+	
+    }
+
+
+/* ******************** */
+/*      STRUKTURA       */
+/* ******************** */
+/*OBERTKA*/
+#wrapper {
+    float: left;
+    width: 100%;
+	}
+
+/* ******************** */
+/*        HEADER        */
+/* ******************** */
+
+#header {
+	display: flex;
+	flex-direction: column;/**/
+	/*align-items: stretch;*/
+	background-repeat: round space;
+	/*background-position: left 20%;*/
+	/*background-size: contain;*/
+	/*background-color: #fff;white*/
+	/*padding: 5px;*/
+	margin-bottom: 1%;
+	/*margin-top: 1%;*/
+	/*height: 30%;*/
+	width: 100%;
+}
+/**/
+#head_galery {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;/**/
+	padding-bottom: 1em;
+}
+
+#head_1, #head_2, #head_3, #head_4 {
+	background-repeat: round space;
+	box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+	-moz-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+	-webkit-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+	
+	-moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+	overflow: hidden;
+	float: left;/**/
+	display: flex;/**/
+	flex-direction: row;/**/
+	height: 200px;/**/
+	width: 25%;/**/
+	padding: 10px;/**/
+	
+}
+
+/**/
+	
+/* ************************************* */
+/* СТИЛИ ДЛЯ ЗАГОЛОВКОВ, АБЗАЦЕВ, ССЫЛОК */
+/* ************************************* */
+p, ul {
+    margin: 1.5em 1em;
+	/*padding-bottom: 3em;*/
+    }
+    
+a {
+    /*display: block;*/
+    color: #d01e1e;/* red */
+    
+    text-decoration: none;
+    }
+/*
+img {
+	max-width: 100%;
+	border: 1px solid #19910f;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+	-moz-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+	-webkit-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+}
+*/
+/**//**//*green*/
+	
+/* ************************ */
+/*    ОСНОВНАЯ НАВИГАЦИЯ    */
+/* ************************ */
+
+/*------------------------------------*\
+	СКАЧАННЫЙ КОД НАВИГАЦИИ
+\*------------------------------------*/
+#nav {
+    float: left;/**/
+	/*width: 98%;*/
+	margin: 0.5em auto 0.5em auto;
+    /*position: absolute;*/
+    background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+	margin-bottom: 1%;/**/
+    }
+
+#nav li {
+	float: left;
+	position: relative;
+	display: block;
+    }
+    
+#nav li a {
+	display: block;
+	padding: 4px 12px;
+	color: #19910f;/*green*/
+    font: bold 1.6em Arial, sans-serif;
+	background: url(../images/polosa.png) no-repeat;
+	text-decoration: none;
+    text-transform: uppercase;
+    }
+    
+#nav li.first a {
+    background: none;
+}
+
+#nav li a.active, #nav li a:hover {
+    color: #19910f;/*green*/
+    text-shadow: 1px 1px 2px #bebebe;
+    }
+    
+#nav li a em:hover {
+    color: #d01e1e; /*red*/
+    }
+
+/* ВЫПАДАЮЩИЕ ПУНКТЫ */
+#nav ul { 
+	list-style: none;
+	position: absolute;
+	display: none;
+    -webkit-transition: 0.25s linear opasity;
+    z-index: 5;
+    }
+    
+#nav ul li {
+	padding-top: 1px; 
+	float: none;
+    }
+    
+#nav ul a {
+	white-space: nowrap; 
+	display: block;
+    text-transform: none;
+    }
+    
+#nav li:hover ul { /* Выводим выпадающий пункт при наведении курсора */
+	display: block;
+    }
+    
+#nav li:hover a { 
+	background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+    
+#nav li:hover ul li a:hover { 
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+
+#nav ul li a.first{
+    background: none;
+}
+
+#nav li a.last {
+    padding-right: 0;
+}
+
+#nav ul li ul li a{
+    background: none;
+}
+
+#nav ul{
+    /**/margin: 0;
+}
+
+
+/* ********************* */
+/*    TABLE INVENTORY    */
+/* ********************* */
+#inventory { /* ����� ����� ��� ������� */
+	clear: both;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 98%; /* 98% - ��-�� ����������� ������������� � IE6 */
+    border-collapse: collapse; /* ������� ������� ������� ����� �������� */
+    margin: 0 auto 1.5em auto; /**/
+}
+
+caption {
+	/*float: left;*/
+	/*position: relative;*/
+	/*padding-top: 1%;*/
+    /*margin-top: 1%;*/
+}
+
+#inventory h1 { /* ����� ��� ��������� ������� */
+    text-align: center;
+    font-size: 2em;
+    color: #19910f;/* green */
+    font-weight: bold;
+}
+	
+#inventory h1 em{ /* ����� ��� ��������� ������� */
+    color: #d01e1e;/* red */
+    }
+#inventory h2 {
+    font-size: 1.2em;
+    text-align: center;
+    padding-bottom: 0.5%;
+    }
+
+#inventory th { /**/
+	font-size: 1em;
+    border: 1px solid #19910f;/*green*/
+    padding: 0; /* 3px 7px 2px 7px���������� ������� � ������� */
+    text-align: center;
+	vertical-align: center;
+    }
+	
+#inventory td {
+	font-size: 0.9em;
+    border: 1px solid #19910f;/*green*/
+	padding: 0px 7px 3px 7px; /**/
+	margin: 1px;
+	vertical-align: center;
+}
+
+#inventory td a {
+	padding: 0.5em;
+}
+	
+#inventory th,
+#inventoty td.ren h3 { /* ����� ��� ������������ ����� ������� */
+    
+    /*padding-top: 5px; */
+    /*padding-bottom: 4px; */
+    background: url(../images/table_bg.png) bottom left;
+    color: #fff300;/* yellow */
+    }
+#inventory tr.alt td { /* ����� ��� ������ ����� ������� */
+    background-color: #eaeaea;
+	}
+
+#inventory th { /* ����� ��� ������ ����� ������� */
+    border: 1px solid #fff300;/* yellow */
+	vertical-align: center;
+    }
+
+#inventory tr.sub td { /* ����� ��� ��������������� ����� ������� */
+    background-color: #fff300;/* yellow */
+    font-size: 1.2em;
+    font-weight: bold;
+	text-align: center;
+	color: #19910f;/* green */
+    }
+	
+/* WIDTH COLUMN TABLE INVENTORY_ID */
+#inventory .address {
+	width: 17%;
+	text-align: left;
+	}
+	
+#inventory .id {
+	width: 3%;
+	text-align: right;
+    }
+	
+#inventory .shop {
+	width: 15%;
+	text-align: left;
+    }
+	
+#inventory .characteristic {
+    width: 35%;
+	text-align: left;
+    }
+	
+#inventory .trade,
+#inventory .item {
+	width: 7%;
+	text-align: right;
+    }
+
+#inventory .date {
+	width: 6%;
+	text-align: center;
+    }
+	
+#inventory .price {
+	width: 10%;
+	text-align: right;
+	font-size: 1em;
+	font-weight: bold;
+    }
+
+#inventory .itog {
+	 background-color: #19910f;/* green */
+	 font: 1.2em bold Georgia, 'Times New Roman', Times, serif;
+	 color: #fff300;/* yellow */
+	 text-align: right;
+}
+
+/* 'STORE' STYLE */
+#inventory .id_store,
+#inventory .shop_store,
+#inventory .town_store,
+#inventory .address_store,
+#inventory .phone_store {
+    text-align: left];
+}
+
+#inventory .id_store {
+    width: 10%;
+}
+
+#inventory .shop_store {
+    width: 20%;
+}
+
+#inventory .town_store {
+    width: 20%;
+}
+
+#inventory .address_store {
+    width: 30%;
+}
+
+#inventory .phone_store {
+    width: 20%;
+}
+
+
+
+
+/**/
+#rentingPhoto {
+    text-align: left;
+    padding: 1%;
+	width: 60%;	
+    }
+
+#realties #inventory tr td p a {
+    text-decoration: underline;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+    color: #000;
+    
+}
+
+#realties #inventory tr td p a:hover {
+    -moz-transform: scale(1.05, 1.05);
+    -webkit-transform: scale(1.05, 1.05);
+    -o-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
+    color: #d01e1e;/* red */
+    text-decoration: none;
+    }
+
+#realties #inventory tr td p {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#realties #inventory tr td,
+#realties #inventory tr td p a {
+    font: 12px Georgia, "Times New Roman", Times, serif;
+}
+
+#inventory tr.input td {
+    border: none;
+}
+
+input.back {
+    display: none;
+}
+
+
+/* ********** */
+/*    MENU    */
+/* ********** */
+
+/* ************** */
+/*     FORM       */
+/* ************** */
+#form #inventory tr td h3,
+#form #inventory tr td ul li a,
+#form #inventory tr td ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    border: none;
+}
+#form #inventory tr td {
+    border: none;
+}
+#form #inventory tr td h3 {
+    margin-top: 0.5em;
+    }
+#statement {
+    margin-bottom: 2em;
+    }
+#statement p,
+#statement ol li {
+    font-size: 1.3em;
+    margin-top: 0.3em;
+    border: none;
+    padding: 0;
+    text-align: justify;
+    color: black;
+    }
+#statement p.where {
+    text-align: left;
+    margin-left: 45%;
+}
+#statement p.where em {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: normal;
+    letter-spacing: normal;
+}
+#statement p.topic {
+    text-align: center;
+    font-weight: bold;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+}
+#statement p.abzac {
+    text-indent: 1em;
+}
+#statement p.topic1 {
+    text-align: center;
+    text-transform: uppercase;
+    }
+#statement p.sign {
+    text-align: center;
+    font-style: italic;
+    margin-top: 1.5em;
+}
+#statement p.app,
+#statement p.topic1 {
+    margin-top: 1.5em;
+    font-weight: bold;
+}
+#statement p.sign em {
+    color: white;
+}
+#statement ol {
+    list-style-type: decimal;
+}
+#statement ol li {
+    margin-left: 1.5em;
+    color: black;
+}
+#statement p.for_example,
+#statement p.abzac strong,
+#statement p.where strong,
+#form #realties #inventory tr td li a {
+    text-decoration: underline;
+}
+#form_text #realties p a {
+    display: inline;
+    text-decoration: underline;
+}
+#form_text #realties p a:hover,
+#form #realties #inventory tr td li a:hover {
+    color: red;
+    text-decoration: none;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+}
+/**/
+
+
+/* ************** */
+/*     FOOTER     */
+/* ************** */
+/*������ ����� ����� (�������)*/
+#footer {
+    background: url(../images/col_bg.png) bottom left;
+    clear: left;
+    width: 100%;
+	padding: 1%;
+	margin-top: 3%; /**/
+	margin-bottom: 3%;
+    }
+
+#footer p {
+    margin: 0;
+    padding-left: 5px;
+    }
+
+#footer a {
+    display: inline; 
+  /*  padding: 0;*/
+    color: #C6D5FD;
+    
+    }
+
+#footer table tr td {
+	text-align: center;
+	}
+
+#footer td {
+   /* vertical-align: middle;*/
+    }
+    
+/*���������*/
+#footerNav{
+    height: 10%;
+    outline: 0px solid #cccccc;
+    /*position: relative;
+    top: 81px;
+    right: 36px;*/
+}
+
+#footerNav li{
+    float: right;
+    outline: 0px solid #d01e1e;/* red */
+    margin-right: 2%;
+    vertical-align: middle;
+}
+
+#footerNav li a:hover {
+    color: #19910f;/*green*/
+    text-shadow: 1px 1px 2px #fff300;/* yellow */
+}
+
+#footerNav li a em:hover {
+    color: #d01e1e;/* red */
+}
+
+#index .indexLink,
+#realty .realtyLink {
+    color: #19910f;/*green*/
+    }
+
+#footer #gerb {
+    margin: 1em;
+    }
+
+#footer img {
+   border: none;
+   box-shadow: none;
+   opacity: 0.7;
+    }
+    
+#footer a img:hover {
+   border: none;
+   box-shadow: none;
+   opacity: 1.0;
+    }
+
+#top {
+position :fixed;
+bottom :100px;
+right :5px;
+}

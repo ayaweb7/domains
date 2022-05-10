@@ -1,0 +1,12 @@
+<?php // login.php
+$db_hostname = 'localhost';
+$db_database = 'meteo';
+$db_username = 'nikart';
+$db_password = 'arteeva12';
+
+$db_server = mysqli_connect($db_hostname, $db_username, $db_password);
+if (!$db_server) die("Невозможно подключиться к MySQL: " . mysqli_error());
+
+mysqli_select_db($db_server, $db_database)
+		or die("Невозможно выбрать базу данных: " . mysqli_error());
+?>

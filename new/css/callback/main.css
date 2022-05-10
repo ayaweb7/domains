@@ -1,0 +1,199 @@
+@import url("font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600");
+/*
+body {
+	background-color: #191515;
+	background: radial-gradient(white, #FFA9A1) repeat-y;
+	height: 700px;
+}
+*/
+
+.button {
+    display: inline-block;
+    position: relative;
+    min-width: 178px;
+    margin: 6px 28px;
+    padding: 15px 40px;
+    font-weight: 800;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #AB274F;
+    transition: .15s ease-out;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Alice, serif;
+    text-shadow: #a58383 2px 2px 2px;
+	letter-spacing: 2px;
+}
+
+.button:hover {
+    color: #ec1355!important;
+}
+
+.button:last-of-type {margin: 6px 28px;}
+.button:before {
+  content:"";
+  position: absolute;
+  top: -6px;
+  left: 0;
+  height: calc(100% + 12px);
+  width: 100%;
+  border: 2px solid #AB274F;
+  box-sizing: border-box;
+  transition: .2s ease-in-out;
+}
+
+.button:after {
+  content:"";
+  position: absolute;
+  top: 0;
+  left: -8px;
+  height: 100%;
+  width: calc(100% + 16px);
+  border: 1px solid #AB274F;
+  box-sizing: border-box;
+  transition: .2s ease-in-out;
+}
+
+.button:hover:before {
+  top: 0;
+  left: -8px;
+  height: 100%;
+  width: calc(100% + 16px);
+}
+.button:hover:after {
+  top: -6px;
+  left: 0;
+  height: calc(100% + 12px);
+  width: 100%;
+}
+
+.button:hover{
+    color:#AB274F;
+}
+
+
+.panel-grid-cell section {
+    padding: 80px 0;
+    z-index: 999;
+    text-align: center;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover,
+.btn:hover {
+	background-color: #9ececc;
+}
+
+.mfp-close-btn-in .mfp-close {
+    color: #999!important;
+}
+
+/* modal windows */
+
+div > a.popup-modal.button[href="#form"] { 
+	text-transform: uppercase;
+    padding: 0.75em 2em 0.75em 2em;
+    text-decoration: none;
+    margin-top: 100px;
+}
+
+.mfp-content {
+    background-image: url("../images/callback_bg.jpg")!important;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 auto;
+    text-align: center!important;
+	background: #2f3847;
+	max-width: 280px;
+    z-index: 1045;
+	height: auto;
+	padding: .8%;
+	border-radius: 4px;
+}
+
+a.popup-modal-dismiss {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    cursor: pointer;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+    text-decoration: none;
+    color: #95979c;
+    border: 0;
+    background: transparent;
+}
+
+.mfpcontentBorder {
+    max-width: 310px;
+    border: 1px solid #e1e1e1;
+    padding: 4% 5% 0.8%;
+}
+
+.fa-times:hover {
+    content: "\f00d";
+    color: #F7943C;
+}
+.fa-times{
+padding: 15px 0px 0px 18px;
+display: inline-block;
+}
+
+.putNumber, .putName, .putPhone {
+    width: 210px!important;
+    padding: 9px 10px!important;
+    height: 40px!important;
+    background: rgba(255, 255, 255, 0.62)!important;
+    margin-bottom: 15px;
+    border-radius: 2px!important;
+    border: none!important;
+    outline: none!important;
+	margin: 10px auto;
+	font-family: Alice, serif;
+	font-size: 18px;
+}
+
+input.putName:focus, input.putPhone:focus {
+	box-shadow: 0 0 2px 1px #FFCC00!important;
+}
+
+#form > input.btn {
+	margin-top: 10px;
+}
+
+p.title {
+	margin: 15px 10px 2px!important;
+	color: #e1e1e1!important;
+	font-family: Marck Script, cursive!important;
+	line-height: 1.4!important;
+	font-size: 22px;
+}
+
+#form {
+     border: 1px solid #e1e1e1;
+     border-radius: 4px;
+}
+
+input.btn {
+    width: 210px;
+    height: 40px;
+    background: rgba(229, 115, 115, 0.78);
+    margin: 10px 0px 15px!important;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+}
+
+input.btn:hover {
+    color: #000;
+}

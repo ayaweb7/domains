@@ -1,0 +1,11 @@
+
+/* Импорт таблиц стилей и скрыто ie/mac \*/
+@import url("reset.css");
+@import url("main_style.css");
+@import url("form.css");
+@import url("search.css");
+@import url("gallery.css");
+/*@import url("demo.css");*/
+@import url("elastislide.css");
+@import url("style.css");
+/**/

@@ -1,0 +1,85 @@
+<html>
+	<body>
+<!-- 1 select отправляет только 1 или только последний из выбранного списка --> 
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<select multiple='multiple' name='lessons'>
+				<option value='ed3MHi'>Как работает транзистор</option>
+				<option value='dfGH6nm'>Перевод целого числа из десятичной дроби в двоичную</option>
+				<option value='sbn56JHkm'>Перевод чисел в восьмеричную систему</option>
+				<option value='f34HJiu'>Перевод дробной части</option>
+			</select>
+			<button type='submit'>Отправить</button>
+		</form>
+		<hr/>
+
+<!-- 2 checkbox отправляет только 1 или только последний из выбранного списка -->		
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<div>
+				<input type='checkbox' name='lessons' value='ed3MHi' />Как работает транзистор
+				<input type='checkbox' name='lessons' value='dfGH6nm' />Перевод целого числа из десятичной дроби в двоичную
+				<input type='checkbox' name='lessons' value='sbn56JHkm' />Перевод чисел в восьмеричную систему
+				<input type='checkbox' name='lessons' value='f34HJiu' />Перевод дробной части
+			</div>
+			<button type='submit'>Отправить</button>
+		</form>
+		</hr>
+
+<!-- 3 checkbox отправляет все выбранные с отметкой 'on' ('включено') -->		
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<div>
+				<input type='checkbox' name='ed3MHi' />Как работает транзистор
+				<input type='checkbox' name='dfGH6nm' />Перевод целого числа из десятичной дроби в двоичную
+				<input type='checkbox' name='sbn56JHkm' />Перевод чисел в восьмеричную систему
+				<input type='checkbox' name='f34HJiu' />Перевод дробной части
+			</div>
+			<button type='submit'>Отправить</button>
+		</form>
+		</hr>
+
+<!-- 4 checkbox отправляет все возможные варианты значений с пометкой 'on' ('включено') или 'off' ('выключено') -->		
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<div>
+				<input type='hidden' name='ed3MHi' value='off'/>
+				<input type='checkbox' name='ed3MHi' />Как работает транзистор
+				<input type='hidden' name='dfGH6nm' value='off' />
+				<input type='checkbox' name='dfGH6nm' />Перевод целого числа из десятичной дроби в двоичную
+				<input type='hidden' name='sbn56JHkm' value='off' />
+				<input type='checkbox' name='sbn56JHkm' />Перевод чисел в восьмеричную систему
+				<input type='hidden' name='f34HJiu' value='off' />
+				<input type='checkbox' name='f34HJiu' />Перевод дробной части
+			</div>
+			<button type='submit'>Отправить</button>
+		</form>
+		</hr>
+		
+<!-- 5 checkbox отправляет все выбранные -->		
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<div>
+				<input type='checkbox' name='lessons[]' value='ed3MHi' />Как работает транзистор
+				<input type='checkbox' name='lessons[]' value='dfGH6nm' />Перевод целого числа из десятичной дроби в двоичную
+				<input type='checkbox' name='lessons[]' value='sbn56JHkm' />Перевод чисел в восьмеричную систему
+				<input type='checkbox' name='lessons[]' value='f34HJiu' />Перевод дробной части
+			</div>
+			<button type='submit'>Отправить</button>
+		</form>
+		</hr>
+		
+<!-- 6 select отправляет все выбранные --> 
+		<form action='get_1.php' method='GET'>
+			Ваши любимые видео-уроки
+			<select multiple='multiple' name='lessons[]'>
+				<option value='ed3MHi'>Как работает транзистор</option>
+				<option value='dfGH6nm'>Перевод целого числа из десятичной дроби в двоичную</option>
+				<option value='sbn56JHkm'>Перевод чисел в восьмеричную систему</option>
+				<option value='f34HJiu'>Перевод дробной части</option>
+			</select>
+			<button type='submit'>Отправить</button>
+		</form>
+		<hr/>
+	</body>
+</html>

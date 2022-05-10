@@ -1,0 +1,96 @@
+/* стиль для вывода печатной версии страницы на экране */
+
+#extra, #activities,
+#footer, #header,
+#inventory tr td #parameters table {
+    display: none;
+}
+
+* { /* Черный шрифт для всех тэгов независимо ни от чего */
+	color: black !important;	
+    } 
+
+h1, h2, p, td, td p, td p a, th {
+    font-family: "Times New Roman", Times, serif !important;
+}
+td, td p, td p a {
+    font-size: 10pt !important;
+}
+
+table tr td p a {
+    text-decoration: none !important;
+}
+
+#inventory tr td {
+    border-bottom: none;
+    border-top: none;
+}
+#inventory tr.input td {
+    border: none;
+}
+
+#content {
+    margin: 0 !important;
+}
+#price, #price1,
+#square, #square1 {
+	width: 7%;	
+    }
+#floor, #floor1 {
+	width: 6%;	
+    }
+#trade {
+	width: 15%;	
+    }
+#trade1 {
+	width: 10%;	
+    }
+#characteristic {
+	width: 39%;	
+    }
+#characteristic1 {
+	width: 35%;	
+    }
+#address {
+	width: 25%;	
+    }
+#address1 {
+	width: 14%;	
+    }
+#firm1 {
+	width: 20%;
+    }
+
+
+input.print {
+    display: none;
+}
+input.back {
+    display: inline !important;
+}
+
+#inventory th {
+    background: none !important;
+}
+#inventory tr.sub td {
+    background: #ccc !important;
+}
+
+#inventory tr.sub td,
+#inventory th {
+    font-weight: bold !important;
+    font-size: 11pt !important;
+}
+
+html, body, #container { /* Убирает фоны изображений и цвета */
+	background: white;
+    }
+/* Переопределение размеров и стилей шрифтов в пункты - более логичные для принтеров */
+#realties h1 {
+    font-size: 16pt !important;
+    font-weight: normal !important;
+    }
+
+#realties h1 em {
+    font-weight: bold;
+    }

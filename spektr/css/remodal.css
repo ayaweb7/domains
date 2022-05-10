@@ -1,0 +1,584 @@
+/* ********************* */
+/*        REMODAL        */
+/* ********************* */
+
+
+html.remodal-is-locked {
+  overflow: hidden;
+}
+
+.remodal,
+[data-remodal-id] {
+  display: none;
+}
+
+.remodal-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: -5000px;
+  right: -5000px;
+  bottom: -5000px;
+  left: -5000px;
+
+  display: none;
+}
+
+.remodal-wrapper {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: none;
+  overflow: auto;
+
+  text-align: center;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.remodal-wrapper:after {
+  display: inline-block;
+
+  height: 100%;
+  margin-left: -0.05em;
+
+  content: "";
+}
+
+.remodal-overlay,
+.remodal-wrapper {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.remodal {
+  position: relative;
+  outline: none;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.remodal-is-initialized {
+  display: inline-block;
+}
+
+/* ********************** */
+/* REMODAL-DEFFAULT-THEME */
+/* ********************** */
+
+.remodal-bg.remodal-is-opening,
+.remodal-bg.remodal-is-opened {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.remodal-overlay {
+  background: rgba(43, 46, 56, 0.9);
+}
+
+.remodal-overlay.remodal-is-opening,
+.remodal-overlay.remodal-is-closing {
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.remodal-overlay.remodal-is-opening {
+  -webkit-animation: remodal-overlay-opening-keyframes 0.3s;
+  animation: remodal-overlay-opening-keyframes 0.3s;
+}
+
+.remodal-overlay.remodal-is-closing {
+  -webkit-animation: remodal-overlay-closing-keyframes 0.3s;
+  animation: remodal-overlay-closing-keyframes 0.3s;
+}
+
+.remodal-wrapper {
+  padding: 10px;
+}
+
+.remodal {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 99.2%;
+  padding: .8%;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  color: #2b2e38;
+  /*background: #2f3847;*/
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+
+}
+.remodalBorder{
+    /*width: 89.2%;
+    border: 1px solid #e1e1e1;*/
+    padding: 4% 5% 0.8%; 
+}
+
+.remodal.remodal-is-opening,
+.remodal.remodal-is-closing {
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.remodal.remodal-is-opening {
+  -webkit-animation: remodal-opening-keyframes 0.3s;
+  animation: remodal-opening-keyframes 0.3s;
+}
+
+.remodal.remodal-is-closing {
+  -webkit-animation: remodal-closing-keyframes 0.3s;
+  animation: remodal-closing-keyframes 0.3s;
+}
+
+.remodal,
+.remodal-wrapper:after {
+  vertical-align: middle;
+}
+
+.remodal-close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: visible;
+  width: 35px;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+  text-decoration: none;
+  color: #95979c;
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+.remodal-close:hover,
+.remodal-close:focus {
+  color: #2b2e38;
+}
+
+.remodal-close:before {
+  font-size: 25px;
+  line-height: 35px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: block;
+  width: 35px;
+  content: "\00d7";
+  text-align: center;
+}
+
+
+.remodal-confirm,
+.remodal-cancel {
+  font: inherit;
+  display: inline-block;
+  overflow: visible;
+  min-width: 110px;
+  margin: 0;
+  padding: 12px 0;
+  cursor: pointer;
+  -webkit-transition: background 0.2s;
+  transition: background 0.2s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+
+  border: 0;
+  outline: 0;
+}
+
+.remodal-confirm {
+  color: #fff;
+  background: #81c784;
+}
+
+.remodal-confirm:hover,
+.remodal-confirm:focus {
+  background: #66bb6a;
+}
+
+.remodal-cancel {
+  color: #fff;
+  background: #e57373;
+}
+
+.remodal-cancel:hover,
+.remodal-cancel:focus {
+  background: #ef5350;
+}
+
+.remodal-confirm::-moz-focus-inner,
+.remodal-cancel::-moz-focus-inner,
+.remodal-close::-moz-focus-inner {
+  padding: 0;
+
+  border: 0;
+}
+
+@-webkit-keyframes remodal-opening-keyframes {
+  from {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: none;
+    transform: none;
+
+    opacity: 1;
+  }
+}
+
+@keyframes remodal-opening-keyframes {
+  from {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: none;
+    transform: none;
+
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes remodal-closing-keyframes {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+
+    opacity: 0;
+  }
+}
+
+@keyframes remodal-closing-keyframes {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes remodal-overlay-opening-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes remodal-overlay-opening-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes remodal-overlay-closing-keyframes {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes remodal-overlay-closing-keyframes {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.home{
+  width: 500px;
+  margin:0 auto;
+  background: #f1f1f1;
+  border-radius: 5px;
+  padding: 50px;
+}
+.home p{
+  text-align: center;
+}
+
+.mainButton{
+  padding: 10px 25px;
+  background: #e57373;
+  border-radius: 19px;
+  box-shadow: 0 0 5px rgba(206, 57, 57, 0.5);
+  color: #fff;
+  text-decoration: none;
+  font: bold 16px 'Roboto', sans-serif;
+}
+
+.success, .fail{
+  color: #fff;
+}
+
+#modal1Title{
+    font-size: 18px;
+    font-weight: bold;
+    color: #c7d9e7;
+    text-shadow: 1px 1px 1px rgba(0, 21, 57, 0.7);
+}
+
+.putName, .putPhone{
+  width: 210px;
+  padding: 0 15px;
+  height: 40px;
+  background: #fff;
+  margin-bottom: 15px;
+  border-radius: 2px;
+  border:none;
+  outline: none;
+}
+/**/
+.btn_modal{
+  width: 210px;
+  height: 40px;
+  background: #e57373;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border:none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn_modal:hover{
+  background: #C94141;
+}
+
+@media only screen and (min-width: 440px) {
+  .remodal {
+    max-width: 420px;
+  }
+}
+
+@media only screen and (max-width: 439px) {
+  .remodal {
+    max-width: 100%;
+  }
+  .putName, .putPhone{
+    width: 90%;
+    height: 80px;
+    font-size: 22px;
+  }
+  .btn{
+    width: 96%;
+    height: 82px;
+    font-size: 22px;
+  }
+  #modal1Title{
+    font-size: 24px;
+  }
+}
+
+.lt-ie9 .remodal-overlay {
+  background: #2b2e38;
+}
+
+.lt-ie9 .remodal {
+  width: 420px;
+}
+
+/* ************* */
+/*      FORM     */
+/* ************* */
+input:focus, select:focus {
+   border: 1px solid #007C37;
+}
+
+option:hover {
+/*	font-weight: bold;*/
+	color: #0d6efd; /*light-blue*/
+}
+/**/
+input:hover {
+    border: 1px solid #0d6efd; /*light-blue*/
+    color: #0d6efd; /*light-blue*/
+/*    text-shadow: 1px 1px 2px #FFF300; yellow */
+}
+
+select {
+	background-color: #EEF7FD;/*light-light-blue*/
+	}
+
+option {
+	font-size: 1.2em;
+}
+/* ********************* */
+/*      CALCULATION      */
+/* ********************* */
+#result h6,
+#openModal h6 {
+	margin-top: 1.1em;
+	margin-bottom: 0;
+}
+
+#result p,
+#openModal p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+    /* свойства модального окна по умолчанию */
+.myModal {
+      position: fixed;
+/* фиксированное положение */
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+/* цвет фона */
+      z-index: 1050;
+      opacity: 0;
+/* по умолчанию модальное окно прозрачно */
+      -webkit-transition: opacity 400ms ease-in;
+      -moz-transition: opacity 400ms ease-in;
+      transition: opacity 400ms ease-in;
+/* анимация перехода */
+      pointer-events: none;
+/* элемент невидим для событий мыши */
+    }
+
+    /* при отображении модального окно */
+.myModal:target {
+      opacity: 1;
+      pointer-events: auto;
+      overflow-y: auto;
+    }
+
+/* ширина модального окна и его отступы от экрана */
+.modal-dialog {
+      position: relative;
+      width: auto;
+      margin: 10px;
+    }
+
+@media (min-width: 576px) {
+      .modal-dialog {
+        max-width: 500px;
+        margin: 30px auto;
+      }
+    }
+
+    /* свойства для блока, содержащего контент модального окна */
+.modal-content {
+      position: relative;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      background-color: #fff;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: .3rem;
+      outline: 0;
+    }
+
+@media (min-width: 768px) {
+      .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+      }
+    }
+
+/* свойства для заголовка модального окна */
+.modal-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid #eceeef;
+    }
+
+.modal-title {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 1.5;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    /* свойства для кнопки "Закрыть" */
+.close {
+      float: right;
+      font-family: sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: .5;
+      text-decoration: none;
+    }
+
+/* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+.close:focus,
+.close:hover {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: .75;
+    }
+
+/* свойства для блока, содержащего основное содержимое окна */
+.modal-body {
+      position: relative;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 15px;
+      overflow: auto;
+    }

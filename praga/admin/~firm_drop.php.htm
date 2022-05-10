@@ -1,0 +1,178 @@
+
+Warning: mysql_connect(): Access denied for user 'nikart_realty'@'localhost' (using password: YES) in S:\home\localhost\www\praga_tab\admin\blocks\date_base.php on line 2
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0072     333096   2. include('S:\home\localhost\www\praga_tab\admin\blocks\date_base.php') S:\home\localhost\www\praga_tab\admin\firm_drop.php:2
+    0.0072     333296   3. mysql_connect() S:\home\localhost\www\praga_tab\admin\blocks\date_base.php:2
+
+
+Warning: mysql_select_db() expects parameter 2 to be resource, boolean given in S:\home\localhost\www\praga_tab\admin\blocks\date_base.php on line 3
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0072     333096   2. include('S:\home\localhost\www\praga_tab\admin\blocks\date_base.php') S:\home\localhost\www\praga_tab\admin\firm_drop.php:2
+    0.0518     333352   3. mysql_select_db() S:\home\localhost\www\praga_tab\admin\blocks\date_base.php:3
+
+
+Warning: mysql_query() expects parameter 2 to be resource, boolean given in S:\home\localhost\www\praga_tab\admin\firm_drop.php on line 4
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0724     337168   2. mysql_query() S:\home\localhost\www\praga_tab\admin\firm_drop.php:4
+
+
+Warning: mysql_fetch_array() expects parameter 1 to be resource, null given in S:\home\localhost\www\praga_tab\admin\firm_drop.php on line 6
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0727     337128   2. mysql_fetch_array() S:\home\localhost\www\praga_tab\admin\firm_drop.php:6
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/screen.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/praga_script.js"></script>
+<script type="text/javascript" src="http://4geo.ru/maps/js/4geoAPI.js" ></script>
+<link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+</head>
+
+<body id="firm_redact">
+
+<!-- Подключаем HEADER -->
+		<!-- praga -->
+
+<div id="header">
+        
+    		<ul id="nav">
+                
+
+            
+    			<li class="first">
+                                     
+    			<li>
+                    <a class="othersLink" href="#" title="База квартир">База <em>квартир</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="firm_insert.php" title="Добавление">Новая <em>квартира</em></a></li>
+                        <li><a class="realty1Link" href="firm_update.php" title="Редактирование">Редактирование <em>квартиры</em></a></li>
+                        <li><a class="realty1Link" href="firm_drop.php" title="Удаление">Удаление <em>квартиры</em></a></li>
+                    </ul>
+                </li>
+    			
+                <li>
+                    <a class="othersLink" href="#" title="Страницы">Страницы <em>сайта</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="settings_insert.php" title="Добавление">Новая <em>страница</em></a></li>
+                        <li><a class="realty1Link" href="settings_update.php" title="Редактирование">Редактирование <em>записей</em></a></li>
+                        <li><a class="realty1Link" href="#" title="Удаление">Удаление <em>данных</em></a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a class="othersLink" href="#" title="База домов">База <em>домов</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="house_insert.php" title="Добавление">Новый <em>дом</em></a></li>
+                        <li><a class="realty1Link" href="house_update.php" title="Редактирование">Редактирование <em>данных</em></a></li>
+                        <li><a class="realty1Link" href="house_drop.php" title="Удаление">Удаление <em>дома</em></a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a class="othersLink" href="#" title="Агентства недвижимости">Агентства <em>недвижимости</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="#" title="Добавление">Новое <em>агентство</em></a></li>
+                        <li><a class="realty1Link" href="agency_update.php" title="Редактирование">Изменение <em>данных</em></a></li>
+                        <li><a class="realty1Link" href="#" title="Удаление">Удаление <em>агентства</em></a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a class="othersLink" href="#" title="Частные объявления">Частные <em>объявления</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="ads_insert.php" title="Добавление">Новое <em>объявление</em></a></li>
+                        <li><a class="realty1Link" href="ads_update.php" title="Редактирование">Изменение <em>объявления</em></a></li>
+                        <li><a class="realty1Link" href="ads_drop.php" title="Удаление">Удаление <em>объявления</em></a></li>
+                        <li><a class="realty1Link" href="files_insert.php" title="Добавить файл">Добавить <em>файл</em></a></li>
+                        <li><a class="realty1Link" href="files_update.php" title="Изменить документ">Редактировать <em>документ</em></a></li>
+                        <li><a class="realty1Link" href="files_drop.php" title="Удалить документ">Удалить <em>документ</em></a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a class="othersLink" href="#" title="Пользователи"><em>Пользователи</em></a>
+                    <ul>
+                        <li><a class="realty1Link" href="user_insert.php" title="Добавление">Новый <em>пользователь</em></a></li>
+                        <li><a class="realty1Link" href="user_update.php" title="Редактирование">Редактирование <em>пользователя</em></a></li>
+                        <li><a class="realty1Link" href="user_drop.php" title="Удаление">Удаление <em>пользователя</em></a></li>
+                    </ul>
+                </li>
+                                
+                </li>
+            </ul> <!-- nav -->
+               	 
+    </div> <!-- header -->
+
+<!-- Начало кода INDEX -->
+
+<div id="info">
+
+Warning: mysql_query() expects parameter 2 to be resource, boolean given in S:\home\localhost\www\praga_tab\admin\firm_drop.php on line 32
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0937     339688   2. mysql_query() S:\home\localhost\www\praga_tab\admin\firm_drop.php:32
+
+
+Warning: mysql_fetch_array() expects parameter 1 to be resource, null given in S:\home\localhost\www\praga_tab\admin\firm_drop.php on line 34
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0938     339560   2. mysql_fetch_array() S:\home\localhost\www\praga_tab\admin\firm_drop.php:34
+
+
+
+    <h1></h1>
+    <h2> </h2>
+<!-- Подключаем FORMA_FIRM_SQL_REDACT.PHP -->
+		<div>
+
+
+Warning: mysql_query() expects parameter 2 to be resource, boolean given in S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php on line 7
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0991     351536   2. include('S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php') S:\home\localhost\www\praga_tab\admin\firm_drop.php:42
+    0.1234     351696   3. mysql_query() S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php:7
+
+
+Warning: mysql_fetch_array() expects parameter 1 to be resource, null given in S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php on line 8
+
+Call Stack:
+    0.0057     330744   1. {main}() S:\home\localhost\www\praga_tab\admin\firm_drop.php:0
+    0.0991     351536   2. include('S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php') S:\home\localhost\www\praga_tab\admin\firm_drop.php:42
+    0.1239     351568   3. mysql_fetch_array() S:\home\localhost\www\praga_tab\admin\blocks\firm_form_drop.php:8
+
+<form name='form' action='firm_drop.php' method='post'>
+<table align='center' width='100
+  <tr>
+	<td colspan='2' valign='top'><span style='width:60px; padding-left:4px;'>ID:</span>
+		<input type='text' name='id' size='5' value='' autofocus />
+        <input type='submit' value='Показать данные' style='margin-left:20px;'/>
+</td></tr></table></form>
+</div>
+    
+</div> <!-- info -->    
+    
+    
+
+<!-- Конец кода INDEX -->  
+
+
+</body>
+</html>

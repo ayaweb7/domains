@@ -1,0 +1,729 @@
+﻿@import url(reset.css);
+/* PRAGA */
+
+
+
+/* ******************** */
+/*    ОСНОВНЫЕ СТИЛИ    */ 
+/* ******************** */
+html {
+    margin: 0;
+    padding: 0;
+	font-family: sans-serif;
+    }
+
+body {
+    background: url(../images/foto_kor.jpg) top left repeat-x;
+	font: 76% arial,sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #e7e7de;
+    min-width: 77em;
+    max-width: 120em;
+    width: 98%;
+    
+    }
+    
+#container {
+    padding: 1%;
+    /*background-color: #222;*/
+    
+    }
+
+
+/* ******************** */
+/*      STRUKTURA        */
+/* ******************** */
+/*OBERTKA*/
+#wrapper {
+    float: left;
+    width: 100%;
+    
+    }
+
+#header{
+   background: url(../images/P1150888.png) 0% 0% no-repeat, url(../images/header_bg.png) top left repeat-x;
+   background-color: #fff;
+   padding: 5px;
+   margin-bottom: 3%;
+   margin-top: 1%;
+   height: 200px;
+   
+}
+/**/
+
+#today {
+    background: #B9CAFF;
+    float: left;
+    width:25%;
+    margin-left: -25%;
+    }
+    
+#activities {
+    background: none;
+    float: left;
+    width: 25%;
+    margin-left: -100%;
+    margin-bottom: 1.5em;
+    }
+	
+/* ************************************* */
+/* СТИЛИ ДЛЯ ЗАГОЛОВКОВ, АБЗАЦЕВ, ССЫЛОК */
+/* ************************************* */
+p, ul {
+    margin: 1.5em 1em;
+    }
+    
+a {
+    display: block;
+    color: #981793;
+    padding: 10px;
+    text-decoration: none;
+    }
+
+img {
+    max-width: 100%;/**/
+    border: 1px solid #00843e;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    -moz-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    -webkit-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+    }
+
+	
+/* ******************** */
+/*        HEADER        */
+/* ******************** */
+
+#header #slogan {
+    vertical-align: top;
+    width: 54%;
+    }
+
+#header #slogan h1 {
+    text-align: center;
+    font: 2em arial,sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00843e;
+    text-shadow: 1px 1px 1px #fff300;
+    }
+
+#header #slogan h1 span {
+    text-align: center;
+    font: 130% "Lucida Bright Demibold", "Bookman Old Style", Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    letter-spacing: 0.7em;
+    color: #D01E1E;
+    }
+
+#header h2, 
+#header h3 {
+    color: #00843e;
+    font: 100% "Arial Black",sans-serif;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #fff300;
+    }
+
+#header #gerb {
+    text-align: center;
+    margin: 0 auto;/**/
+    
+    }
+
+#header #gerb img,
+#footer #gerb img {
+    border: none;
+    boxbox-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    }
+    
+#logo {
+    vertical-align: top;
+    width: 24%;
+    }
+    
+.gif {
+    width: 21%;
+    vertical-align: top;
+    }
+    
+#header #phone {
+    background: url(../images/phone.png) center center no-repeat;
+    text-align: center;
+    margin: 0 auto;/**/
+    
+    }
+/**/
+
+	
+/* ************************ */
+/*    ОСНОВНАЯ НАВИГАЦИЯ    */
+/* ************************ */
+
+/*------------------------------------*\
+	СКАЧАННЫЙ КОД НАВИГАЦИИ
+\*------------------------------------*/
+#nav {
+    float: left;
+	width: 100%;
+	margin: 0.5em auto 0em auto;
+    position: relative;
+    background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    }
+
+#nav li {
+	float: left;
+	position: relative;
+	display: block;
+    }
+    
+#nav li a {
+	display: block;
+	padding: 4px 12px;
+	color: #00843e;
+    font: bold 1.6em Arial, sans-serif;
+	background: url(../images/polosa.png) no-repeat;
+	text-decoration: none;
+    text-transform: uppercase;
+    }
+    
+#nav li.first a {
+    background: none;
+}
+
+#nav li a.active, #nav li a:hover {
+    color: #00843e;
+    text-shadow: 1px 1px 2px #bebebe;
+    }
+    
+#nav li a em:hover {
+    color: #D01E1E;
+    }
+    
+#nav ul { /* ВЫПАДАЮЩИЕ ПУНКТЫ */
+	list-style: none;
+	position: absolute;
+	display: none;
+    -webkit-transition: 0.25s linear opasity;
+    z-index: 5;
+    }
+    
+#nav ul li {
+	padding-top: 1px; 
+	float: none;
+    }
+    
+#nav ul a {
+	white-space: nowrap; 
+	display: block;
+    text-transform: none;
+    }
+    
+#nav li:hover ul { /* Выводим выпадающий пункт при наведении курсора */
+	display: block;
+    }
+    
+#nav li:hover a { 
+	background: url(../images/navBg7.png) repeat-x;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+    
+#nav li:hover ul li a:hover { 
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -webkit-transition: 0.75s linear opasity;
+    }
+
+#index .indexLink,
+#realty .realtyLink,
+#firms .firmsLink,
+#section .sectionLink,
+#gostinki .gostinkiLink,
+#flat1 .flat1Link,
+#flat2 .flat2Link,
+#flat3 .flat3Link,
+#flat4 .flat4Link,
+#commercial .commercialLink,
+#houses .housesLink,
+#others .othersLink,
+#form .formLink,
+#form .form_textLink {
+    text-shadow: 1px 1px 2px #fff300;
+    -moz-transform: none;
+    -webkit-transform: none;
+    }
+
+#index .indexLink em,
+#realty .realtyLink em,
+#firms .firmsLink em,
+#section .sectionLink em,
+#gostinki .gostinkiLink em,
+#flat1 .flat1Link em,
+#flat2 .flat2Link em,
+#flat3 .flat3Link em,
+#flat4 .flat4Link em,
+#commercial .commercialLink em,
+#houses .housesLink em,
+#others .othersLink em,
+#form .formLink em,
+#form .form_textLink em {
+    color: #D01E1E;
+    }
+
+#nav ul li a.first{
+    background: none;
+}
+
+#nav li a.last {
+    padding-right: 0;
+}
+
+#nav ul li ul li a{
+    background: none;
+}
+
+#nav ul{
+    margin: 0;
+}
+
+/* *************** */
+/*     CONTENT     */
+/* *************** */
+
+
+/* ******************** */
+/*     RADIO button     */
+/* ******************** */
+/*
+div:first-of-type {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+label {
+  margin-right: 15px;
+  line-height: 32px;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
+}
+
+input:checked {
+  border: 6px solid black;
+}
+
+button,
+legend {
+  color: white;
+  background-color: black;
+  padding: 5px 10px;
+  border-radius: 0;
+  border: 0;
+  font-size: 14px;
+}
+
+button:hover,
+button:focus {
+  color: #999;
+}
+
+button:active {
+  background-color: white;
+  color: black;
+  outline: 1px solid black;
+}
+*/
+
+/* *************** */
+/*     TABLITCA    */
+/* *************** */
+div #names {
+margin-top: 2%;
+}
+
+#inventory,
+#search { /* ����� ����� ��� ������� */
+	clear: both;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 98%; /* 98% - ��-�� ����������� ������������� � IE6 */
+    border-collapse: collapse; /* ������� ������� ������� ����� �������� */
+    margin: 0 auto 1.5em auto;
+    }
+
+#inventory h1 { /* ����� ��� ��������� ������� */
+    text-align: center;
+    font-size: 2em;
+    color: #00843e;
+    font-weight: bold;
+    padding-bottom: 2%;
+    }
+#inventory h1 em{ /* ����� ��� ��������� ������� */
+    color: #D01E1E;
+    }
+#inventory h2 {
+    font-size: 1.2em;
+    text-align: center;
+    padding-bottom: 0.5%;
+    }
+
+#inventory td, #inventory th,
+#search td, #search th { /* ����� ��� ����� ������� */
+
+    font-size: 0.8em;
+    border: 1px solid #00843e;/**/
+    padding: 3px 7px 2px 7px; /* ���������� ������� � ������� */
+    text-align: center;
+    }
+#inventory th,
+#inventoty td.ren h3 { /* ����� ��� ������������ ����� ������� */
+    
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background: url(../images/table_bg.png) bottom left;
+    color: #FFF300;
+    }
+#inventory tr.alt td,
+#search tr.alt td { /* ����� ��� ������ ����� ������� */
+    background-color: #eaeaea;
+    }
+
+#inventory tr.sub td,
+#search tr.sub td { /* ����� ��� ��������������� ����� ������� */
+    background-color: #fff300;
+    font-size: 1em;
+    font-weight: bold;
+    }
+#realty #inventory #address {
+	width: 25%;
+	text-align: left;
+	color: #FFF300;	
+    }
+#realty #inventory #square, 
+#realty #inventory #floor {
+	width: 8%;	
+    }
+#realty #inventory #characteristic {
+	width: 25%;
+	color: #FFF300;
+    }
+#realty #inventory #trade {
+	width: 8%;	
+    }
+#realty #inventory #price {
+	width: 8%;	
+    }
+#realty #inventory #id {
+	width: 5%;	
+    }
+#realty #inventory #shop {
+	width: 8%;	
+    }
+#realty #inventory #item {
+	width: 8%;	
+    }
+#realty #inventory #date {
+	width: 13%;	
+    }
+
+#rentingCharcteristics {
+    padding: 1%;
+	width: 40%;	
+    }
+    
+#rentingPhoto {
+    text-align: left;
+    padding: 1%;
+	width: 60%;	
+    }
+
+#realty #realties #inventory tr td p a {
+    text-decoration: underline;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+    color: #000;
+    
+}
+
+#realty #realties #inventory tr td p a:hover {
+    -moz-transform: scale(1.05, 1.05);
+    -webkit-transform: scale(1.05, 1.05);
+    -o-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
+    color: #D01E1E;
+    text-decoration: none;
+    }
+
+#realty #realties #inventory tr td p {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#realty #realties #inventory tr td,
+#realty #realties #inventory tr td p a {
+    font: 12px Georgia, "Times New Roman", Times, serif;
+}
+
+#inventory tr.input td {
+    border: none;
+}
+
+input.back {
+    display: none;
+}
+
+
+/* ********** */
+/*    MENU    */
+/* ********** */
+
+ul.lst li a {
+	display: block;
+	padding: 7px;
+	border-bottom: 1px solid #fff300;
+	overflow: hidden;
+	}
+ul.lst li.last a {
+	border: none;
+	}
+ul.lst a:hover {
+	background: url(../images/col_bg_hov.png) top left repeat-y;
+    border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	}
+
+#renting #rentingLink,
+#valuation #valuationLink,
+#escort #escortLink,
+#declaration #declarationLink,
+#deposit #depositLink,
+#form #formLink,
+#form_text #form_textLink {
+	background: url(../images/col_bg_hov.png) top left repeat-y;
+    border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+    text-shadow: 1px 1px 2px #fff300;
+	}    
+
+ul.lst li em {
+	float: right;
+	margin: 0 0 0 5px;
+	font-size: 1em;
+	font-style: normal;
+	font-weight: normal;
+	color: #9c836e;
+	}
+
+#today ul.lst li a,
+#activities ul.lst li a {
+    color: #fff300;
+    }
+    
+#reclam {
+    background: none;
+    margin-left: 20%;
+    }   
+
+/* ************** */
+/*     FORM       */
+/* ************** */
+#form #inventory tr td h3,
+#form #inventory tr td ul li a,
+#form #inventory tr td ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    border: none;
+}
+#form #inventory tr td {
+    border: none;
+}
+#form #inventory tr td h3 {
+    margin-top: 0.5em;
+    }
+#statement {
+    margin-bottom: 2em;
+    }
+#statement p,
+#statement ol li {
+    font-size: 1.3em;
+    margin-top: 0.3em;
+    border: none;
+    padding: 0;
+    text-align: justify;
+    color: black;
+    }
+#statement p.where {
+    text-align: left;
+    margin-left: 45%;
+}
+#statement p.where em {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: normal;
+    letter-spacing: normal;
+}
+#statement p.topic {
+    text-align: center;
+    font-weight: bold;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+}
+#statement p.abzac {
+    text-indent: 1em;
+}
+#statement p.topic1 {
+    text-align: center;
+    text-transform: uppercase;
+    }
+#statement p.sign {
+    text-align: center;
+    font-style: italic;
+    margin-top: 1.5em;
+}
+#statement p.app,
+#statement p.topic1 {
+    margin-top: 1.5em;
+    font-weight: bold;
+}
+#statement p.sign em {
+    color: white;
+}
+#statement ol {
+    list-style-type: decimal;
+    }
+#statement ol li {
+    margin-left: 1.5em;
+    color: black;
+    }
+#statement p.for_example,
+#statement p.abzac strong,
+#statement p.where strong,
+#form #realties #inventory tr td li a {
+    text-decoration: underline;
+    }
+#form_text #realties p a {
+    display: inline;
+    text-decoration: underline;
+}
+#form_text #realties p a:hover,
+#form #realties #inventory tr td li a:hover {
+    color: red;
+    text-decoration: none;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+}
+
+
+
+/* ************** */
+/*     FOOTER     */
+/* ************** */
+/*������ ����� ����� (�������)*/
+#footer {
+    background: url(../images/col_bg.png) bottom left;
+    clear: left;
+    width: 100%;
+    }
+
+#footer p {
+    margin: 0;
+    padding-left: 5px;
+    }
+
+#footer a {
+    display: inline; 
+    padding: 0;
+    color: #C6D5FD;
+    
+    }
+
+#footer table tr td {
+	text-align: center;
+	}
+
+#footer td {
+    vertical-align: middle;
+    }
+    
+/*���������*/
+#footerNav{
+    height: 10%;
+    outline: 0px solid #cccccc;
+    /*position: relative;
+    top: 81px;
+    right: 36px;*/
+}
+
+#footerNav li{
+    float: right;
+    outline: 0px solid #cc0000;
+    margin-right: 2%;
+    vertical-align: middle;
+}
+
+
+
+#footerNav li a:hover {
+    color: #00843e;
+    text-shadow: 1px 1px 2px #fff300;
+}
+
+#footerNav li a em:hover {
+    color: #D01E1E;
+}
+
+#index .indexLink,
+#realty .realtyLink {
+    color: #00843e;
+    }
+
+#footer #gerb {
+    margin: 1em;
+    }
+
+#footer img {
+   border: none;
+   box-shadow: none;
+   opacity: 0.7;
+    }
+    
+#footer a img:hover {
+   border: none;
+   box-shadow: none;
+   opacity: 1.0;
+    }

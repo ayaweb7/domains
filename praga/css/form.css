@@ -1,0 +1,65 @@
+/* 
+Название:		Мастер стилей
+*/
+
+/* ******************** */
+/*    ОСНОВНЫЕ СТИЛИ    */
+/* ******************** */
+
+
+
+/* ******************** */
+/*      СТРУКТУРА       */
+/* ******************** */
+
+
+.tableborder td {
+    padding: 5px;
+    
+    }
+
+.tablehead {
+    text-align: center;
+    background: url(../images/table_bg.png) bottom left;
+    font-weight: bold;
+    padding: 0;
+    color: #FFF300;
+    }
+
+.inputbuttonflat {
+    margin: 0 auto;
+    
+    }
+
+
+input, select {
+  border: 1px solid #333;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  height: 20px;
+  background: url(../images/inputbg.jpg) top left repeat-x;
+  box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+  -moz-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+  -webkit-box-shadow: 0 0 10px 0px rgba(255,243,0,.8);
+  padding-left: 3px;
+    }
+
+
+input:focus, select:focus {
+   border: 1px solid #007C37;
+   background: none;
+   background-color: #fff;
+    }
+
+input:hover {
+    border: 1px solid #D01E1E;
+    color: #D01E1E;
+    text-shadow: 1px 1px 2px #fff300; 
+    }
+
+span.help {
+  color: red;
+  font-style: italic;
+  font-size: .8em;
+}
