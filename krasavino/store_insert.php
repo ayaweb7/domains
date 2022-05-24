@@ -25,10 +25,10 @@ include ("blocks/header_admin.php");
 							<table align="center" width="100%">
 <!-- DATE -->
 								<tr>
-									<td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Дата ввода</span><br/>
-<!--									<input type="text" name="date" style="color: red; size="10" value="2021.01.08" />-->
+<!--									<td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Дата ввода</span><br/>
+									<input type="text" name="date" style="color: red; size="10" value="2021.01.08" />
 								<input type='date' name='date_store' value=''>
-									</td>
+									</td>-->
 <!-- TOWN -->                              
 									<td colspan="2" valign="top"><span style="width:60px; padding-left:4px;">Город</span><br/>
 										<select name='town' size='7'>
@@ -80,9 +80,12 @@ $result->close(); // Товары внутри категорий - отсорт
 					</tr>
 				</table>
 
+<!-- SUBMIT -->
 <input class="inputbuttonflat" type="submit" name="set_filter" value="Отправить данные" style="margin-left:20px;"/>
 <input type="reset" name="set_filter" value="Сбросить"/>
 
+<!-- HIDDEN -->
+<input type="hidden" name="date_store" value="<?php echo (new DateTime())->format('Y-m-d'); ?>"/>
 			</td>
 		</tr>
 	</table>

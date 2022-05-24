@@ -40,10 +40,10 @@ $myrow = mysqli_fetch_array($result);
 							<table align="center" width="100%">
 <!-- DATE -->
 								<tr>
-									<td valign="top"><span style="font-size: 1.2em; font-style: italic; color: #D01E1E;">Дата: </span><br>
+<!--									<td valign="top"><span style="font-size: 1.2em; font-style: italic; color: #D01E1E;">Дата: </span><br>
 																<span style="font-size: 1em; font-style: italic;">изменить на</span><br>
 										<input type="text" name="date_store" size="10" value="<?php echo $myrow['date_store'] ?>"/>
-									</td>
+									</td>-->
 <!-- TOWN -->                              
 									<td valign="top"><span style="width:60px; padding-left:4px;">Город:</span><br><br>
 										<span style="width:60px; padding-left:4px; color: #D01E1E; text-decoration: none;"><?php echo $myrow['town'] ?></span>
@@ -77,8 +77,11 @@ $myrow = mysqli_fetch_array($result);
 					</tr>
 				</table>
 
+<!-- SUBMIT -->
 <input class="inputbuttonflat" type="submit" name="set_filter" value="Отправить данные" style="margin-left:20px;"/>
 <input type="reset" name="set_filter" value="Сбросить"/>
+<!-- HIDDEN -->
+<input type="hidden" name="date_store" value="<?php echo (new DateTime())->format('Y-m-d'); ?>"/>
 
 			</td>
 		</tr>

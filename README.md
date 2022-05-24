@@ -8,3 +8,6 @@ OSPanel
 5. Володя;
 6. и другие.
 &&& others &&&
+
+# Путь к репозиторию на диске
+cd /d/father/Programs/OSPanel/domains

@@ -22,6 +22,7 @@ if (isset($_POST['quantity'])) {$quantity = $_POST['quantity'];}
 if (isset($_POST['item'])) {$item = $_POST['item'];}
 if (isset($_POST['price'])) {$price = $_POST['price'];}
 if (isset($_POST['amount'])) {$amount = $_POST['amount'];}
+if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
 $id = (int) $id;
 
 // Проверка на ошибки средствами PHP
@@ -44,15 +45,23 @@ function validate_quantity($field) {return ($field == "") ? "Не введено
 function validate_price($field) {return ($field == "") ? "Не введена цена товара.<br>" : "";}
 function validate_amount($field) {return ($field == "") ? "Не введена стоимость товара.<br>" : "";}
 
-if ($fail == "") {
+if ($fail == "")
+{
 	echo "Проверка формы прошла успешно:<br>
 Дата: $date;<br> Магазин: $shop;<br> Категория: $gruppa;<br> Наименование: $name;<br> Характеристики: $characteristic;<br>
 Количество: $quantity $item;<br> Цена: $price руб.;<br> Стоимость: $amount руб.<br><br>";
 } else {
 	echo "BAD";
+}
 
-$query = "INSERT INTO shops (id, date, shop, gruppa, name, characteristic, quantity, item, price, amount)
-VALUES ('$id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount')";
+// Определение значения 'ID_STORE'
+// Выборка из таблицы 'store' соответствия 'shop' & 'id_store'
+$result2 = mysqli_query($db, "SELECT * FROM store WHERE shop='$shop'");
+$myrow2 = mysqli_fetch_array($result2);
+$id_store = $myrow2['id_store'];
+
+$query = "INSERT INTO shops (id, date, shop, gruppa, name, characteristic, quantity, item, price, amount, id_store)
+VALUES ('$id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount', '$id_store')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {
@@ -74,6 +83,8 @@ HERE;
 }
 
 // !***************** Закрытие объектов с результатами и подключение к базе данных *********************! //
+$result1->close(); // Титулы, заголовки из таблицы 'settings'
+$result2->close(); // Различные данные из таблицы 'store'
 $db->close(); // Закрываем базу данных
 
 // Подключаем FOOTER_SEARCH

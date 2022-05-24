@@ -15,6 +15,7 @@ $date = $shop = $town = $street = $house = $phone = "";
 if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
 if (isset($_POST['date_store'])) {$date_store = $_POST['date_store'];}
 if (isset($_POST['town'])) {$town = $_POST['town'];}
+if (isset($_POST['town_eng'])) {$town_eng = $_POST['town_eng'];}
 if (isset($_POST['street'])) {$street = $_POST['street'];}
 if (isset($_POST['house'])) {$house = $_POST['house'];}
 if (isset($_POST['shop'])) {$shop = $_POST['shop'];}
@@ -47,9 +48,10 @@ echo "Проверка формы прошла успешно:<br>
 $result2 = mysqli_query($db, "SELECT * FROM store WHERE town='$town'");
 $myrow2 = mysqli_fetch_array($result2);
 $id_locality = $myrow2['id_locality'];
+$town_eng = $myrow2['town_eng'];
 
-$query = "INSERT INTO store (id_store, shop, street, house, phone, town, id_locality, date_store)
-VALUES ('$id_store', '$shop', '$street', '$house', '$phone','$town', '$id_locality', '$date_store')";
+$query = "INSERT INTO store (id_store, shop, street, house, phone, town, town_eng, id_locality, date_store)
+VALUES ('$id_store', '$shop', '$street', '$house', '$phone', '$town', '$town_eng', '$id_locality', '$date_store')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {
@@ -72,9 +74,15 @@ HERE;
 
 // !***************** Закрытие объектов с результатами и подключение к базе данных *********************! //
 $result1->close(); // Титулы, заголовки из таблицы 'settings'
-$result2->close(); // Титулы, заголовки из таблицы 'settings'
+$result2->close(); // Различные данные из таблицы 'store'
 $db->close(); // Закрываем базу данных
 
 // Подключаем FOOTER_SEARCH
 include ("blocks/footer_store.php");
+
+// UPDATE `shops` SET `shop`='РосНефть №203 - Коряжма' WHERE `shop`='РосНефть №203'
+// UPDATE `shops` SET `shop`='РосНефть №220 - Ядриха' WHERE `shop`='РосНефть №220'
+// UPDATE `shops` SET `shop`='НТК №1 - Приводино' WHERE `shop`='НТК №1'
+// (м-н Часы-Виконда, г. Коряжма, ул. Ленина)
+// (ш-ж г. Красавино, ул. Кооперативная)
 ?>

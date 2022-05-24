@@ -11,7 +11,7 @@
 			<a href="#" title="Поиск товара по магазину"><img src=''/></a>
 		</td>
 		<td width='32%' >
-			<a onclick='javascript: history.back(); return falshe;'><img src="images/sbros.png" id="send"/></a>
+			<a onclick='javascript: history.back(); return falshe;' title="НАЗАД на ввод"><img src="images/sbros.png" id="send"/></a>
 		</td>
 	</tr></table>
 	

@@ -46,8 +46,8 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 			<li>
 				<a class="othersLink" href="index.php" title="На главную"><em>Магазины</em></a>
 				<ul>
-					<li><a class="realty1Link" href="stores.php" title="Все магазины">Все <em>магазины</em></a></li>
-					<li><a class="realty1Link" href="store.php" title="Информация о магазинах"><em>Информация </em>о магазинах</a></li>
+					<li><a class="realty1Link" href="stores.php" title="Все магазины">Магазины <em>(таблица)</em></a></li>
+					<li><a class="realty1Link" href="store.php" title="Информация о магазинах">Магазины <em>(выбор)</em></a></li>
 					<li><a class="realty1Link" href="store_insert.php" title="Новый магазин"><em>Новый </em>магазин</a></li>
 					<li><a class="realty1Link" href="store_update.php" title="Изменение магазина">Изменение <em>магазина</em></a></li>
 				</ul>

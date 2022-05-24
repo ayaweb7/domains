@@ -5,6 +5,7 @@ include ("blocks/header_admin.php");
 if (isset($_POST['shop_search'])) {
 	$shop_search = $_POST['shop_search'];
 	
+	
 	$result = mysqli_query($db, "SELECT * FROM store WHERE shop='$shop_search'");
 	$myrow = mysqli_fetch_array($result);
 	
