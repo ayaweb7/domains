@@ -94,7 +94,7 @@ $result2->close(); // Категории, отсортированные по а
 
 for ($i = 1 ; $i <= 4 ; ++$i)
 {
-	$k = mt_rand(111, 271);
+	$k = mt_rand(111, 345);
 
 // Выборка фотографий
 $result6 = mysqli_query($db, "SELECT * FROM photos WHERE number=$k");

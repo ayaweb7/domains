@@ -85,4 +85,5 @@ include ("blocks/footer_store.php");
 // UPDATE `shops` SET `shop`='НТК №1 - Приводино' WHERE `shop`='НТК №1'
 // (м-н Часы-Виконда, г. Коряжма, ул. Ленина)
 // (ш-ж г. Красавино, ул. Кооперативная)
+// UPDATE `shops` SET `id_store`=121 WHERE `shop`='СтройРынок Окна'
 ?>
