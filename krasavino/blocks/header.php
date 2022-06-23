@@ -76,6 +76,10 @@ $result2->close(); // Категории, отсортированные по а
 					<li><a class="realty1Link" href="search.php" title="Комбинация параметров поиска"><em>Сложный поиск</em></a></li>
 				</ul>
 			</li>
+<!-- Графики -->
+			<li
+				<a class="othersLink" href="plot_search.php" title="Выбор графика">Построй <em>свой</em> график</a>
+			</li>
 <!-- Фотографии
 			<li>
 				<a class='othersLink' href="gallery.php" title="Галерея фотографий"><em>Галерея</em></a>
@@ -95,10 +99,14 @@ for ($i = 1 ; $i <= 4 ; ++$i)
 // Выборка фотографий
 $result6 = mysqli_query($db, "SELECT * FROM photos WHERE number=$k");
 $myrow6 = mysqli_fetch_array($result6);
-	
+
 printf ("<div id='head_%s'>
 			<a href='../images/house_or/house_%s.jpg' target='_blank'><img src='../images/house/house_%s.jpg' title='%s: %s(%s)'></a>
 		</div>", $i, $k, $k, $myrow6['date_photo'], $myrow6['notes'], $k);
+		
+//printf ("<div id='head_%s'>
+//			<a href='https://disk.yandex.ru/client/disk/Загрузки/house_origin?idApp=client&dialog=slider&idDialog=/disk/Загрузки/house_origin/house_%s.jpg' //target='_blank'><img src='../images/house/house_%s.jpg' title='%s: %s(%s)'></a>
+//		</div>", $i, $k, $k, $myrow6['date_photo'], $myrow6['notes'], $k);
 }
 // style='background-image: url(../images/house/house_%s.jpeg);'
 //

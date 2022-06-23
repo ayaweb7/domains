@@ -12,6 +12,7 @@ if (isset($_POST['month_search'])) {$title = $_POST['month_search'];}
 if (isset($_POST['price_search'])) {$title = $_POST['price_search'];}
 if (isset($_POST['name_update'])) {$title = $_POST['name_update'];}
 if (isset($_POST['shop_update'])) {$title = $_POST['shop_update'];}
+//if (isset($_POST['view'])) {$title = $_POST['view'];}
 if (isset($_POST['id_update'])) {$title = 'id=' . $_POST['id_update'];}
 if (isset($_GET['id'])) {$title = $_GET['id'];}
 ?>
@@ -107,6 +108,15 @@ $result2->close(); // Категории, отсортированные по а
 					<li><a class="realty1Link" href="gallery_new.php" title="Галерея фотографий"><em>Галерея </em>gallery_new</a></li>
 					<li><a class="realty1Link" href="photo_insert.php" title="Новое фото"><em>Новое </em>фото</a></li>
 					<li><a class="realty1Link" href="photo_update.php" title="Изменение фото"><em>Изменение </em>фото</a></li>
+					<li><a class="realty1Link" href="python_code.php" title="Python"><em>Python</em></a></li>
+					<li><a class="realty1Link" href="testing.php" title="PHP" target="_blank"><em>PHP</em>-testing</a></li>
+					<li><a class="realty1Link" href="jpgrath_code.php" title="JpGrath"><em>JpGrath</em></a></li>
+					<li><a class="realty1Link" href="jpgrath_code_bar.php" title="JpGrath_Bar"><em>JpGrath_Bar</em></a></li>
+					<li><a class="realty1Link" href="jpgrath_code_shops.php" title="JpGrath_Shops" target="_blank"><em>Группировка</em></a></li>
+					<li><a class="realty1Link" href="jpgrath_code_shops1.php" title="JpGrath_Shops" target="_blank"><em>Отдельно</em></a></li>
+					<li><a class="realty1Link" href="jpgrath_code_shops1_shablon.php" title="JpGrath_Shops" target="_blank"><em>Шаблон</em></a></li>
+					<li><a class="realty1Link" href="jpgrath_query.php" title="Выбор диаграммы" target="_blank"><em>Выбор диаграммы</em></a></li>
+					<li><a class="realty1Link" href="plot_search1.php" title="Выбор графика">Построй <em>свой</em> график</a></li>
 				</ul>
 			</li>
 		</li>
@@ -126,8 +136,12 @@ $result6 = mysqli_query($db, "SELECT * FROM photos WHERE number=$k");
 $myrow6 = mysqli_fetch_array($result6);
 	
 printf ("<div id='head_%s'>
-			<a href='../images/house_origin/house_%s.jpg' target='_blank'><img src='../images/house_header/house_%s.jpg' title='%s: %s(%s)'></a>
+			<a href='../images/house_or/house_%s.jpg' target='_blank'><img src='../images/house/house_%s.jpg' title='%s: %s(%s)'></a>
 		</div>", $i, $k, $k, $myrow6['date_photo'], $myrow6['notes'], $k);
+		
+//printf ("<div id='head_%s'>
+//			<a href='https://disk.yandex.ru/client/disk/Загрузки/house_origin?idApp=client&dialog=slider&idDialog=/disk/Загрузки/house_origin/house_%s.jpg' //target='_blank'><img src='../images/house_header/house_%s.jpg' title='%s: %s(%s)'></a>
+//		</div>", $i, $k, $k, $myrow6['date_photo'], $myrow6['notes'], $k);
 }
 // style='background-image: url(../images/house/house_%s.jpeg);'
 //

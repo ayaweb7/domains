@@ -1,4 +1,4 @@
-</div> <!-- #container -->
+ </div><!-- #container -->
 <div id="footer">
 <div id='top'><a href='#header' title="Наверх страницы"><img src='images/buttonUpActive.png'/></a></div>
 <p align='center'></p>
@@ -15,6 +15,6 @@
 		</td>
 	</tr></table>
 	
-</div> <!-- footer -->
+</div>  <!--footer -->
 </body>
 </html>

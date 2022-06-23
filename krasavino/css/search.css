@@ -93,6 +93,14 @@ label {float: left;}
 	margin: 0 1%;
 }
 
+.title h1{
+	text-align: center;
+}
+
+.title h1 em{
+	color: #d01e1e;/* red */
+}
+
 /*, #townHidden, #divShop, #town_hidden,*/
 #date_hidden,
 #price_hidden {
