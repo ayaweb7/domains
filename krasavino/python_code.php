@@ -1,9 +1,9 @@
 <html>
 <html>    
     <head>
-        <!--<meta http-equiv="content-type" content="text/html; charset=windows-1251" />-->
-		
-        <title>Графики</title> 
+        <!--<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />-->
+        <title>Графики1</title> 
     </head>
  
 <body>
@@ -28,10 +28,22 @@
 
 /**/
 echo '</br>';
-$output = shell_exec('C:\Python310\python.exe python_script_8.py');
-echo $output;
-echo '</br>';
 
+$command = escapeshellcmd("C:\Python310\python.exe python_script_9.py");
+$output =  system($command);
+
+//$output = shell_exec('C:\Python310\python.exe python_script_9.py');
+
+
+echo $output;
+
+//echo "Python is printing: " .  $output;
+echo '</br>';
+/*
+$para1 = "one";
+$para2 = "two";
+echo shell_exec("C:\Python310\python.exe python_script_9.py '$para1' '$para2'");
+*/
 /*
 $resss = shell_exec("C:\Python310\python.exe python_script_8.py '19' 'але' '03' '27' 2>&1");
 echo $resss;
@@ -103,8 +115,42 @@ print_r($message);
 //$result5->close(); // Адреса магазинов из таблицы 'store'
 //$db->close(); // Закрываем базу данных
 
+/*
+$data = array('as', 'df', 'gh');
+
+// Execute the python script with the JSON data
+$result = shell_exec('C:\Python310\python.exe python_script_9.py ' . escapeshellarg(json_encode($data)));
+
+// Decode the result
+$resultData = json_decode($result, true);
+
+// This will contain: array('status' => 'Yes!')
+var_dump($resultData);
+*/
+//echo file_get_contents("python_script_9.py");
+
+/*
+$data = array('as', 'df', 'gh');
+
+$pythonScript = "python_script_9.py";
+$cmd = array("C:\Python310\python.exe", $pythonScript, escapeshellarg(json_encode($data)));
+$cmdText = implode(' ', $cmd);
+
+echo "Running command: " . $cmdText . "\n";
+$result = shell_exec($cmdText);
+
+echo "Got the following result:\n";
+echo $result;
+
+$resultData = json_decode($result, true);
+
+echo "The result was transformed into:\n";
+var_dump($resultData);
+*/
 
 ?>
+
+<div><img src='images/plots/hist.png' title='hist'></div>
 
 <div id="output">
 <!--<button id="button">Нажми меня</button>-->

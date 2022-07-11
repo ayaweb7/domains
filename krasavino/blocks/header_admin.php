@@ -117,6 +117,7 @@ $result2->close(); // Категории, отсортированные по а
 					<li><a class="realty1Link" href="jpgrath_code_shops1_shablon.php" title="JpGrath_Shops" target="_blank"><em>Шаблон</em></a></li>
 					<li><a class="realty1Link" href="jpgrath_query.php" title="Выбор диаграммы" target="_blank"><em>Выбор диаграммы</em></a></li>
 					<li><a class="realty1Link" href="plot_search1.php" title="Выбор графика">Построй <em>свой</em> график</a></li>
+					<li><a class="realty1Link" href="plot_python.php" title="Графики Python">Графики <em>Python</em></a></li>
 				</ul>
 			</li>
 		</li>

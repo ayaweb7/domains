@@ -77,8 +77,12 @@ $result2->close(); // Категории, отсортированные по а
 				</ul>
 			</li>
 <!-- Графики -->
-			<li
-				<a class="othersLink" href="plot_search.php" title="Выбор графика">Построй <em>свой</em> график</a>
+			<li>
+				<a class="othersLink" href="index.php" title="На главную"><em>Графики</em></a>
+				<ul>
+					<li><a class="realty1Link" href="plot_search.php" title="Графики JPGRAPH"><em>jpgraph</em></a></li>
+					<li><a class="realty1Link" href="plot_python.php" title="Графики Python"><em>python</em></a></li>
+				</ul>
 			</li>
 <!-- Фотографии
 			<li>

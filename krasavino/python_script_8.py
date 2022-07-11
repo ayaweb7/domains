@@ -28,7 +28,7 @@ print("<h1>Привет из Аш1, Nick в Питоне</h1>".encode('utf8').de
 print("</body></html>")
 
 print("Hello")
-print("Привет World из Пайтоновского Принта !".encode('utf8').decode('cp1251'))
+print("Привет World из Пайтоновского Принта! - python_script_8.py".encode('utf8').decode('cp1251'))
 
 '''
 # Downloads files
@@ -47,7 +47,7 @@ with open('C:/Users/Андрей/Downloads/shops.csv', 'wb') as fh:
 '''
 '''
 # Data to plot
-languages ='Java', 'Python', 'PHP', 'JavaScript', 'C#', 'C++'
+languages ='Java', 'Python', 'PHP', 'Это был ДжаваСкрипт', 'C#', 'C++'
 popuratity = [22.2, 17.6, 8.8, 8, 7.7, 6.7]
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]
 # explode 1st slice

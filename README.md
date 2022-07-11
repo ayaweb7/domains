@@ -11,3 +11,6 @@ OSPanel
 
 # Путь к репозиторию на диске
 cd /d/father/Programs/OSPanel/domains
+
+print pandas.__version__
+print json.__version__
