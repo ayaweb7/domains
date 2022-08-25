@@ -34,13 +34,17 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 
 <ul id='nav' name='top'>
 		<li>
+<!-- Главная -->
+			<li class='first'>
+				<a class='othersLink' href='index.php' title='На главную'><em>Главная</em></a>
+			</li>
 <!-- Магазины -->
 			<li class='first'>
 				<a class="othersLink" href="stores.php" title="Все магазины"><em>Магазины</em></a>
 			</li>
 <!-- Категории -->
 			<li>
-                <a class="othersLink" href="index.php" title="На главную"><em>Категории</em></a>
+                <a class='othersLink' href='#' title=''><em>Категории</em></a>
 				<ul>
 <?php
 /**/
@@ -70,7 +74,7 @@ $result2->close(); // Категории, отсортированные по а
 			</li>
 <!-- Поиск -->			
 			<li>
-				<a class="othersLink" href="index.php" title="На главную"><em>Поиск</em></a>
+				<a class='othersLink' href='#' title=''><em>Поиск</em></a>
 				<ul>
 					<li><a class="realty1Link" href="poisk.php" title="Быстрый поиск товаров"><em>Быстрый</em> поиск</a></li>
 					<li><a class="realty1Link" href="search.php" title="Комбинация параметров поиска"><em>Сложный поиск</em></a></li>
@@ -78,7 +82,7 @@ $result2->close(); // Категории, отсортированные по а
 			</li>
 <!-- Графики -->
 			<li>
-				<a class="othersLink" href="index.php" title="На главную"><em>Графики</em></a>
+				<a class='othersLink' href='#' title=''><em>Графики</em></a>
 				<ul>
 					<li><a class="realty1Link" href="plot_search.php" title="Графики JPGRAPH"><em>jpgraph</em></a></li>
 					<li><a class="realty1Link" href="plot_python.php" title="Графики Python"><em>python</em></a></li>

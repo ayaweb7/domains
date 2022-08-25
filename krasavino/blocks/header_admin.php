@@ -35,9 +35,13 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 
 <ul id='nav' name='top'>
 		<li>
+<!-- Главная -->
+			<li class='first'>
+				<a class='othersLink' href='index.php' title='На главную'><em>Главная</em></a>
+			</li>
 <!-- Страницы -->
 			<li class='first'>
-				<a class='othersLink' href='index.php' title='На главную'><em>Страницы</em></a>
+				<a class='othersLink' href='#' title=''><em>Страницы</em></a>
 				<ul>
 					<li><a class="realty1Link" href="settings_insert.php" title="Новая страница"><em>Новая </em>страница</a></li>
 					<li><a class="realty1Link" href="settings_update.php" title="Изменение страницы"><em>Изменение </em>страницы</a></li>
@@ -45,7 +49,7 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 			</li>
 <!-- Магазины -->
 			<li>
-				<a class="othersLink" href="index.php" title="На главную"><em>Магазины</em></a>
+				<a class='othersLink' href='#' title=''><em>Магазины</em></a>
 				<ul>
 					<li><a class="realty1Link" href="stores.php" title="Все магазины">Магазины <em>(таблица)</em></a></li>
 					<li><a class="realty1Link" href="store.php" title="Информация о магазинах">Магазины <em>(выбор)</em></a></li>
@@ -55,7 +59,7 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 			</li>
 <!-- Товары -->
 			<li>
-				<a class="othersLink" href="index.php" title="На главную"><em>Товары</em></a>
+				<a class='othersLink' href='#' title=''><em>Товары</em></a>
 				<ul>
 					<li><a class="realty1Link" href="shop_insert.php" title="Ввод новой покупки"><em>Новая </em>покупка</a></li>
 					<li><a class="realty1Link" href="shop_update.php" title="Изменение покупки"><em>Изменение </em>покупки</a></li>
@@ -63,7 +67,7 @@ if (isset($_GET['id'])) {$title = $_GET['id'];}
 			</li>
 <!-- Категории -->
 			<li>
-                <a class="othersLink" href="index.php" title="На главную"><em>Категории</em></a>
+                <a class='othersLink' href='#' title=''><em>Категории</em></a>
 				<ul>
 <?php
 /**/
@@ -93,7 +97,7 @@ $result2->close(); // Категории, отсортированные по а
 			</li>
 <!-- Поиск -->			
 			<li>
-				<a class="othersLink" href="index.php" title="На главную"><em>Поиск</em></a>
+				<a class='othersLink' href='#' title=''><em>Поиск</em></a>
 				<ul>
 					<li><a class="realty1Link" href="poisk.php" title="Быстрый поиск товаров"><em>Быстрый</em> поиск</a></li>
 					<li><a class="realty1Link" href="search.php" title="Комбинация параметров поиска"><em>Сложный поиск</em></a></li>
@@ -101,7 +105,7 @@ $result2->close(); // Категории, отсортированные по а
 			</li>
 <!-- Фотографии -->
 			<li>
-				<a class='othersLink' href='index.php' title='На главную'><em>Фотографии</em></a>
+				<a class='othersLink' href='#' title=''><em>Фотографии</em></a>
 				<ul>
 					<li><a class="realty1Link" href="gallery_new_2.php" title="Галерея фотографий"><em>Галерея </em>gallery_new_2</a></li> <!-- gallery_new_2.php -->
 					<li><a class="realty1Link" href="gallery.php" title="Галерея фотографий"><em>Галерея </em>gallery</a></li>
