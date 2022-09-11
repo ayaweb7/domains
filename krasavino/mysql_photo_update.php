@@ -12,13 +12,13 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $number = $date_photo = $date = $notes = "";
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['photos_id'])) {$photos_id = $_POST['photos_id'];}
 if (isset($_POST['number'])) {$number = $_POST['number'];}
 if (isset($_POST['date_photo'])) {$date_photo = $_POST['date_photo'];}
 if (isset($_POST['date'])) {$date = $_POST['date'];}
 if (isset($_POST['notes'])) {$notes = $_POST['notes'];}
 
-$id = (int) $id;
+$photos_id = (int) $photos_id;
 
 // Проверка на ошибки средствами PHP
 $fail = validateNumber($number);
@@ -35,10 +35,10 @@ function validateNotes($field) {return ($field == "") ? "Не введено о�
 if ($fail == "")
 {
 echo "Проверка формы прошла успешно:<br>
-ID: $id;<br> Номер фото: $number;<br> Дата фотографии: $date_photo;<br> Дата фотографии в формате даты: $date;<br> Описание фотографии: $notes.<br><br>";
+ID: $photos_id;<br> Номер фото: $number;<br> Дата фотографии: $date_photo;<br> Дата фотографии в формате даты: $date;<br> Описание фотографии: $notes.<br><br>";
 }
 
-$query = "UPDATE photos SET number='$number', date_photo='$date_photo', date='$date', notes='$notes' WHERE id='$id'";
+$query = "UPDATE photos SET number='$number', date_photo='$date_photo', date='$date', notes='$notes' WHERE photos_id='$photos_id'";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

@@ -12,7 +12,7 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $date = $shop = $town = $street = $house = $phone = "";
 
-if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
+if (isset($_POST['store_id'])) {$store_id = $_POST['store_id'];}
 if (isset($_POST['date_store'])) {$date_store = $_POST['date_store'];}
 if (isset($_POST['town'])) {$town = $_POST['town'];}
 if (isset($_POST['town_eng'])) {$town_eng = $_POST['town_eng'];}
@@ -21,7 +21,7 @@ if (isset($_POST['house'])) {$house = $_POST['house'];}
 if (isset($_POST['shop'])) {$shop = $_POST['shop'];}
 if (isset($_POST['phone'])) {$phone = $_POST['phone'];}
 
-$id_store = (int) $id_store;
+$store_id = (int) $store_id;
 
 // Проверка на ошибки средствами PHP
 $fail = validate_date($date_store);
@@ -47,11 +47,11 @@ echo "Проверка формы прошла успешно:<br>
 // Выборка из таблицы 'store' соответствия 'town' & 'id_locality'
 $result2 = mysqli_query($db, "SELECT * FROM store WHERE town='$town'");
 $myrow2 = mysqli_fetch_array($result2);
-$id_locality = $myrow2['id_locality'];
+$locality_id = $myrow2['locality_id'];
 $town_eng = $myrow2['town_eng'];
 
-$query = "INSERT INTO store (id_store, shop, street, house, phone, town, town_eng, id_locality, date_store)
-VALUES ('$id_store', '$shop', '$street', '$house', '$phone', '$town', '$town_eng', '$id_locality', '$date_store')";
+$query = "INSERT INTO store (store_id, shop, street, house, phone, town, town_eng, locality_id, date_store)
+VALUES ('$store_id', '$shop', '$street', '$house', '$phone', '$town', '$town_eng', '$locality_id', '$date_store')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

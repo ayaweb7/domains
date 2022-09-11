@@ -40,7 +40,7 @@ $result = mysqli_query($db, "SELECT * FROM shops WHERE gruppa='$gruppa' ORDER BY
 $myrow = mysqli_fetch_array($result);
 
 // Проверка наличия товаров в группе для необходимости печати подзаголовка выбранной категории
-		if (!isset($myrow['id'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
+		if (!isset($myrow['shops_id'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
 		else
 		{
 
@@ -59,7 +59,7 @@ $result5 = mysqli_query($db, "SELECT * FROM store WHERE shop='$myrow[shop]'");
 $myrow5 = mysqli_fetch_array($result5);
 				
 				printf  ("<tr class='absent' style='background-color:".($even?'white':'#eaeaea')."'>
-							<td class='id'><a href='form.php?id=%s'>%s</a></td>
+							<td class='id'><a href='form.php?shops_id=%s'>%s</a></td>
 							<td class='date'>%s</td>
 							<td class='shop'>%s</td>
 							<td class='address'>%s, %s, %s</td>
@@ -67,7 +67,7 @@ $myrow5 = mysqli_fetch_array($result5);
 							<td class='item'>%s %s</td>
 							<td class='trade'>%s</td>
 							<td class='price'>%s</td>
-						</tr>  ",$myrow['id'], $myrow['id'], $myrow['date'], $myrow['shop'], $myrow5['town'], $myrow5['street'], $myrow5['house'],
+						</tr>  ",$myrow['shops_id'], $myrow['shops_id'], $myrow['date'], $myrow['shop'], $myrow5['town'], $myrow5['street'], $myrow5['house'],
 								$myrow['name'], $myrow['characteristic'], $myrow['quantity'], $myrow['item'], $myrow['price'], $myrow['amount']); 
 				
 				$even=!$even;

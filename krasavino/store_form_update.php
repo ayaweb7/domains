@@ -23,9 +23,9 @@ $myrow1 = mysqli_fetch_array($result1);
 <div>
 
 <?php
-if (isset($_GET['id_store'])) {$id_store=$_GET['id_store'];}
+if (isset($_GET['store_id'])) {$store_id=$_GET['store_id'];}
 
-if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
+if (isset($_POST['store_id'])) {$store_id = $_POST['store_id'];}
 if (isset($_POST['date'])) {$date = $_POST['date'];}
 if (isset($_POST['town'])) {$town = $_POST['town'];}
 if (isset($_POST['id_locality'])) {$id_locality = $_POST['id_locality'];}
@@ -37,7 +37,7 @@ if (isset($_POST['phone'])) {$phone = $_POST['phone'];}
 $db = mysqli_connect("localhost","nikart","arteeva12");
 mysqli_select_db($db, "agency");
 
-$result = mysqli_query($db, "SELECT * FROM store WHERE id_store='$id_store'");
+$result = mysqli_query($db, "SELECT * FROM store WHERE store_id='$store_id'");
 $myrow = mysqli_fetch_array($result);
 
 print <<<HERE
@@ -75,7 +75,7 @@ print <<<HERE
 						          <input type="text" name="house" size="70" value="$myrow[house]" autofocus/></td>
                             </tr>
                             
-                            <tr><td><input name="id_store" type="hidden" value="$myrow[id_store]"/></td></tr>
+                            <tr><td><input name="store_id" type="hidden" value="$myrow[store_id]"/></td></tr>
                             
                         </table></td>
                         

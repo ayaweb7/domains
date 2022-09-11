@@ -36,7 +36,7 @@ include ("blocks/header_admin.php");
 $result = mysqli_query($db, "SELECT * FROM settings ORDER BY page");
 $myrow = mysqli_fetch_array($result);
 
-if (!isset($myrow['id'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
+if (!isset($myrow['settings_id'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
 else {
 
 $even=true;
@@ -45,11 +45,11 @@ do {
 	$sum = $sum + 1;
 printf  ("          <tr class='absent' style='background-color:".($even?'white':'#eaeaea')."'>
                       <td>%s</td>
-					  <td><a href='form_settings_update.php?id=%s'>%s</a></td>
+					  <td><a href='form_settings_update.php?settings_id=%s'>%s</a></td>
 					  <td>%s</td>
 					  <td>%s</td>
 					  <td>%s</td>
-					</tr>  ", $myrow['id'],$myrow['id'], $myrow['page'], $myrow['title'], $myrow['h1'], $myrow['h2']); 
+					</tr>  ", $myrow['settings_id'],$myrow['settings_id'], $myrow['page'], $myrow['title'], $myrow['h1'], $myrow['h2']); 
 $even=!$even;
 }
 

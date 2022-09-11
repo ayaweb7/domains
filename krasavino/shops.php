@@ -81,7 +81,7 @@ $result = mysqli_query($db, "SELECT * FROM shops WHERE gruppa='$myrow2[gruppa]' 
 $myrow = mysqli_fetch_array($result);
 
 // Проверка наличия товаров в категории для необходимости печати подзаголовка категории
-		if (!isset($myrow['id'])) {'<script language="javascript">document.getElementsByClassName("sub").style.display="none";<script>';}
+		if (!isset($myrow['shops_id'])) {'<script language="javascript">document.getElementsByClassName("sub").style.display="none";<script>';}
 		else
 		{
 			printf ("<tr class='sub'><td colspan='7'>%s</td></tr>", $myrow2['gruppa']);
@@ -93,14 +93,14 @@ $myrow = mysqli_fetch_array($result);
 			do
 			{
 				printf  ("<tr class='absent' style='background-color:".($even?'white':'#eaeaea')."'>
-									  <td><a href='form.php?id=%s'>%s</a></td>
+									  <td><a href='form.php?shops_id=%s'>%s</a></td>
 									  <td>%s</td>
 									  <td>%s %s</td>
 									  <td>%s %s</td>
 									  <td>%s</td>
 									  <td>%s</td>
 									  
-									</tr>", $myrow['id'], $myrow['id'] ,$myrow['date'], $myrow['name'], $myrow['characteristic'],
+									</tr>", $myrow['shops_id'], $myrow['shops_id'] ,$myrow['date'], $myrow['name'], $myrow['characteristic'],
 									$myrow['quantity'], $myrow['item'], $myrow['price'], $myrow['amount']);
 
 									$even=!$even;

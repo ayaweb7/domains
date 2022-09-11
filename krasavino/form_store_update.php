@@ -71,7 +71,7 @@ $myrow = mysqli_fetch_array($result);
 										<input type="text" name="phone" size="60" value="<?php echo $myrow['phone'] ?>"/>
 									</td>
 								</tr>
-								<tr><td><input name="id_store" type="hidden" value="<?php echo $myrow['id_store'] ?>"/></td></tr>
+								<tr><td><input name="store_id" type="hidden" value="<?php echo $myrow['store_id'] ?>"/></td></tr>
 							</table> <!-- ОБЩИЕ -->
 						</td> <!-- ОБЩИЕ -->
 					</tr>

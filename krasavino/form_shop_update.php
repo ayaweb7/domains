@@ -9,8 +9,8 @@ $myrow1 = mysqli_fetch_array($result1);
 // Подключаем HEADER
 include ("blocks/header_admin.php");
 
-if (isset($_GET['id'])) {$id=$_GET['id'];}
-if (isset($_POST['id_update'])) {$id = $update = $_POST['id_update']; $arg = 'id'; $mess_1 = 'ID товара: '; $mess_2 = '.';}
+if (isset($_GET['shops_id'])) {$shops_id=$_GET['shops_id'];}
+if (isset($_POST['id_update'])) {$shops_id = $update = $_POST['id_update']; $arg = 'shops_id'; $mess_1 = 'ID товара: '; $mess_2 = '.';}
 
 //if (isset($_POST['id'])) {$id = $_POST['id'];}
 if (isset($_POST['date'])) {$date = $_POST['date'];}
@@ -23,7 +23,7 @@ if (isset($_POST['item'])) {$item = $_POST['item'];}
 if (isset($_POST['price'])) {$price = $_POST['price'];}
 if (isset($_POST['amount'])) {$amount = $_POST['amount'];}
 
-$result = mysqli_query($db, "SELECT * FROM shops WHERE id='$id'");
+$result = mysqli_query($db, "SELECT * FROM shops WHERE shops_id='$shops_id'");
 $myrow = mysqli_fetch_array($result);
 ?>
 
@@ -100,7 +100,7 @@ $myrow = mysqli_fetch_array($result);
 									<input type="text" name="amount" size="10" value="<?php echo $myrow['amount'] ?>" style="text-align: center;"/>
 									</td>
 								</tr>
-								<tr><td><input name="id" type="hidden" value="<?php echo $myrow['id'] ?>"/></td></tr>
+								<tr><td><input name="shops_id" type="hidden" value="<?php echo $myrow['shops_id'] ?>"/></td></tr>
 							</table> <!-- ОСНОВНЫЕ -->
 						</td>
 					</tr>

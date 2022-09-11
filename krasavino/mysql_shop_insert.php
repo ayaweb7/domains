@@ -12,7 +12,7 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $date = $shop = $gruppa = $name = $characteristic = $quantity = $price = $amount = "";
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['shops_id'])) {$shops_id = $_POST['shops_id'];}
 if (isset($_POST['date'])) {$date = $_POST['date'];}
 if (isset($_POST['shop'])) {$shop = $_POST['shop'];}
 if (isset($_POST['gruppa'])) {$gruppa = $_POST['gruppa'];}
@@ -23,7 +23,7 @@ if (isset($_POST['item'])) {$item = $_POST['item'];}
 if (isset($_POST['price'])) {$price = $_POST['price'];}
 if (isset($_POST['amount'])) {$amount = $_POST['amount'];}
 if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
-$id = (int) $id;
+$shops_id = (int) $shops_id;
 
 // Проверка на ошибки средствами PHP
 $fail = validate_date($date);
@@ -60,8 +60,8 @@ $result2 = mysqli_query($db, "SELECT * FROM store WHERE shop='$shop'");
 $myrow2 = mysqli_fetch_array($result2);
 $id_store = $myrow2['id_store'];
 
-$query = "INSERT INTO shops (id, date, shop, gruppa, name, characteristic, quantity, item, price, amount, id_store)
-VALUES ('$id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount', '$id_store')";
+$query = "INSERT INTO shops (shops_id, date, shop, gruppa, name, characteristic, quantity, item, price, amount, id_store)
+VALUES ('$shops_id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount', '$id_store')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

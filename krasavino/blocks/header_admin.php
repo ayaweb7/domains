@@ -101,6 +101,7 @@ $result2->close(); // Категории, отсортированные по а
 				<ul>
 					<li><a class="realty1Link" href="poisk.php" title="Быстрый поиск товаров"><em>Быстрый</em> поиск</a></li>
 					<li><a class="realty1Link" href="search.php" title="Комбинация параметров поиска"><em>Сложный поиск</em></a></li>
+					<li><a class="realty1Link" href="query.php" title="Пишем запросы"><em>Запросы</em></a></li>
 				</ul>
 			</li>
 <!-- Фотографии -->

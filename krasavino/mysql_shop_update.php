@@ -12,7 +12,7 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $date = $shop = $gruppa = $name = $characteristic = $quantity = $price = $amount = "";
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['shops_id'])) {$shops_id = $_POST['shops_id'];}
 if (isset($_POST['date'])) {$date = $_POST['date'];}
 if (isset($_POST['shop'])) {$shop = $_POST['shop'];}
 if (isset($_POST['gruppa'])) {$gruppa = $_POST['gruppa'];}
@@ -22,7 +22,7 @@ if (isset($_POST['quantity'])) {$quantity = $_POST['quantity'];}
 if (isset($_POST['item'])) {$item = $_POST['item'];}
 if (isset($_POST['price'])) {$price = $_POST['price'];}
 if (isset($_POST['amount'])) {$amount = $_POST['amount'];}
-$id = (int) $id;
+$shops_id = (int) $shops_id;
 
 // Проверка на ошибки средствами PHP
 $fail = validate_date($date);
@@ -47,12 +47,12 @@ function validate_amount($field) {return ($field == "") ? "Не введена �
 if ($fail == "")
 {
 echo "Проверка формы прошла успешно:<br>
-ID: $id;<br> Дата: $date;<br> Магазин: $shop;<br> Категория: $gruppa;<br> Наименование: $name;<br> Характеристики: $characteristic;<br>
+ID: $shops_id;<br> Дата: $date;<br> Магазин: $shop;<br> Категория: $gruppa;<br> Наименование: $name;<br> Характеристики: $characteristic;<br>
 Количество: $quantity $item;<br> Цена: $price руб.;<br> Стоимость: $amount руб.<br><br>";
 }
 
 $query = "UPDATE shops SET date='$date', shop='$shop', gruppa='$gruppa', name='$name', characteristic='$characteristic',
-							quantity='$quantity', item='$item', price='$price', amount='$amount' WHERE id='$id'";
+							quantity='$quantity', item='$item', price='$price', amount='$amount' WHERE shops_id='$shops_id'";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

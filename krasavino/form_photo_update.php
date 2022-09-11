@@ -50,7 +50,7 @@ $myrow = mysqli_fetch_array($result);
 																<span style="font-size: 1em; font-style: italic;">изменить на</span><br>									
 									<input type="text" name="notes" size="50" value="<?php echo $myrow['notes'] ?>"/>
 									</td>
-									<td><input name="id" type="hidden" value="<?php echo $myrow['id'] ?>"/></td>
+									<td><input name="photos_id" type="hidden" value="<?php echo $myrow['photos_id'] ?>"/></td>
 								</tr>								
 							</table><!-- ОБЩИЕ -->
 						</td>

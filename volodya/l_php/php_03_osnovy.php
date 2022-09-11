@@ -9,6 +9,8 @@
 
 	<body name="top">
 <!-- !!!!!!!!!!!!!!!!!       шаблоны, заготовки для тэгов, комментарии !!!!!!!!!!!!!!! -->
+<!-- Подключаем HEADER -->
+		<?php// include ("../blocks/header.php"); ?>
 
 <!-- Абзацы, заголовки, комментарии -->
 <h4></h4>
@@ -61,7 +63,7 @@
 
 		<?php
 // внутри PHP-тегов встроенная функция date отображает текущий день недели, соответствующий системному времени сервера.
-		echo " Today is " . date("l") . ". ";
+		echo " Today is <strong>" . date("l") . ".</strong>";
 		?>
 		<p>Here's the latest news.</p>
 		
@@ -328,5 +330,8 @@ echo "Вы попали сюда с сайта: " . $came_from_1 . $a;
 		<a onclick="javascript: history.back(); return falshe;"><img src="../images/esc2.png" id="send"/></a>
 		<a href="#top" title="Наверх"><img src="../images/buttonUpActive.png"/></a>
 		</p>
+<!-- Подключаем FOOTER -->
+		<?php// include ("../blocks/footer.php"); ?>
+
 	</body>
 </html>

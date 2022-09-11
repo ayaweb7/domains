@@ -12,16 +12,16 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $title = $h1 = $h2 = "";
 
-if (isset($_GET['id'])) {$id = $_GET['id'];}
+if (isset($_GET['settings_id'])) {$settings_id = $_GET['settings_id'];}
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['settings_id'])) {$settings_id = $_POST['settings_id'];}
 //if (isset($_POST['page'])) {$page = $_POST['page'];}
 if (isset($_POST['title'])) {$title = $_POST['title'];}
 if (isset($_POST['h1'])) {$h1 = $_POST['h1'];}
 if (isset($_POST['h2'])) {$h2 = $_POST['h2'];}
 
 // Выборка из таблицы 'settings' для определения названия страницы
-$result = mysqli_query($db, "SELECT * FROM settings WHERE id='$id'");
+$result = mysqli_query($db, "SELECT * FROM settings WHERE settings_id='$settings_id'");
 $myrow = mysqli_fetch_array($result);
 $page=$myrow['page'];
 // Проверка на ошибки средствами PHP
@@ -36,13 +36,13 @@ function validate_h1($field) {return ($field == "") ? "Не введен заг�
 if ($fail == "")
 {
 echo "Проверка формы прошла успешно:<br>
-ID: $id;<br> PAGE: $page;<br> TITLE: $title;<br> H1: $h1;<br> H2: $h2.<br><br>";
+ID: $settings_id;<br> PAGE: $page;<br> TITLE: $title;<br> H1: $h1;<br> H2: $h2.<br><br>";
 }
 else {
 	echo $fail;
 }
 
-$query = "UPDATE settings SET title='$title', h1='$h1', h2='$h2' WHERE id='$id'";
+$query = "UPDATE settings SET title='$title', h1='$h1', h2='$h2' WHERE settings_id='$settings_id'";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

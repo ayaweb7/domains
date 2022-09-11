@@ -12,7 +12,7 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $shop = $street = $house = $phone = $date = "";
 
-if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
+if (isset($_POST['store_id'])) {$store_id = $_POST['store_id'];}
 if (isset($_POST['shop'])) {$shop = $_POST['shop'];}
 if (isset($_POST['street'])) {$street = $_POST['street'];}
 if (isset($_POST['house'])) {$house = $_POST['house'];}
@@ -33,13 +33,13 @@ function validate_date($field) {return ($field == "") ? "Не введена д�
 if ($fail == "")
 {
 echo "Проверка формы прошла успешно:<br>
-ID_STORE: $id_store;<br> Дата: $date;<br> Город: $town;<br> Магазин: $shop;<br> Улица: $street;<br> Дом: $house;<br> Телефон: $phone.<br><br>";
+ID_STORE: $store_id;<br> Дата: $date;<br> Город: $town;<br> Магазин: $shop;<br> Улица: $street;<br> Дом: $house;<br> Телефон: $phone.<br><br>";
 }
 else {
 	echo "BAD";
 }
 
-$query = "UPDATE store SET date_store='$date_store', street='$street', house='$house', shop='$shop', phone='$phone' WHERE id_store='$id_store'";
+$query = "UPDATE store SET date_store='$date_store', street='$street', house='$house', shop='$shop', phone='$phone' WHERE store_id='$store_id'";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

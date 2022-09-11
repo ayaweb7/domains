@@ -12,16 +12,15 @@ include ("blocks/header_admin.php");
 // Вычислитель
 $page = $title = $h1 = $h2 = "";
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['settings_id'])) {$settings_id = $_POST['settings_id'];}
 if (isset($_POST['page'])) {$page = $_POST['page'];}
 if (isset($_POST['title'])) {$title = $_POST['title'];}
 if (isset($_POST['h1'])) {$h1 = $_POST['h1'];}
 if (isset($_POST['h2'])) {$h2 = $_POST['h2'];}
+$settings_id = (int) $settings_id;
 
-$id = (int) $id;
-
-$query = "INSERT INTO settings (id, page, title, h1, h2)
-VALUES ('$id', '$page', '$title', '$h1', '$h2')";
+$query = "INSERT INTO settings (settings_id, page, title, h1, h2)
+VALUES ('$settings_id', '$page', '$title', '$h1', '$h2')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

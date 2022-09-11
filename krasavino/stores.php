@@ -36,7 +36,7 @@ include ("blocks/header_admin.php");
 $result = mysqli_query($db, "SELECT * FROM store ORDER BY shop");
 $myrow = mysqli_fetch_array($result);
 
-if (!isset($myrow['id_store'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
+if (!isset($myrow['store_id'])) {'<script language="javascript">document.getElementsByClassName("absent").style.display="none";<script>';}                     
 else {
 
 $even=true;
@@ -45,11 +45,11 @@ do {
 	$sum = $sum + 1;
 printf ("<tr class='absent' style='background-color:".($even?'white':'#eaeaea')."'>
 			<td>%s</td>
-			<td><a href='form_store.php?id_store=%s'>%s</a></td>
+			<td><a href='form_store.php?store_id=%s'>%s</a></td>
 			<td>%s - %s</td>
 			<td>%s, %s</td>
 			<td>%s</td>
-		</tr>  ", $myrow['id_store'], $myrow['id_store'], $myrow['shop'], $myrow['town'], $myrow['id_locality'],
+		</tr>  ", $myrow['store_id'], $myrow['store_id'], $myrow['shop'], $myrow['town'], $myrow['id_locality'],
 				$myrow['street'], $myrow['house'], $myrow['phone']); 
 $even=!$even;
 }

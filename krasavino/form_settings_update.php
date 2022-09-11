@@ -9,15 +9,15 @@ $myrow1 = mysqli_fetch_array($result1);
 // Подключаем HEADER
 include ("blocks/header_admin.php");
 
-if (isset($_GET['id'])) {$id=$_GET['id'];}
+if (isset($_GET['settings_id'])) {$settings_id=$_GET['settings_id'];}
 
-if (isset($_POST['id'])) {$id = $_POST['id'];}
+if (isset($_POST['settings_id'])) {$settings_id = $_POST['settings_id'];}
 //if (isset($_POST['page'])) {$page = $_POST['page'];}
 //if (isset($_POST['title'])) {$title = $_POST['title'];}
 //if (isset($_POST['h1'])) {$h1 = $_POST['h1'];}
 //if (isset($_POST['h2'])) {$h2 = $_POST['h2'];}
 
-$result = mysqli_query($db, "SELECT * FROM settings WHERE id='$id'");
+$result = mysqli_query($db, "SELECT * FROM settings WHERE settings_id='$settings_id'");
 $myrow = mysqli_fetch_array($result);
 ?>
 
@@ -49,7 +49,7 @@ $myrow = mysqli_fetch_array($result);
 <?php?>                            
 								<tr>
 <!-- ID -->
-									<td valign="top"><input name="id" type="hidden" value="<?php echo $myrow['id'] ?>"/></td>
+									<td valign="top"><input name="settings_id" type="hidden" value="<?php echo $myrow['settings_id'] ?>"/></td>
 <!-- H2 -->
 									<td valign="top"><span style="font-size: 1.2em; font-style: italic; color: #D01E1E;">H2: </span><br>
 																<span style="font-size: 1em; font-style: italic;">изменить на</span><br>
