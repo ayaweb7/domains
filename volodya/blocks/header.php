@@ -1,4 +1,10 @@
-﻿<div id="header">
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/screen.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+
+<div id="header">
     <ul id="nav" name="top">
         <li class="first">
             <li>
@@ -10,6 +16,18 @@
 						<li><a class="realty1Link" href="l_php/php_06_arrays.php" title="6-Массивы"><em>Массивы</em></a></li>
 						<li><a class="realty1Link" href="l_php/php_07_practic.php" title="7-Практика по PHP"><em>Практика</em></a></li>
 						<li><a class="realty1Link" href="l_php/php_13_cookie.php" title="13-Cookie & сессии"><em>Cookie </em>& сессии</a></li>
+					</ul>
+			</li>
+			
+			<li>
+				<a class="othersLink" href="../index.php" title=""><em>PHP-OOP</em></a>
+					<ul>
+						<li><a class="realty1Link" href="php_oop/start.php" title="Кудлай"><em>Классы</em> и объекты</a></li>
+						<li><a class="realty1Link" href="php_oop/trepachevSait.php" title="Трепачев">Свойства <em>объекта</em></a></li>
+						<li><a class="realty1Link" href="php_oop/pupkin.php" title="Сайт Васи Пупкина"><em>Пупкин</em></a></li>
+						<li><a class="realty1Link" href="#" title="6-Массивы"><em>Массивы</em></a></li>
+						<li><a class="realty1Link" href="#" title="7-Практика по PHP"><em>Практика</em></a></li>
+						<li><a class="realty1Link" href="#" title="13-Cookie & сессии"><em>Cookie </em>& сессии</a></li>
 					</ul>
 			</li>
 			

@@ -331,7 +331,7 @@ echo "Вы попали сюда с сайта: " . $came_from_1 . $a;
 		<a href="#top" title="Наверх"><img src="../images/buttonUpActive.png"/></a>
 		</p>
 <!-- Подключаем FOOTER -->
-		<?php// include ("../blocks/footer.php"); ?>
+		<?php // include ("../blocks/footer.php"); ?>
 
 	</body>
 </html>
