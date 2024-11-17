@@ -81,7 +81,7 @@ $db->close(); // Закрываем базу данных
 <!-- Выбор даты покупки -->
 			<td colspan="2" width="24%"><span>Выберите дату покупки</span><br><br>
 				<form name='form' action='mysql_poisk.php' method='post'>
-				<input type='date' name='date_search' value='2021-03-19'><br><br>
+				<input type='date' name='date_search' value=''><br><br>
 				<input class='inputSubmit' type='submit' value='подтвердите дату покупки' /><br>
 				<!--<input type="reset" name="set_filter" value="Сбросить"/>-->
 				</form>
@@ -90,7 +90,7 @@ $db->close(); // Закрываем базу данных
 <!-- Выбор месяца -->
 			<td colspan="2" width="24%"><span>Выберите интересующий месяц</span><br><br>
 				<form name='form' action='mysql_poisk.php' method='post'>
-				<input type='month' name='month_search' value='2021-01'><br><br>
+				<input type='month' name='month_search' value=''><br><br>
 				<input class='inputSubmit' type='submit' value='подтвердите выбор месяца' /><br>
 				<!--<input type="reset" name="set_filter" value="Сбросить"/>-->
 				</form>

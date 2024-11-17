@@ -1,0 +1,17 @@
+/* ********************** */
+/*    СТИЛИ ДЛЯ HEADER    */
+/* ********************** */
+
+footer {
+    color: red;
+}
+
+header a {
+    margin-right: 5px;
+    color: blue;
+    text-decoration: none;
+}
+
+header a.active {
+    text-decoration: underline;
+}

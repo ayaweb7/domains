@@ -214,6 +214,145 @@ $arr->push([3, 4]); // добавляем группу чисел
 echo $arr->getSum() . '<br>'; // находим сумму элементов массива
 
 // Пусть теперь мы хотим сделать так, чтобы методы вызывались не отдельно, а цепочкой, вот так:
+$arr = new Arr3; // создаем объект
+echo $arr->add(1)->add(2)->push([3, 4])->getSum() . '<br>'; // это наша цель
+
+// Можно упростить еще больше:
+echo (new Arr3)->add(1)->add(2)->push([3, 4])->getSum() . '<br>'; // выведет 10
+
+// 21. Цепочки методов
+echo '<br>Primer 21. Класс как набор методов <br>';
+$arraySumHelper = new ArraySumHelper;
+
+$arr = [1, 2, 3];
+echo $arraySumHelper->getSum1($arr) . '<br>';
+echo $arraySumHelper->getSum2($arr) . '<br>';
+echo $arraySumHelper->getSum3($arr) . '<br>';
+echo $arraySumHelper->getSum4($arr) . '<br>';
+
+// 22. Цепочки методов
+echo '<br>Primer 22. Класс как набор методов <br>';
+$arraySumHelper = new ArraySumHelper1;
+
+$arr = [1, 2, 3];
+echo $arraySumHelper->getSum1($arr) . '<br>';
+echo $arraySumHelper->getSum2($arr) . '<br>';
+echo $arraySumHelper->getSum3($arr) . '<br>';
+echo $arraySumHelper->getSum4($arr) . '<br>';
+
+// 23. Наследование классов
+echo '<br>Primer 23. Наследование классов <br>';
+$employee = new Employee9;
+
+$employee->setSalary(1000); // метод класса Employee
+$employee->setName('john'); // метод унаследован от родителя
+$employee->setAge(25); // метод унаследован от родителя
+
+echo $employee->getSalary(); // метод класса Employee
+echo $employee->getName(); // метод унаследован от родителя
+echo $employee->getAge() . '<br>'; // метод унаследован от родителя
+
+// 24. Модификатор доступа protected
+echo '<br>Primer 24. Модификатор доступа protected <br>';
+$student = new Student10();
+
+$student->setName('john'); // установим имя
+$student->setCourse(3);    // установим курс
+$student->setAge(25);      // установим возраст в 25
+
+$student->addOneYear();    // увеличим возраст на единицу
+echo $student->getAge() . '<br>';   // выведет 26
+
+echo 'Попытка обратится к свойству age снаружи класса выдаст ошибку, как нам и нужно: <br>';
+//$student = new Student10();
+//$student->age = 30; // выдаст ошибку
+
+// 25. Перезапись методов родителя в классе потомке
+echo '<br>Primer 25. Перезапись методов родителя в классе потомке <br>';
+$student = new Student11;
+
+$student->setAge(24);    // укажем корректный возраст
+echo $student->getAge(); // выведет 24 - возраст поменялся
+
+$student->setName('Norris');    // укажем корректное имя
+echo $student->getName(); // выведет Norris - имя изменилось
+
+
+$student->setAge(30);    // укажем некорректный возраст
+echo $student->getAge(); // выведет 24 - возраст не поменялся
+
+$student->setName('Nor');    // укажем корректное имя
+$student->setName('NorrisNorriNor');    // укажем некорректное имя
+echo $student->getName() . '<br>'; // выведет Norris - имя не изменилось
+
+// 26. Перезапись конструктора родителя в потомке
+echo '<br>Primer 26. Перезапись конструктора родителя в потомке <br>';
+$student = new Student12('john', 19, 2);
+
+echo $student->getName();   // выведет 'john'
+echo $student->getAge();    // выведет 19
+echo $student->getCourse() . '<br>'; // выведет 2
+
+// 27. Передача объектов параметрами
+echo '<br>Primer 27. Передача объектов параметрами <br>';
+$employeesCollection = new EmployeesCollection27;
+
+$employeesCollection->add(new Employee27('john', 100));
+$employeesCollection->add(new Employee27('eric', 200));
+$employeesCollection->add(new Employee27('kyle', 300));
+
+echo $employeesCollection->getTotalSalary() . '<br>'; // выведет 600
+
+
+// 30. Классы
+echo '<br><br>Primer 30. Классы';
+echo '<br>Primer 30. Класс Date в ООП <br>';
+//$date = new Date30('2025-12-31');
+$date = new Date30();
+echo $date . '<br><br>';  // выведет '2025-12-31'
+
+echo $date->getYear() . '<br><br>';  // выведет '2025'
+/**/
+echo $date->getMonth() . '<br>'; // выведет '12' - возвращает месяц
+echo $date->getMonth('en') . '<br>'; // возвращает месяц по-английски
+echo $date->getMonth('ru') . '<br>'; // возвращает месяц по-русски
+echo $date->getMonth('uk') . '<br><br>'; // возвращает месяц по-украински
+echo $date->getDay() . '<br><br>';   // выведет '31' - возвращает день
+
+echo $date->getWeekDay() . '<br>';     // выведет '3'
+echo $date->getWeekDay('ru') . '<br>'; // выведет 'среда'
+echo $date->getWeekDay('en') . '<br>'; // выведет 'wednesday'
+echo $date->getWeekDay('uk') . '<br><br>'; // выведет 'wednesday'
+
+echo $date->addYear(1) . '<br><br>'; // '2026-12-31'
+
+echo (new Date30('2025-12-31'))->addYear(1) . '<br>'; // '2026-12-31'
+echo (new Date30('2025-12-31'))->addDay(1) . '<br>';  // '2026-01-01'
+
+echo (new Date30('2025-12-31'))->subDay(3)->addYear(1) . '<br>'; // '2026-12-28'
+echo (new Date30('2025-12-31'))->__toString() . '<br>';
+
+
+// 31. Тренировка с датами
+echo '<br>Primer 31. Тренировка с датами<br>';
+$date = new Date31('2025-12-31');
+//$date = new Date31();
+echo $date->getYear() . '<br>';  // выведет '2025'
+//echo $date;
+//$user->name = 'john'; // записываем имя в свойство name
+
+// 32. Класс Interval
+echo '<br>Primer 32. Класс Interval<br>';
+$date1 = new Date30('2025-12-31');
+$date2 = new Date30('2026-11-28');
+
+$interval = new Interval($date1, $date2);
+
+echo $interval->toDays() . '<br>';   // выведет разницу в днях
+echo $interval->toMonths() . '<br>'; // выведет разницу в месяцах
+echo $interval->toYears() . '<br>';  // выведет разницу в годах
+echo $interval->__toString() . '<br>';
+
 
 
 

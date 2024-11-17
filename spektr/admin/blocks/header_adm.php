@@ -20,7 +20,7 @@ if (isset($myrow['title'])) {$title = $myrow['title'];}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" /> <!--  -->
+		<meta http-equiv="content-type" content="text/html" charset="utf-8" /> <!--  -->
 		<title><?php echo $title; ?></title>
 		<link href="css/screen.css" type="text/css" rel="stylesheet" />
 		<script type="text/javascript" src="js/admin.js"></script><!---->

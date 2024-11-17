@@ -4,6 +4,7 @@ params = "url=krasavino:8080/index.php" //amazon.com/gp/aw В первой ст�
 															// состоящее из пары «параметр = значение».
 request = new ajaxRequest() // Затем создается AJAX-объект запроса.
 request.open("POST", "mysql_search.php", true) // После этого вызывается метод open, настраивающий объект на создание POST-запроса по адресу
+//request.open("POST", "plot_result.php", true) // После этого вызывается метод open, настраивающий объект на создание POST-запроса по адресу
 													// urlpost.php в асинхронном режиме.
 
 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded") // Последние три строки в этой группе
@@ -55,10 +56,11 @@ function ajaxRequest()
 }
 
 
-// Функция передачи данных выбранных оператором 'SELECT'
+// Функция передачи данных выбранных оператором 'SELECT' - ЗАДЕЙСТВОВАНА В 'SEARCH.PHP' для определения магазинов в выбранном городе
 function selectTown()
 {
 //	alert('OK-K-k');
+//	document.write("Hello World")
 	var tS = document.form.town.selectedIndex;
 	var townSelected = document.form.town.options[tS].text;
 	var defSelected = document.form.town.options[tS].defaultSelected;
@@ -236,6 +238,57 @@ function validateAmount(field)
 		return "Стоимость товара - это положительное число.\n"
 	return ""
 }
+
+
+// Функция передачи данных выбранных оператором 'SELECT' - ЗАДЕЙСТВОВАНА В 'PLOT_SEARCH2.PHP' для определения товаров в выбранной категории
+function selectCat()
+{
+	alert('OK-K-k');
+	var gS = document.form.gruppa.selectedIndex;
+	var gruppaSelected = document.form.gruppa.options[gS].text;
+	var defSelected = document.form.gruppa.options[gS].defaultSelected;
+	request.open("POST", "plot_search2.php", true)
+	
+	request.onreadystatechange = function()
+	{
+		if (this.readyState == 4)
+		{
+			if (this.status == 200)
+			{
+				if (this.responseText != null) {
+					window.location.href = 'plot_search2.php?gruppaSelected='+gruppaSelected;
+					document.getElementById('divName').style.display = 'flex';
+					document.getElementById('gruppa_hidden').style.display = 'flex';
+					}
+				else alert("Ошибка AJAX: Данные не получены")
+			}
+			else alert( "Ошибка AJAX: " + this.statusText)
+		}
+	}
+request.send(params)
+
+
+	function ajaxRequest()
+	{
+		try {var request = new XMLHttpRequest()} // Браузер не относится к семейству IE?
+		catch(e1) // Да
+		{
+			try {request = new ActiveXObject("Msxml2.XMLHTTP")} // Это IE 6+?
+			catch(e2) // Да
+			{
+				try {request = new ActiveXObject("Microsoft.XMLHTTP")} // Это IE 5?
+				catch(e3) // Да
+				{
+					request = false// Данный браузер не поддерживает AJAX
+				}
+			}
+		}
+		return request
+	}
+}
+
+
+
 
 // ******************************** !!
 //									!!

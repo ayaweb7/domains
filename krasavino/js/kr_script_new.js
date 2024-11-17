@@ -156,6 +156,7 @@ function selectTownNNN()
 // Функция для определения показа списка магазинов в зависимости от выбранного города - РАБОЧИЙ ВАРИАНТ
 function selectTown()
 {
+	alert('OK-K-k');
 	var Txt = "";
 	var tS = document.form.town.selectedIndex;
 	var townSelected = document.form.town.options[tS].text;

@@ -22,7 +22,7 @@ if (isset($_POST['quantity'])) {$quantity = $_POST['quantity'];}
 if (isset($_POST['item'])) {$item = $_POST['item'];}
 if (isset($_POST['price'])) {$price = $_POST['price'];}
 if (isset($_POST['amount'])) {$amount = $_POST['amount'];}
-if (isset($_POST['id_store'])) {$id_store = $_POST['id_store'];}
+if (isset($_POST['store_id'])) {$store_id = $_POST['store_id'];}
 $shops_id = (int) $shops_id;
 
 // Проверка на ошибки средствами PHP
@@ -58,10 +58,10 @@ if ($fail == "")
 // Выборка из таблицы 'store' соответствия 'shop' & 'id_store'
 $result2 = mysqli_query($db, "SELECT * FROM store WHERE shop='$shop'");
 $myrow2 = mysqli_fetch_array($result2);
-$id_store = $myrow2['id_store'];
+$store_id = $myrow2['store_id'];
 
-$query = "INSERT INTO shops (shops_id, date, shop, gruppa, name, characteristic, quantity, item, price, amount, id_store)
-VALUES ('$shops_id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount', '$id_store')";
+$query = "INSERT INTO shops (shops_id, date, shop, gruppa, name, characteristic, quantity, item, price, amount, store_id)
+VALUES ('$shops_id', '$date', '$shop', '$gruppa', '$name','$characteristic', '$quantity', '$item', '$price', '$amount', '$store_id')";
 
 // Проверка на ошибки при вводе в базу
 if ($result = mysqli_query($db, $query)) {

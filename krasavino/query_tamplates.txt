@@ -1,0 +1,26 @@
+
+SELECT`s
+
+SELECT * FROM `shops` WHERE `name` LIKE 'ТКО'
+SELECT * FROM `shops` WHERE `date` = '2024-06-01' AND `name` LIKE 'ТКО'
+SELECT * FROM `shops` WHERE `name` = 'DIN'
+
+SELECT * FROM 'store' WHERE town='Вологда' ORDER BY shop;
+
+UPDATE`s
+UPDATE `shops` SET `quantity` = 0.218 WHERE `date` = '2024-06-01' AND `name` LIKE 'ТКО'
+UPDATE `shops` SET `quantity` = 0.211 WHERE `name` LIKE 'ТКО'
+UPDATE `shops` SET `quantity` = 0.218 WHERE `shops_id` < 1868 AND `name` LIKE 'ТКО'
+
+UPDATE `shops` SET `name` = `` AND `gruppa` = `Бензин` WHERE `shops_id` = 2790 AND `name` LIKE 'Бензин'
+UPDATE `shops` SET `name` = `` AND `gruppa` = 'Бензин' WHERE `shops_id` = 2787
+UPDATE `shops` SET `name` = '' AND `gruppa` = 'Бензин' WHERE `shops_id` = 2787
+UPDATE `shops` SET `gruppa` = 'Бензин' WHERE `shops_id` = 2787
+
+
+UPDATE `shops` SET `gruppa` = 'Бензин' WHERE `name` LIKE 'Бензин'
+UPDATE `shops` SET `name` = '' WHERE `gruppa` = 'Бензин'
+UPDATE `shops` SET `name` = 'Бензин' WHERE `gruppa` = 'Бензин'
+
+UPDATE `shops` SET `gruppa` = 'БытоТехника' WHERE `gruppa` = 'Бытовая техника'
+

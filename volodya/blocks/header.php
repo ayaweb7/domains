@@ -25,7 +25,7 @@
 						<li><a class="realty1Link" href="php_oop/start.php" title="Кудлай"><em>Классы</em> и объекты</a></li>
 						<li><a class="realty1Link" href="php_oop/trepachevSait.php" title="Трепачев">Свойства <em>объекта</em></a></li>
 						<li><a class="realty1Link" href="php_oop/pupkin.php" title="Сайт Васи Пупкина"><em>Пупкин</em></a></li>
-						<li><a class="realty1Link" href="#" title="6-Массивы"><em>Массивы</em></a></li>
+						<li><a class="realty1Link" href="php_oop/session.php" title="Сессии и формы"><em>Сессии</em> и формы</a></li>
 						<li><a class="realty1Link" href="#" title="7-Практика по PHP"><em>Практика</em></a></li>
 						<li><a class="realty1Link" href="#" title="13-Cookie & сессии"><em>Cookie </em>& сессии</a></li>
 					</ul>

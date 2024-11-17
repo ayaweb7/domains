@@ -36,7 +36,7 @@ $gruppa = $_GET['gruppa'];
                     
 <?php
 // Выборка в цикле товаров выбранной категории
-$result = mysqli_query($db, "SELECT * FROM shops WHERE gruppa='$gruppa' ORDER BY name, characteristic");
+$result = mysqli_query($db, "SELECT * FROM shops WHERE gruppa='$gruppa' ORDER BY name, characteristic, date DESC");
 $myrow = mysqli_fetch_array($result);
 
 // Проверка наличия товаров в группе для необходимости печати подзаголовка выбранной категории
@@ -76,10 +76,7 @@ $myrow5 = mysqli_fetch_array($result5);
 			while ($myrow = mysqli_fetch_array($result));
 		}
 
-// !***************** Закрытие объектов с результатами и подключение к базе данных *********************! //
-$result->close(); // Товары внутри категорий - отсортированные по наименованию
-$result5->close(); // Адреса магазинов из таблицы 'store'
-$db->close(); // Закрываем базу данных
+
 
 // Заголовок таблицы
 	printf  ("<tr><td colspan='7' style='border: none;'></td><td class='itog'>%s</td></tr>
@@ -90,6 +87,11 @@ $db->close(); // Закрываем базу данных
 	</caption>
                    
 </table>" , $sum , $gruppa, $sum, $count); // inventory
+
+// !***************** Закрытие объектов с результатами и подключение к базе данных *********************! //
+$result->close(); // Товары внутри категорий - отсортированные по наименованию
+$result5->close(); // Адреса магазинов из таблицы 'store'
+$db->close(); // Закрываем базу данных
 
 // Подключаем FOOTER_MAIN
 include ("blocks/footer_main.php");

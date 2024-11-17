@@ -9,8 +9,12 @@ $myrow1 = mysqli_fetch_array($result1);
 // Подключаем HEADER
 include ("blocks/header_admin.php");
 		
-if (isset($_GET['townSelected'])) {$townSelected = $_GET['townSelected'];} // echo $townSelected;
-//else {echo 'BAD';}
+if (isset($_GET['townSelected'])) {
+	$townSelected = $_GET['townSelected'];
+	$where = "WHERE town='$townSelected'";
+} else {
+	$where = "";
+}
 ?>
 <!---->
 
@@ -75,13 +79,13 @@ if (isset($_GET['townSelected'])) {$townSelected = $_GET['townSelected'];} // ec
 <?php?>
 			<div id='divShop' class='flexSmall'><!--divShop - style='background-color: purple;' -->
 				<div class='blockInput'>
-<!---->					<input type='hidden' name='townSelected' value="<?php echo $townSelected ?>" />
+					<input type='hidden' name='townSelected' value="<?php echo $townSelected ?>" />
 					<span>Магазины в городе <em style='color: red;'><?php echo $townSelected; ?></em></span>
 					<select name='shop' size='1'><!---->
 						<option></option>
 <?php	
 
-		$result3 = mysqli_query($db, "SELECT * FROM store WHERE town='$townSelected' ORDER BY shop");
+		$result3 = mysqli_query($db, "SELECT * FROM store $where ORDER BY shop");
 		$myrow3 = mysqli_fetch_array($result3);
 		$shop='';
 										

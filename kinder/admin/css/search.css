@@ -1,0 +1,136 @@
+/* ********************************* */
+/*    СТИЛИ ДЛЯ СТРАНИЧКИ 'SEARCH'   */
+/* ********************************* */
+
+
+
+/* ******************** */
+/*      СТРУКТУРА       */
+/* ******************** */
+
+span {text-align: center;}
+label {float: center;}
+.blockButton input {display: none;}
+.blockButton label {padding: .2em .5em;}
+.blockButton label:hover {background: #ddd; cursor:pointer; border-radius: 3px;}
+.blockButton input:checked + label {color: black; font-weight: bold; background: #95fc69; /* lime */ border-radius: 3px;} /* red */
+.inputSubmit:hover {cursor:pointer;}
+
+
+/* ********************** */
+/*    СТИЛИ ДЛЯ DIV-ов    */
+/* ********************** */
+
+
+#divTop {
+	font-size: 1.5em;
+}
+
+.flexBig {
+	display: flex;
+	flex-direction: column;
+/*    background-color: #ccc;#5e1da7;*/
+	align-items: center;/**/	
+	padding: 1% 1%;
+	margin: 0 1%;
+	width: 100%;
+}
+
+.flexTitle {
+/*	background-color: lightgreen;*/
+	display: flex;
+	flex-direction: row;
+	justify-content: center;/**/
+	padding: 1% 1%;
+	margin: 0 1%;
+	width: 80%;
+}
+
+.flexMiddle {/**/
+	display: flex;
+	flex-direction: column;
+	/*justify-content: space-around;*/
+	padding: 1% 1%;
+	margin: 0 1%;
+	width: 100%;
+	
+}
+
+.flexSmall {/**/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;/**/
+	padding: 1% 1%;
+	margin: 0 1%;
+	border-bottom: 1px solid #19910f;
+}
+/**/
+.blockInput {
+	display: flex;
+	flex-direction: column;
+	/*justify-content: space-evenly;*/
+
+}
+
+.blockButton {
+	flex-direction: row;
+	/*justify-content: space-around;*/
+}
+/**/
+.blockInput span,
+.flexSmall span, 
+#divTop {
+	color: #19910f;/*green*/
+	font-style: italic;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.flexOne {/**/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;/**/
+	padding: 1% 1%;
+	margin: 0 1%;
+}
+
+/*, #townHidden, #divShop, #town_hidden,*/
+#date_hidden,
+#price_hidden {
+	display: none;
+}
+
+#title_search {
+	color: #19910f;/* green */
+    font-weight: bold;
+	font-size: 1.5em;
+}
+
+#title_search em {
+	color: #d01e1e;/* red */
+}
+
+#title_search span {
+	font-style: italic;
+	font-size: 0.9em;/**/
+	color: gray;/* gray */
+}
+
+.color-price {
+	color: red; /*#0d6efd light-blue*/
+	font-size: 1.25rem;
+}
+/*
+#townHidden
+{
+	display: block;
+}
+*/
+/*
+input[value="BETWEEN"]:checked ~ div[class="hidden"] {
+	display:flex;
+}
+*/
+/* ************* */
+/*    BUTTONS    */
+/* ************* */

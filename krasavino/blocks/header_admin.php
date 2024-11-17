@@ -12,7 +12,7 @@ if (isset($_POST['month_search'])) {$title = $_POST['month_search'];}
 if (isset($_POST['price_search'])) {$title = $_POST['price_search'];}
 if (isset($_POST['name_update'])) {$title = $_POST['name_update'];}
 if (isset($_POST['shop_update'])) {$title = $_POST['shop_update'];}
-//if (isset($_POST['view'])) {$title = $_POST['view'];}
+if (isset($_POST['view'])) {$title = $_POST['view'];}
 if (isset($_POST['id_update'])) {$title = 'id=' . $_POST['id_update'];}
 if (isset($_GET['id'])) {$title = $_GET['id'];}
 ?>
@@ -121,7 +121,7 @@ $result2->close(); // Категории, отсортированные по а
 					<li><a class="realty1Link" href="jpgrath_code_shops1.php" title="JpGrath_Shops" target="_blank"><em>Отдельно</em></a></li>
 					<li><a class="realty1Link" href="jpgrath_code_shops1_shablon.php" title="JpGrath_Shops" target="_blank"><em>Шаблон</em></a></li>
 					<li><a class="realty1Link" href="jpgrath_query.php" title="Выбор диаграммы" target="_blank"><em>Выбор диаграммы</em></a></li>
-					<li><a class="realty1Link" href="plot_search1.php" title="Выбор графика">Построй <em>свой</em> график</a></li>
+					<li><a class="realty1Link" href="plot_search2.php" title="Выбор графика">Построй <em>свой</em> график</a></li>
 					<li><a class="realty1Link" href="plot_python.php" title="Графики Python">Графики <em>Python</em></a></li>
 				</ul>
 			</li>
@@ -144,6 +144,12 @@ $myrow6 = mysqli_fetch_array($result6);
 printf ("<div id='head_%s'>
 			<a href='../images/house_or/house_%s.jpg' target='_blank'><img src='../images/house/house_%s.jpg' title='%s: %s(%s)'></a>
 		</div>", $i, $k, $k, $myrow6['date_photo'], $myrow6['notes'], $k);
+
+// ДЛЯ ЗАГРУЗКИ В ИНТЕРНЕТ !!!!!!!!!!
+// <a href='images/house_or/house_%s.jpg' target='_blank'><img src='images/house/house_%s.jpg' title='%s: %s(%s)'></a>
+
+//Закрытие объектов с результатами и подключение к базе данных
+$result6->close(); // База данных фотографий
 		
 //printf ("<div id='head_%s'>
 //			<a href='https://disk.yandex.ru/client/disk/Загрузки/house_origin?idApp=client&dialog=slider&idDialog=/disk/Загрузки/house_origin/house_%s.jpg' //target='_blank'><img src='../images/house_header/house_%s.jpg' title='%s: %s(%s)'></a>
