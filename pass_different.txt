@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 ﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 06.01.2025
+=======
+﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 17.12.2024
+>>>>>>> f501196e301447a4907943e368ca6c46bf7e8eb9
 
 ipHone	macx-5ZtY-HHhQ-Gtw8
 
+<<<<<<< HEAD
 Google Ayaweb7		ayaweb7@gmail.com	NikArtSerbia12*!
 Google Aarteeva		aarteeva@gmail.com	TimeForAction!1
 Google ANarteeva	anarteeva@gmail.com	TimeForAction!1
@@ -11,6 +16,11 @@ VPN CyberGhost	aarteeva		MakeLoveNotWar!1 - не используется
 PlanetVPN	ayaweb7@gmail.com	E92pkFCU4H - не используется
 adguard.com	ayaweb7@gmail.com	arteeva12 - бесплатный на 5Гб в месяц
 adguard.com	aarteeva@gmail.com	EnjoyYouTube!1
+=======
+VPN CyberGhost	aarteeva		MakeLoveNotWar!1
+PlanetVPN	ayaweb7@gmail.com	E92pkFCU4H
+adguard.com	ayaweb7@gmail.com	arteeva12
+>>>>>>> f501196e301447a4907943e368ca6c46bf7e8eb9
 
 avito		ayaweb7@gmail.com	ArteevA12*	+7 981 507-92-46
 
@@ -63,7 +73,7 @@ macbook					arteeva12
 iMac		arteeva12
 edu.i-sales.pro/my	ayaweb7@gmail.com	rb2S+$3c (нейросети)
 
-adguard.com	ayaweb7@gmail.com	arteeva12	
+	
 
 fusionbrain.ai	ayaweb7@gmail.com	ArteevA12*
 
@@ -86,6 +96,7 @@ GitHub.com		ayaweb7@gmail.com	@ZehVAMsgGTD@t2
 Discord&MidJourney	ayaweb03@gmail.com	Arteev*1	h9bf9022	yl5vvzp7
 	ayaweb7@gmail.com	arteeva12
 
+DIR-615		#@123456654321@#
 
 
 
