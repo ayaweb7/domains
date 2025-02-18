@@ -1,12 +1,17 @@
-﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 18.01.2025
+﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 16.02.2025
 
-ipHone	macx-5ZtY-HHhQ-Gtw8
+iPhone	macx-5ZtY-HHhQ-Gtw8
 
 <<<<<<< HEAD
 Google Ayaweb7		ayaweb7@gmail.com	NikArtSerbia12*!
 Google Aarteeva		aarteeva@gmail.com	TimeForAction!1
 Google ANarteeva	anarteeva@gmail.com	TimeForAction!1
 Google Ayaweb03		ayaweb03@gmail.com	IndeyArt2*8
+
+BookMate	anarteeva@gmail.com 	ReadBooks!1
+
+spotify		NikArt	ayaweb7@gmail.com	EnjoyMusic!1
+spotify		AnnaArt	anarteeva@gmail.com 	TimeForAction!1
 
 VPN CyberGhost	aarteeva		MakeLoveNotWar!1 - не используется
 PlanetVPN	ayaweb7@gmail.com	E92pkFCU4H - не используется
@@ -49,10 +54,6 @@ Ncard	5599005095868068 (467) 10/22
 wallet	4100117261420973
 
 zenmate.com	aarteeva@gmail.com	MakeLoveNotWar!1
-
-spotify		NikArt	ayaweb7@gmail.com	EnjoyMusic!1
-spotify		AnnaArt	anarteeva@gmail.com 	LoveMusic!1
-spotify		AnnaArt	1154692141		LoveMusic!1
 
 freelance.ru	nikart132		ArteevA12*
 
