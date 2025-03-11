@@ -1,4 +1,4 @@
-﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 16.02.2025
+﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 01.03.2025
 
 iPhone	macx-5ZtY-HHhQ-Gtw8
 
@@ -8,6 +8,8 @@ Google Aarteeva		aarteeva@gmail.com	TimeForAction!1
 Google ANarteeva	anarteeva@gmail.com	TimeForAction!1
 Google Ayaweb03		ayaweb03@gmail.com	IndeyArt2*8
 
+supabase.com	ayaweb7@gmail.com	NikArtSerbia12*!
+PostMan		ayaweb7@gmail.com	TimeForAction!1
 BookMate	anarteeva@gmail.com 	ReadBooks!1
 
 spotify		NikArt	ayaweb7@gmail.com	EnjoyMusic!1
@@ -62,7 +64,7 @@ elama		ayaweb7@gmail.com	arRK(66+v?+0
 handyhost	ayaweb7@gmail.com	Z2b4V6q2
 
 AppleID		Andrey.Arteev@icloud.com	Ayaweb2020
-AppleID		ayaweb7@gmail.com	nikolai.arteev@icloud.com	Serbia22
+AppleID		ayaweb7@gmail.com	nikolai.arteev@icloud.com	NikArtSerbia12*!
 macbook					arteeva12	
 
 
@@ -79,6 +81,9 @@ kwork.ru	ayaweb7			arteeva12
 	ayaweb7@gmail.com	
 
 	ayaweb7@gmail.com	
+
+chat.deepseek.com	ayaweb7@gmail.com	NikArtSerbia12*!
+openai.com	ayaweb7@yandex.ru	Google Account
 discord.com	ayaweb03@rambler.ru	arteeva96
 app.elai.io	ayaweb7@gmail.com	NikArtSerbia12*!
 visper.tech	ayaweb7@gmail.com	NikArtSerbia12*!
