@@ -1,36 +1,32 @@
-﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 25.03.2025
+﻿ИНФОРМАЦИЯ АКТУАЛЬНА на 17.09.2025
+=======
+﻿
+ipHone	macx-5ZtY-HHhQ-Gtw8
+@47_UaEgTrRsMeBa_64!
 
-iPhone	macx-5ZtY-HHhQ-Gtw8
-
-<<<<<<< HEAD
 Google Ayaweb7		ayaweb7@gmail.com	NikArtSerbia12*!
 Google Aarteeva		aarteeva@gmail.com	TimeForAction!1
 Google ANarteeva	anarteeva@gmail.com	TimeForAction!1
 Google Ayaweb03		ayaweb03@gmail.com	IndeyArt2*8
 
-supabase.com	ayaweb7@gmail.com	NikArtSerbia12*!
-PostMan		ayaweb7@gmail.com	TimeForAction!1
-BookMate	anarteeva@gmail.com 	ReadBooks!1
-
-spotify		NikArt	ayaweb7@gmail.com	EnjoyMusic!1
-spotify		AnnaArt	anarteeva@gmail.com 	TimeForAction!1
-
 VPN CyberGhost	aarteeva		MakeLoveNotWar!1 - не используется
 PlanetVPN	ayaweb7@gmail.com	E92pkFCU4H - не используется
 adguard.com	ayaweb7@gmail.com	arteeva12 - бесплатный на 5Гб в месяц
 adguard.com	aarteeva@gmail.com	EnjoyYouTube!1
-
+=======
 VPN CyberGhost	aarteeva		MakeLoveNotWar!1
 PlanetVPN	ayaweb7@gmail.com	E92pkFCU4H
 adguard.com	ayaweb7@gmail.com	arteeva12
+>>>>>>> f501196e301447a4907943e368ca6c46bf7e8eb9
 
 avito		ayaweb7@gmail.com	ArteevA12*	+7 981 507-92-46
 
 facebook	ayaweb7@gmail.com	arteeva12
+insta		ayaweb7@gmail.com	+7(981)507-92-46	NikArtSerbia12*!	nikart_0712
 
-gosuslugi_I	050-727-616-45		NikolayA-1969
-gosuslugi_A	143-286-214-49		MakeLoveNotWar!1
-gosuslugi_M	050-724-575-41		Ayaweb.ayaweb2020
+gosuslugi_I	050-727-616-45		NikolayA-1969	телефон: +7 981-507-92-46 (Yota)
+gosuslugi_A	143-286-214-49		AnnaA-1992	телефон: +7 995-034-92-46 (E-Sim T-Mobile)
+gosuslugi_M	050-724-575-41		Jym51rM&S!	телефон: +7 999-791-48-39 (Yota)
 					Ayawebayaweb1966/
 
 ok.ru		+79815079246		arteeva12
@@ -57,6 +53,10 @@ wallet	4100117261420973
 
 zenmate.com	aarteeva@gmail.com	MakeLoveNotWar!1
 
+spotify		NikArt	ayaweb7@gmail.com	EnjoyMusic!1
+spotify		AnnaArt	anarteeva@gmail.com 	LoveMusic!1
+spotify		AnnaArt	1154692141		LoveMusic!1
+
 freelance.ru	nikart132		ArteevA12*
 
 elama		ayaweb7@gmail.com	arRK(66+v?+0
@@ -64,7 +64,7 @@ elama		ayaweb7@gmail.com	arRK(66+v?+0
 handyhost	ayaweb7@gmail.com	Z2b4V6q2
 
 AppleID		Andrey.Arteev@icloud.com	Ayaweb2020
-AppleID		ayaweb7@gmail.com	nikolai.arteev@icloud.com	NikArtSerbia12*!
+AppleID		ayaweb7@gmail.com	nikolai.arteev@icloud.com	Serbia22
 macbook					arteeva12	
 
 
@@ -81,12 +81,6 @@ kwork.ru	ayaweb7			arteeva12
 	ayaweb7@gmail.com	
 
 	ayaweb7@gmail.com	
-
-tensor.ai(StableViffusion) 	ayaweb7@gmail.com	user_844996783825429491	- генерация изображений
-uberduck.ai	ayaweb7@gmail.com	 - генерация звука
-fakeyou.com	ayaweb7@gmail.com	3mwBsaCy#!xB/Zj - генерация звука
-chat.deepseek.com	ayaweb7@gmail.com	NikArtSerbia12*!
-openai.com	ayaweb7@yandex.ru	Google Account - B,f!uDV##up326%
 discord.com	ayaweb03@rambler.ru	arteeva96
 app.elai.io	ayaweb7@gmail.com	NikArtSerbia12*!
 visper.tech	ayaweb7@gmail.com	NikArtSerbia12*!
@@ -127,9 +121,5 @@ https://gn404.whpservers.com:2222/evo/	ayaweb7@gmail.com	arte0374	npd5RHmCazwCON
 
 Ссылка на страницу подписки	https://vk.com/app5898182_-224912073#s=2723664
 
-Конасова Валентина Васильевна
-д.р.:	 21.01.1941
-СНИЛС:	098-627-178-25
-П-т:	19 03 772411
-	выдан Красавинским отделом милиции ОВД г.великий Устюг Вологодской области
-	11.02.2003 код: 353-002
+от 45000 до 50000
+Толщина стенки 10 мм толщина Каменки 14 мм бак из нержавеющей стали 2 мм диаметр 530 мм Высота 1500 мм

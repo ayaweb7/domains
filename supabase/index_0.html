@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазинчик SB</title>
+    <!-- Подключаем стили для красивого отображения таблицы -->
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+    <!-- Небольшие свои стили -->
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #purchases-table {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>История моих покупочек</h1>
+
+    <!-- Контейнер для таблицы -->
+    <div id="purchases-table"></div>
+    <div id="loading" class="loading">Загрузка данных...</div>
+
+    <!-- Подключаем библиотеки -->
+    <!-- Supabase клиентская библиотека -->
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+    <!-- Библиотека Tabulator для создания продвинутых таблиц -->
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+
+    <script>
+        // ИНИЦИАЛИЗАЦИЯ SUPABASE
+        // ВАЖНО: ЗАМЕНИТЕ ЭТИ ЗНАЧЕНИЯ НА СВОИ!
+        const supabaseUrl = 'https://fmlozfzmonszroxsrldk.supabase.co';// Ваш Supabase URL
+        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtbG96Znptb25zenJveHNybGRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMTgxMTAsImV4cCI6MjA3MTg5NDExMH0.WQRiC0vg1tVF2vTlO7uMst6FYZnWW_76NMYKwPoL4iw';// Ваш anon key из настроек API
+        // Создаем клиент Supabase
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        // ЭЛЕМЕНТЫ ДОМ
+        const tableElement = document.getElementById('purchases-table');
+        const loadingElement = document.getElementById('loading');
+
+        // ОСНОВНАЯ ФУНКЦИЯ ДЛЯ ЗАГРУЗКИ И ОТОБРАЖЕНИЯ ДАННЫХ
+        async function loadPurchasesData() {
+            try {
+                // 1. Делаем запрос к Supabase API для получения данных из таблицы 'purchases'
+                // Если ваша таблица называется иначе, ИЗМЕНИТЕ НАЗВАНИЕ ТАБЛИЦЫ ЗДЕСЬ!
+                const { data: shops, error } = await supabase
+                    .from('shops') // Укажите здесь имя вашей таблицы
+                    .select('*'); // Выбираем все столбцы
+
+                // 2. Если есть ошибка - выводим в консоль и уведомляем пользователя
+                if (error) {
+                    console.error('Ошибка при загрузке данных:', error);
+                    loadingElement.textContent = 'Ошибка при загрузке данных. Посмотрите консоль (F12).';
+                    throw error;
+                }
+
+                // 3. Если данные успешно получены, скрываем надпись "Загрузка..."
+                loadingElement.style.display = 'none';
+
+                // 4. Инициализируем красивую таблицу Tabulator
+                new Tabulator(tableElement, {
+                    data: shops, // Передаем полученные данные
+                    layout: "fitColumns", // Колонки растягиваются по ширине таблицы
+                    // pagination: "local", // Включаем постраничную навигацию
+                    // paginationSize: 100, // Количество строк на странице
+                    // paginationSizeSelector: [10, 20, 50, 100, 500], // Выбор количества строк
+                    movableColumns: true, // Можно менять колонки местами
+                    // responsiveLayout: "hide", // Адаптивность на мобильных
+					// ★★★★ КРИТИЧЕСКИ ВАЖНОЕ ДОБАВЛЕНИЕ ★★★★
+					// Снимаем ограничение на максимальное количество строк
+					maxHeight: "100%", // Или конкретное значение, например, "80vh"
+					
+					columns: [ // Определяем колонки таблицы
+						// ID: Просто показываем номер
+						{
+							title: "ID",
+							field: "id", // Просто отображаем значение поля 'id'
+							hozAlign: "left",
+							headerFilter: "input"
+						},
+						// ДАТА: Просто показываем, без сортировки и форматирования
+						{
+							title: "Дата (сырые данные)",
+							field: "date", // Просто отображаем значение поля 'date'
+							hozAlign: "left"
+						},
+						// ТОВАР
+						{ 
+							title: "Товар",
+							field: "name",
+							headerFilter: "input"
+						},
+						// МАГАЗИН
+						{
+							title: "Магазин",
+							field: "shop",
+							headerFilter: "input"
+						},
+						// ЦЕНА
+						{ 
+							title: "Цена",
+							field: "price",
+							hozAlign: "right"
+						}
+					]
+                });
+
+            } catch (error) {
+                console.error('Неожиданная ошибка:', error);
+            }
+        }
+
+        // Запускаем всю логику после загрузки страницы
+        document.addEventListener('DOMContentLoaded', loadPurchasesData);
+    </script>
+</body>
+</html>
