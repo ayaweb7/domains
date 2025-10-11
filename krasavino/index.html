@@ -1,179 +1,38 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазинчик SB</title>
-    <!-- Подключаем стили для красивого отображения таблицы -->
-    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
-    <!-- Небольшие свои стили -->
-    <style>
-        body {
-            font-family: sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        #purchases-table {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .loading {
-            text-align: center;
-            padding: 20px;
-            font-style: italic;
-            color: #666;
-        }
-    </style>
+  <title>Shopping Tracker - Вход</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>История моих покупочек</h1>
-
-    <!-- Контейнер для таблицы -->
-    <div id="purchases-table"></div>
-    <div id="loading" class="loading">Загрузка данных...</div>
-
-    <!-- Подключаем библиотеки -->
-    <!-- Supabase клиентская библиотека -->
-    <script src="https://unpkg.com/@supabase/supabase-js"></script>
-    <!-- Библиотека Tabulator для создания продвинутых таблиц -->
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
-
-    <script>
-        // ИНИЦИАЛИЗАЦИЯ SUPABASE
-        // ВАЖНО: ЗАМЕНИТЕ ЭТИ ЗНАЧЕНИЯ НА СВОИ!
-        const supabaseUrl = 'https://fmlozfzmonszroxsrldk.supabase.co';// Ваш Supabase URL
-        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtbG96Znptb25zenJveHNybGRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMTgxMTAsImV4cCI6MjA3MTg5NDExMH0.WQRiC0vg1tVF2vTlO7uMst6FYZnWW_76NMYKwPoL4iw';// Ваш anon key из настроек API
-        // Создаем клиент Supabase
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-        // ЭЛЕМЕНТЫ ДОМ
-        const tableElement = document.getElementById('purchases-table');
-        const loadingElement = document.getElementById('loading');
-
-		// ОСНОВНАЯ ФУНКЦИЯ ДЛЯ ЗАГРУЗКИ И ОТОБРАЖЕНИЯ ДАННЫХ
-		async function loadPurchasesData() {
-			try {
-				console.log("Начинаем загрузку данных...");
-				const allRows = [];
-				const pageSize = 1000;
-				let from = 0;
-				let hasMoreData = true;
-				let safeExitCounter = 0; // Счетчик для защиты от бесконечного цикла
-				const maxSafePages = 10; // Максимум 10 страниц (10 * 1000 = 10 000 строк)
-
-				while (hasMoreData && safeExitCounter < maxSafePages) {
-					safeExitCounter++; // Увеличиваем счетчик на каждой итерации
-
-					// ★★ КРИТИЧЕСКИ ВАЖНОЕ ИЗМЕНЕНИЕ: Используем .range() корректно ★★
-					// В Supabase нумерация начинается с 0, и 'to' - включительно!
-					let to = from + pageSize - 1; // Например, from=0, to=999 (1000 записей)
-
-					console.log(`Пытаемся загрузить блок: с ${from} по ${to}`);
-
-					const { data: pageData, error, count } = await supabase
-						.from('shops')
-						.select('*', { count: 'exact' })
-						.order('id', { ascending: true })
-						.range(from, to); // Запрашиваем конкретный диапазон
-
-					// ★★ УЛУЧШЕННАЯ ОБРАБОТКА ОШИБОК ★★
-					if (error) {
-						// Если ошибка - это "неудовлетворительный диапазон" (416), это конец данных
-						if (error.message && error.message.includes('416') || error.code === 'PGRST301') {
-							console.log('Достигнут конец данных. Загрузка завершена.');
-							hasMoreData = false;
-							break; // Выходим из цикла
-						} else {
-							// Если это любая другая ошибка - выбрасываем ее
-							console.error('Критическая ошибка при загрузке страницы:', error);
-							throw new Error(`Ошибка Supabase: ${error.message || JSON.stringify(error)}`);
-						}
-					}
-
-					// Если данных нет (пустой массив) - выходим
-					if (!pageData || pageData.length === 0) {
-						console.log('Получен пустой ответ. Загрузка завершена.');
-						hasMoreData = false;
-						break;
-					}
-
-					// Добавляем данные и готовим следующий запрос
-					allRows.push(...pageData);
-					from += pageSize; // Сдвигаем "указатель" на следующую страницу
-					console.log(`Успешно загружено: ${pageData.length} записей. Всего: ${allRows.length}`);
-
-					// Проверяем, получили ли мы полную страницу? Если нет, это последняя страница.
-					if (pageData.length < pageSize) {
-						console.log(`Получено неполная страница (${pageData.length}/${pageSize}). Загрузка завершена.`);
-						hasMoreData = false;
-					}
-				}
-
-				console.log('Всего загружено записей:', allRows.length);
-				loadingElement.style.display = 'none';
-
-				// 4. Инициализируем Tabulator со ВСЕМИ данными
-				new Tabulator(tableElement, {
-					data: allRows,
-					layout: "fitColumns",
-					pagination: "local",
-					paginationSize: 20,
-					paginationSizeSelector: [10, 20, 50, 100, 500],
-					movableColumns: true,
-					maxHeight: "100%",
-					columns: [
-						// ... ВАША КОНФИГУРАЦИЯ КОЛОНОК ...
-						{
-							title: "ID",
-							field: "id",
-							hozAlign: "left",
-						},
-						{
-							title: "Дата",
-							field: "date",
-							hozAlign: "left",
-							headerFilter: "input",
-							sorter: "date",
-							sorterParams: { format: "yyyy-MM-dd" },
-							formatter: function(cell, formatterParams, onRendered) {
-								const dateObj = new Date(cell.getValue() + 'T00:00:00');
-								return dateObj.toLocaleDateString('ru-RU');
-							}
-						},
-						{ title: "Товар", field: "name", headerFilter: "input" },
-						{ title: "Магазин", field: "shop", headerFilter: "input" },
-						{
-							title: "Цена, ₽",
-							field: "price",
-							hozAlign: "right",
-							sorter: "number",
-							formatter: "money",
-							formatterParams: {
-								symbol: "₽",
-								symbolAfter: true,
-								thousand: " ",
-								decimal: ".",
-								precision: 2
-							}
-						},
-					]
-				});
-
-			} catch (error) {
-				console.error('Общая ошибка:', error);
-				loadingElement.textContent = 'Ошибка при загрузке данных: ' + error.message;
-			}
-		}
-
-        // Запускаем всю логику после загрузки страницы
-        document.addEventListener('DOMContentLoaded', loadPurchasesData);
-    </script>
+  <div class="auth-container">
+    <h1>Трекер Покупок</h1>
+    <div id="login-form">
+      <h2>Вход в систему</h2>
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Пароль">
+      <button onclick="handleLogin()">Войти</button>
+      <p id="auth-message"></p>
+    </div>
+  </div>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script src="auth.js"></script>
+  <script>
+    async function handleLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const messageEl = document.getElementById('auth-message');
+      
+      const result = await window.authManager.signIn(email, password);
+      
+      if (result.success) {
+        messageEl.textContent = 'Успешный вход!';
+        messageEl.style.color = 'green';
+      } else {
+        messageEl.textContent = 'Ошибка: ' + result.error;
+        messageEl.style.color = 'red';
+      }
+    }
+  </script>
 </body>
 </html>

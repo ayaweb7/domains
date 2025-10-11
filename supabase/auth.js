@@ -1,62 +1,96 @@
-// app.js - Основное приложение (только для аутентифицированных пользователей)
-class ShoppingApp {
+// auth.js - Управление аутентификацией
+const SUPABASE_URL = 'https://fmlozfzmonszroxsrldk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtbG96Znptb25zenJveHNybGRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMTgxMTAsImV4cCI6MjA3MTg5NDExMH0.WQRiC0vg1tVF2vTlO7uMst6FYZnWW_76NMYKwPoL4iw';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+class AuthManager {
   constructor() {
-    this.init();
+    this.checkAuthState();
   }
 
-  async init() {
-    // Проверяем, что пользователь аутентифицирован
-    const { data: { session } } = await supabase.auth.getSession();
+  // Проверка статуса аутентификации
+  async checkAuthState() {
+    const { data: { session }, error } = await supabase.auth.getSession();
     
-    if (!session) {
-      window.location.href = 'index.html';
-      return;
+    if (session) {
+      this.onUserSignedIn(session.user);
+    } else {
+      this.onUserSignedOut();
     }
-
-    console.log('Запуск приложения для пользователя:', session.user.email);
-    this.loadPurchasesData();
-    this.setupEventListeners();
   }
 
-  async loadPurchasesData() {
+  // Вход по email/password
+  async signIn(email, password) {
     try {
-      // ★ ВАЖНО: Теперь запрос автоматически возвращает только данные текущего пользователя
-      // благодаря RLS политикам!
-      const { data: purchases, error } = await supabase
-        .from('shops')
-        .select('*')
-        .order('date', { ascending: false });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
 
       if (error) throw error;
-
-      // Инициализация Tabulator (ваш существующий код)
-      this.initializeTable(purchases);
+      return { success: true, user: data.user };
       
     } catch (error) {
-      console.error('Ошибка загрузки данных:', error);
+      console.error('Ошибка входа:', error);
+      return { success: false, error: error.message };
     }
   }
 
-  initializeTable(data) {
-    // Ваш существующий код инициализации Tabulator
-    new Tabulator('#purchases-table', {
-      data: data,
-      // ... остальные настройки
-      columns: [
-        // ... ваши колонки
-      ]
-    });
+  // Регистрация
+  async signUp(email, password, fullName) {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: fullName
+          }
+        }
+      });
+
+      if (error) throw error;
+      return { success: true, user: data.user };
+      
+    } catch (error) {
+      console.error('Ошибка регистрации:', error);
+      return { success: false, error: error.message };
+    }
   }
 
-  setupEventListeners() {
-    // Кнопка выхода
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      window.authManager.signOut();
-    });
+  // Выход
+  async signOut() {
+    const { error } = await supabase.auth.signOut();
+    if (error) console.error('Ошибка выхода:', error);
+  }
+
+  // Обработчики событий
+  onUserSignedIn(user) {
+    console.log('Пользователь вошел:', user);
+    // Перенаправление на защищенную страницу
+    if (window.location.pathname === '/index.html') {
+      window.location.href = 'app.html';
+    }
+  }
+
+  onUserSignedOut() {
+    console.log('Пользователь вышел');
+    // Перенаправление на публичную страницу
+    if (window.location.pathname === '/app.html') {
+      window.location.href = 'index.html';
+    }
   }
 }
 
-// Запускаем приложение когда DOM готов
-document.addEventListener('DOMContentLoaded', () => {
-  window.shoppingApp = new ShoppingApp();
+// Слушаем изменения состояния аутентификации
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    window.authManager.onUserSignedIn(session.user);
+  } else if (event === 'SIGNED_OUT') {
+    window.authManager.onUserSignedOut();
+  }
 });
+
+// Создаем глобальный экземпляр
+window.authManager = new AuthManager();
