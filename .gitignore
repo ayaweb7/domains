@@ -156,6 +156,7 @@ cython_debug/
 
 # My_Pass
 pass_different.txt
+alter_sql.txt
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
