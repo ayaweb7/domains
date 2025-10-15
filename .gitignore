@@ -154,10 +154,12 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# My_Pass
+# My Own Preferences
+structure/
 pass_different.txt
 alter_sql.txt
 auth.js
+
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can

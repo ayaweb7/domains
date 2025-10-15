@@ -1,3 +1,25 @@
 /* ******************** */
 /*    ОСНОВНЫЕ СТИЛИ    */ 
 /* ******************** */
+body {
+	font-family: sans-serif;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+h1 {
+	text-align: center;
+	color: #333;
+}
+#purchases-table {
+	margin-top: 20px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.loading {
+	text-align: center;
+	padding: 20px;
+	font-style: italic;
+	color: #666;
+}
