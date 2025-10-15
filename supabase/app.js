@@ -139,11 +139,26 @@ class ShoppingApp {
     }
 
     setupEventListeners() {
-        // Кнопка выхода
+		// Новая кнопка админ-панели
+		document.getElementById('admin-btn').addEventListener('click', () => {
+			window.location.href = 'admin.html';
+		});
+        // Кнопка добавления покупки
+		document.getElementById('add-purchase-btn').addEventListener('click', () => {
+			this.showPurchaseForm();
+		});
+		// Кнопка выхода
         document.getElementById('logout-btn').addEventListener('click', () => {
             window.authManager.signOut();
         });
     }
+	
+	// Новый метод для показа формы покупки
+	showPurchaseForm(purchaseData = null) {
+		// Временная реализация - позже заменим модальным окном
+		console.log('Открытие формы покупки', purchaseData);
+		alert('Форма добавления покупки будет реализована в следующем шаге');
+	}
 }
 
 // Запускаем приложение когда DOM готов
