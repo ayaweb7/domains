@@ -1,7 +1,7 @@
-// admin.js
-// admin.js - Административная панель
+// admin.js - Административная панель (ИСПРАВЛЕННАЯ ВЕРСИЯ)
 class AdminPanel {
     constructor() {
+        this.citiesCache = null;
         this.init();
     }
 
@@ -15,8 +15,29 @@ class AdminPanel {
         }
 
         console.log('Админ-панель для пользователя:', session.user.email);
+        
+        // Сначала загружаем кэш городов
+        await this.loadCitiesCache();
+        
         this.initializeAdmin();
         this.setupEventListeners();
+    }
+
+    // ЗАГРУЗКА КЭША ГОРОДОВ
+    async loadCitiesCache() {
+        try {
+            const { data, error } = await supabase
+                .from('locality')
+                .select('id, town_ru')
+                .order('town_ru');
+            
+            if (error) throw error;
+            
+            this.citiesCache = data || [];
+            console.log('Загружено городов в кэш:', this.citiesCache.length);
+        } catch (error) {
+            console.error('Ошибка загрузки кэша городов:', error);
+        }
     }
 
     initializeAdmin() {
@@ -24,7 +45,7 @@ class AdminPanel {
         this.initializeCitiesTable();
     }
 
-    // ТАБЛИЦА МАГАЗИНОВ
+    // ТАБЛИЦА МАГАЗИНОВ - ИСПРАВЛЕННАЯ
     initializeShopsTable() {
         this.shopsTable = new Tabulator("#shops-table", {
             layout: "fitColumns",
@@ -39,7 +60,7 @@ class AdminPanel {
                     sorter: "number"
                 },
                 { 
-                    title: "Название магазина", 
+                    title: "Название", 
                     field: "shop", 
                     editor: "input",
                     headerFilter: "input",
@@ -47,9 +68,21 @@ class AdminPanel {
                 },
                 { 
                     title: "Город", 
-                    field: "town", 
-                    editor: "input",
-                    headerFilter: "input"
+                    field: "locality_id",
+                    editor: "select",
+                    editorParams: {
+                        values: this.getCitiesForDropdown(),
+                        allowEmpty: false
+                    },
+                    formatter: (cell) => {
+                        const cityId = cell.getValue();
+                        const city = this.citiesCache.find(c => c.id === cityId);
+                        return city ? city.town_ru : 'Не указан';
+                    },
+                    headerFilter: "select",
+                    headerFilterParams: {
+                        values: this.getCitiesForDropdown()
+                    }
                 },
                 { 
                     title: "Улица", 
@@ -82,26 +115,61 @@ class AdminPanel {
                     headerSort: false
                 }
             ],
+            // Сохранение данных при редактировании
+            cellEdited: (cell) => {
+                this.saveShopEdit(cell.getRow().getData());
+            }
         });
 
         this.loadShopsData();
     }
 
-    // ЗАГРУЗКА ДАННЫХ МАГАЗИНОВ
+    // ЗАГРУЗКА ДАННЫХ МАГАЗИНОВ С JOIN
     async loadShopsData() {
         try {
             const { data, error } = await supabase
                 .from('stores')
-                .select('*')
+                .select(`
+                    *,
+                    locality:locality_id (town_ru, town_en, code)
+                `)
                 .order('id', { ascending: true });
 
             if (error) throw error;
             
-            this.shopsTable.setData(data || []);
-            console.log('Загружено магазинов:', data?.length || 0);
+            // Преобразуем данные для отображения
+            const formattedData = (data || []).map(shop => ({
+                ...shop,
+                city_name: shop.locality?.town_ru || 'Не указан'
+            }));
+            
+            this.shopsTable.setData(formattedData);
+            console.log('Загружено магазинов:', formattedData.length);
         } catch (error) {
             console.error('Ошибка загрузки магазинов:', error);
             this.showNotification('Ошибка загрузки магазинов', 'error');
+        }
+    }
+
+    // СОХРАНЕНИЕ ИЗМЕНЕНИЙ МАГАЗИНА
+    async saveShopEdit(shopData) {
+        try {
+            // Подготавливаем данные для сохранения (убираем лишние поля)
+            const { locality, city_name, ...cleanData } = shopData;
+            
+            const { error } = await supabase
+                .from('stores')
+                .update(cleanData)
+                .eq('id', shopData.id);
+
+            if (error) throw error;
+
+            this.showNotification('Изменения сохранены', 'success');
+        } catch (error) {
+            console.error('Ошибка сохранения магазина:', error);
+            this.showNotification('Ошибка сохранения', 'error');
+            // Перезагружаем данные чтобы откатить изменения
+            this.loadShopsData();
         }
     }
 
@@ -116,8 +184,7 @@ class AdminPanel {
     // РЕДАКТИРОВАНИЕ МАГАЗИНА
     editShop(shopData) {
         console.log('Редактирование магазина:', shopData);
-        // Временная реализация - используем встроенный редактор Tabulator
-        this.showNotification(`Редактирование магазина: ${shopData.shop}`, 'info');
+        this.showNotification(`Редактирование: ${shopData.shop}`, 'info');
     }
 
     // УДАЛЕНИЕ МАГАЗИНА
@@ -133,14 +200,24 @@ class AdminPanel {
             if (error) throw error;
 
             this.showNotification('Магазин успешно удален', 'success');
-            this.loadShopsData(); // Перезагружаем данные
+            this.loadShopsData();
         } catch (error) {
             console.error('Ошибка удаления магазина:', error);
             this.showNotification('Ошибка удаления магазина', 'error');
         }
     }
 
-    // ТАБЛИЦА ГОРОДОВ (аналогично магазинам)
+    // ПОЛУЧЕНИЕ ГОРОДОВ ДЛЯ ВЫПАДАЮЩЕГО СПИСКА
+    getCitiesForDropdown() {
+        if (!this.citiesCache) return {};
+        
+        return this.citiesCache.reduce((acc, city) => {
+            acc[city.id] = city.town_ru;
+            return acc;
+        }, {});
+    }
+
+    // ТАБЛИЦА ГОРОДОВ
     initializeCitiesTable() {
         this.citiesTable = new Tabulator("#cities-table", {
             layout: "fitColumns",
@@ -148,9 +225,24 @@ class AdminPanel {
             paginationSize: 10,
             columns: [
                 { title: "ID", field: "id", width: 80 },
-                { title: "Город (RU)", field: "town_ru", editor: "input" },
-                { title: "Город (EN)", field: "town_en", editor: "input" },
-                { title: "Код", field: "code", editor: "input", width: 100 },
+                { 
+                    title: "Город (RU)", 
+                    field: "town_ru", 
+                    editor: "input",
+                    headerFilter: "input"
+                },
+                { 
+                    title: "Город (EN)", 
+                    field: "town_en", 
+                    editor: "input",
+                    headerFilter: "input" 
+                },
+                { 
+                    title: "Код", 
+                    field: "code", 
+                    editor: "input", 
+                    width: 100 
+                },
                 { 
                     title: "Действия", 
                     formatter: this.actionsFormatter, 
@@ -160,12 +252,38 @@ class AdminPanel {
                             this.deleteCity(data.id);
                         }
                     },
-                    width: 80
+                    width: 80,
+                    headerSort: false
                 }
             ],
+            cellEdited: (cell) => {
+                this.saveCityEdit(cell.getRow().getData());
+            }
         });
 
         this.loadCitiesData();
+    }
+
+    // ОСТАЛЬНЫЕ МЕТОДЫ остаются без изменений...
+    // (loadCitiesData, deleteCity, setupEventListeners, switchTab, addNewShop, addNewCity, showNotification)
+    
+    async saveCityEdit(cityData) {
+        try {
+            const { error } = await supabase
+                .from('locality')
+                .update(cityData)
+                .eq('id', cityData.id);
+
+            if (error) throw error;
+
+            this.showNotification('Город сохранен', 'success');
+            // Обновляем кэш
+            await this.loadCitiesCache();
+        } catch (error) {
+            console.error('Ошибка сохранения города:', error);
+            this.showNotification('Ошибка сохранения города', 'error');
+            this.loadCitiesData();
+        }
     }
 
     async loadCitiesData() {
@@ -173,7 +291,7 @@ class AdminPanel {
             const { data, error } = await supabase
                 .from('locality')
                 .select('*')
-                .order('id', { ascending: true });
+                .order('town_ru', { ascending: true });
 
             if (error) throw error;
             
@@ -197,6 +315,8 @@ class AdminPanel {
 
             this.showNotification('Город успешно удален', 'success');
             this.loadCitiesData();
+            // Обновляем кэш
+            await this.loadCitiesCache();
         } catch (error) {
             console.error('Ошибка удаления города:', error);
             this.showNotification('Ошибка удаления города', 'error');
@@ -225,7 +345,6 @@ class AdminPanel {
 
     // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
     switchTab(tabName) {
-        // Скрыть все вкладки
         document.querySelectorAll('.tab-content').forEach(tab => {
             tab.classList.remove('active');
         });
@@ -233,22 +352,19 @@ class AdminPanel {
             btn.classList.remove('active');
         });
         
-        // Показать выбранную вкладку
         document.getElementById(`${tabName}-section`).classList.add('active');
         document.getElementById(`${tabName}-tab`).classList.add('active');
     }
 
     // ДОБАВЛЕНИЕ НОВОГО МАГАЗИНА
     addNewShop() {
-        // Временная реализация - добавляем пустую строку для редактирования
-        this.shopsTable.addRow({}, true)
-            .then(row => {
-                row.getCells().forEach(cell => {
-                    if (cell.getColumn().getDefinition().field !== 'id') {
-                        cell.edit();
-                    }
-                });
-            });
+        this.shopsTable.addRow({
+            locality_id: this.citiesCache[0]?.id || null
+        }, true).then(row => {
+            const cells = row.getCells();
+            // Начинаем редактирование с названия магазина
+            cells[1].edit(); // Вторая колонка - название магазина
+        });
     }
 
     // ДОБАВЛЕНИЕ НОВОГО ГОРОДА
@@ -265,7 +381,6 @@ class AdminPanel {
 
     // УВЕДОМЛЕНИЯ
     showNotification(message, type = 'info') {
-        // Временная реализация - используем alert
         alert(`[${type.toUpperCase()}] ${message}`);
     }
 }
