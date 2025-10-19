@@ -1,12 +1,18 @@
-// app.js - Основное приложение (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+// app.js - Основное приложение
 class ShoppingApp {
     constructor() {
-        this.storesCache = null; // Добавляем кэш магазинов
+        this.storesCache = null;
+        this.user = null;
+        this.currentPage = 1;
+        this.pageSize = 50;
+        this.totalRecords = 0;
+        this.table = null;
+        this.paginationContainer = null;
+        this.paginationInfo = null;
         this.init();
     }
 
     async init() {
-        // Проверяем, что пользователь аутентифицирован
         const { data: { session } } = await supabase.auth.getSession();
         
         if (!session) {
@@ -15,8 +21,8 @@ class ShoppingApp {
         }
 
         console.log('Запуск приложения для пользователя:', session.user.email);
+        this.user = session.user;
         
-        // Сначала загружаем кэш магазинов
         await this.loadStoresCache();
         this.loadPurchasesData();
         this.setupEventListeners();
@@ -44,85 +50,52 @@ class ShoppingApp {
         }
     }
 
-    // ОСНОВНАЯ ФУНКЦИЯ ДЛЯ ЗАГРУЗКИ И ОТОБРАЖЕНИЯ ДАННЫХ
-    async loadPurchasesData() {
+    // ОСНОВНАЯ ФУНКЦИЯ ДЛЯ ЗАГРУЗКИ ДАННЫХ С СЕРВЕРНОЙ ПАГИНАЦИЕЙ
+    async loadPurchasesData(page = this.currentPage, pageSize = this.pageSize) {
         try {
-            console.log("Начинаем загрузку данных...");
-            const allRows = [];
-            const pageSize = 1000;
-            let from = 0;
-            let hasMoreData = true;
-            let safeExitCounter = 0;
-            const maxSafePages = 10;
-
-            while (hasMoreData && safeExitCounter < maxSafePages) {
-                safeExitCounter++;
-
-                let to = from + pageSize - 1;
-                console.log(`Пытаемся загрузить блок: с ${from} по ${to}`);
-
-                // ОБНОВЛЕННЫЙ ЗАПРОС С JOIN
-                const { data: pageData, error } = await supabase
-                    .from('shops')
-                    .select(`
-                        *,
-                        store:store_id (
-                            shop,
-                            street,
-                            house,
-                            locality:locality_id (
-                                town_ru
-                            )
-                        )
-                    `)
-                    .order('id', { ascending: true })
-                    .range(from, to);
-
-                if (error) {
-                    if (error.message && error.message.includes('416') || error.code === 'PGRST301') {
-                        console.log('Достигнут конец данных. Загрузка завершена.');
-                        hasMoreData = false;
-                        break;
-                    } else {
-                        console.error('Критическая ошибка при загрузке страницы:', error);
-                        throw new Error(`Ошибка Supabase: ${error.message || JSON.stringify(error)}`);
-                    }
-                }
-
-                if (!pageData || pageData.length === 0) {
-                    console.log('Получен пустой ответ. Загрузка завершена.');
-                    hasMoreData = false;
-                    break;
-                }
-
-                // ОБРАБАТЫВАЕМ ДАННЫЕ С JOIN
-                const processedData = pageData.map(row => ({
-                    ...row,
-                    // Формируем адрес для отображения
-                    full_address: this.formatAddress(row.store)
-                }));
-
-                allRows.push(...processedData);
-                from += pageSize;
-                console.log(`Успешно загружено: ${pageData.length} записей. Всего: ${allRows.length}`);
-
-                if (pageData.length < pageSize) {
-                    console.log(`Получено неполная страница (${pageData.length}/${pageSize}). Загрузка завершена.`);
-                    hasMoreData = false;
-                }
+            if (!this.user || !this.user.id) {
+                console.error('Пользователь не загружен');
+                return;
             }
 
-            console.log('Всего загружено записей:', allRows.length);
+            console.log(`Загрузка страницы ${page}, размер: ${pageSize} для пользователя:`, this.user.id);
             
-            // Скрываем надпись "Загрузка..."
-            document.getElementById('loading').style.display = 'none';
+            const from = (page - 1) * pageSize;
+            const to = from + pageSize - 1;
 
-            // Инициализируем таблицу со ВСЕМИ данными
-            this.initializeTable(allRows);
+            const { data, error, count } = await supabase
+                .from('shops')
+                .select(`
+                    *,
+                    store:store_id (
+                        shop,
+                        street,
+                        house,
+                        locality:locality_id (
+                            town_ru
+                        )
+                    )
+                `, { count: 'exact' })
+                .eq('user_id', this.user.id)
+                .order('date', { ascending: false })
+                .range(from, to);
+
+            if (error) throw error;
+
+            const processedData = (data || []).map(row => ({
+                ...row,
+                full_address: this.formatAddress(row.store)
+            }));
+
+            console.log(`Загружено: ${processedData.length} записей из ${count}`);
+
+            document.getElementById('loading').style.display = 'none';
+            this.initializeTable(processedData, count, page, pageSize);
             
         } catch (error) {
             console.error('Общая ошибка:', error);
             document.getElementById('loading').textContent = 'Ошибка при загрузке данных: ' + error.message;
+            window.notifications.error('Ошибка загрузки данных: ' + error.message);
         }
     }
 
@@ -138,14 +111,25 @@ class ShoppingApp {
         return parts.length > 0 ? parts.join(', ') : 'Адрес не указан';
     }
 
-    initializeTable(data) {
-        // Инициализируем Tabulator со ВСЕМИ данными
+    initializeTable(data, totalRecords = 0, currentPage = 1, pageSize = 50) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalRecords = totalRecords;
+
+        // Уничтожаем старую таблицу если есть
+        if (this.table) {
+            this.table.destroy();
+        }
+
+        // Удаляем старые контролы пагинации
+        if (this.paginationContainer && this.paginationContainer.parentElement) {
+            this.paginationContainer.remove();
+        }
+
+        // Инициализируем Tabulator БЕЗ встроенной пагинации
         this.table = new Tabulator('#purchases-table', {
             data: data,
             layout: "fitColumns",
-            pagination: "local",
-            paginationSize: 20,
-            paginationSizeSelector: [10, 20, 50, 100, 500],
             movableColumns: true,
             maxHeight: "100%",
             columns: [
@@ -278,28 +262,117 @@ class ShoppingApp {
                         }
                     }
                 }
-            ],
-            tooltips: true
+            ]
         });
+
+        // СОЗДАЕМ КОНТРОЛЫ ПАГИНАЦИИ ПОСЛЕ ТАБЛИЦЫ
+        this.createPaginationControls();
+    }
+
+    // СОЗДАНИЕ КОНТРОЛОВ ПАГИНАЦИИ
+    createPaginationControls() {
+        // Создаем контейнер для пагинации
+        const container = document.createElement('div');
+        container.className = 'pagination-controls';
+        
+        // Информация о странице
+        const pageInfo = document.createElement('span');
+        pageInfo.className = 'page-info';
+
+        // Кнопка "Назад"
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = '◀ Назад';
+        prevBtn.className = 'btn-secondary';
+        prevBtn.onclick = () => this.previousPage();
+
+        // Кнопка "Вперед"  
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = 'Вперед ▶';
+        nextBtn.className = 'btn-secondary';
+        nextBtn.onclick = () => this.nextPage();
+
+        // Селектор размера страницы
+        const sizeSelect = document.createElement('select');
+        sizeSelect.innerHTML = `
+            <option value="20">20 записей</option>
+            <option value="50" ${this.pageSize === 50 ? 'selected' : ''}>50 записей</option>
+            <option value="100" ${this.pageSize === 100 ? 'selected' : ''}>100 записей</option>
+            <option value="200" ${this.pageSize === 200 ? 'selected' : ''}>200 записей</option>
+        `;
+        sizeSelect.onchange = (e) => this.changePageSize(parseInt(e.target.value));
+
+        container.appendChild(prevBtn);
+        container.appendChild(pageInfo);
+        container.appendChild(nextBtn);
+        container.appendChild(sizeSelect);
+
+        // Добавляем пагинацию ПОД таблицей
+        const tableElement = document.getElementById('purchases-table');
+        tableElement.parentNode.insertBefore(container, tableElement.nextSibling);
+
+        this.paginationInfo = pageInfo;
+        this.paginationContainer = container;
+
+        this.updatePaginationInfo();
+    }
+
+    // ОБНОВЛЕНИЕ ИНФОРМАЦИИ О ПАГИНАЦИИ
+    updatePaginationInfo() {
+        if (!this.paginationInfo || !this.totalRecords) return;
+
+        const totalPages = Math.ceil(this.totalRecords / this.pageSize);
+        const startRecord = (this.currentPage - 1) * this.pageSize + 1;
+        const endRecord = Math.min(this.currentPage * this.pageSize, this.totalRecords);
+
+        this.paginationInfo.textContent = 
+            `Страница ${this.currentPage} из ${totalPages} | ` +
+            `Записи ${startRecord}-${endRecord} из ${this.totalRecords}`;
+
+        // Обновляем состояние кнопок
+        const prevBtn = this.paginationContainer.querySelector('button:first-child');
+        const nextBtn = this.paginationContainer.querySelector('button:nth-child(3)');
+        
+        if (prevBtn) prevBtn.disabled = this.currentPage <= 1;
+        if (nextBtn) nextBtn.disabled = this.currentPage >= totalPages;
+    }
+
+    // ПЕРЕХОД К СЛЕДУЮЩЕЙ СТРАНИЦЕ
+    async nextPage() {
+        const totalPages = Math.ceil(this.totalRecords / this.pageSize);
+        if (this.currentPage < totalPages) {
+            this.currentPage++;
+            await this.loadPurchasesData(this.currentPage, this.pageSize);
+        }
+    }
+
+    // ПЕРЕХОД К ПРЕДЫДУЩЕЙ СТРАНИЦЕ  
+    async previousPage() {
+        if (this.currentPage > 1) {
+            this.currentPage--;
+            await this.loadPurchasesData(this.currentPage, this.pageSize);
+        }
+    }
+
+    // ИЗМЕНЕНИЕ РАЗМЕРА СТРАНИЦЫ
+    async changePageSize(newSize) {
+        this.pageSize = newSize;
+        this.currentPage = 1;
+        await this.loadPurchasesData(this.currentPage, this.pageSize);
     }
 
     setupEventListeners() {
-        // Новая кнопка админ-панели
         document.getElementById('admin-btn').addEventListener('click', () => {
             window.location.href = 'admin.html';
         });
         
-        // Кнопка добавления покупки
         document.getElementById('add-purchase-btn').addEventListener('click', () => {
             this.showPurchaseForm();
         });
         
-        // Кнопка выхода
         document.getElementById('logout-btn').addEventListener('click', () => {
             window.authManager.signOut();
         });
 
-        // Кнопка обновления данных
         document.getElementById('refresh-btn').addEventListener('click', () => {
             this.refreshData();
         });
@@ -310,22 +383,14 @@ class ShoppingApp {
         document.getElementById('loading').style.display = 'block';
         document.getElementById('loading').textContent = 'Обновление данных...';
         
-        // Перезагружаем кэш магазинов
         await this.loadStoresCache();
-        
-        // Очищаем таблицу перед загрузкой новых данных
-        const tableElement = document.getElementById('purchases-table');
-        if (tableElement._tabulator) {
-            tableElement._tabulator.destroy();
-        }
-        
-        await this.loadPurchasesData();
+        await this.loadPurchasesData(this.currentPage, this.pageSize);
     }
 
     // ИНИЦИАЛИЗАЦИЯ ФОРМЫ ПОКУПКИ
     initializePurchaseForm() {
         this.loadStoresIntoForm();
-		this.loadCategoriesAndUnits();
+        this.loadCategoriesAndUnits();
         this.setupFormEventListeners();
         this.setupModalHandlers();
     }
@@ -348,38 +413,75 @@ class ShoppingApp {
         });
     }
 
-	// АВТОМАТИЧЕСКОЕ ЗАПОЛНЕНИЕ КАТЕГОРИЙ И ЕДИНИЦ ИЗ БАЗЫ
+    // АВТОМАТИЧЕСКОЕ ЗАПОЛНЕНИЕ КАТЕГОРИЙ И ЕДИНИЦ ИЗ БАЗЫ
 	async loadCategoriesAndUnits() {
 		try {
-			console.log('Загрузка категорий и единиц из базы...');
+			console.log('Загрузка ВСЕХ категорий и единиц из базы...');
 			
-			// Загружаем ВСЕ уникальные категории из базы
-			const { data: categoriesData, error: categoriesError } = await supabase
-				.from('shops')
-				.select('gruppa')
-				.not('gruppa', 'is', null)
-				.order('gruppa');
+			// ЗАГРУЖАЕМ ВСЕ уникальные категории с ПАГИНАЦИЕЙ
+			let allCategories = [];
+			let from = 0;
+			const pageSize = 1000;
+			let hasMore = true;
 
-			if (categoriesError) throw categoriesError;
-			
+			while (hasMore) {
+				const { data: categoriesPage, error: categoriesError } = await supabase
+					.from('shops')
+					.select('gruppa')
+					.not('gruppa', 'is', null)
+					.range(from, from + pageSize - 1);
+
+				if (categoriesError) throw categoriesError;
+				
+				if (!categoriesPage || categoriesPage.length === 0) {
+					hasMore = false;
+				} else {
+					allCategories = allCategories.concat(categoriesPage.map(item => item.gruppa));
+					from += pageSize;
+					
+					// Защита от бесконечного цикла
+					if (from > 10000) {
+						console.warn('Достигнут лимит загрузки категорий');
+						hasMore = false;
+					}
+				}
+			}
+
 			// Извлекаем уникальные категории и сортируем
-			const uniqueCategories = [...new Set(categoriesData.map(item => item.gruppa))].filter(Boolean);
-			console.log('Найдено категорий:', uniqueCategories.length);
+			const uniqueCategories = [...new Set(allCategories)].filter(Boolean).sort();
+			console.log('Найдено категорий ВСЕГО:', uniqueCategories.length);
 			
 			this.populateSelect('purchase-category', uniqueCategories, 'Выберите категорию');
 			
-			// Загружаем ВСЕ уникальные единицы измерения из базы
-			const { data: unitsData, error: unitsError } = await supabase
-				.from('shops')
-				.select('item')
-				.not('item', 'is', null)
-				.order('item');
+			// АНАЛОГИЧНО ДЛЯ ЕДИНИЦ ИЗМЕРЕНИЯ
+			let allUnits = [];
+			from = 0;
+			hasMore = true;
 
-			if (unitsError) throw unitsError;
-			
-			// Извлекаем уникальные единицы и сортируем
-			const uniqueUnits = [...new Set(unitsData.map(item => item.item))].filter(Boolean);
-			console.log('Найдено единиц измерения:', uniqueUnits.length);
+			while (hasMore) {
+				const { data: unitsPage, error: unitsError } = await supabase
+					.from('shops')
+					.select('item')
+					.not('item', 'is', null)
+					.range(from, from + pageSize - 1);
+
+				if (unitsError) throw unitsError;
+				
+				if (!unitsPage || unitsPage.length === 0) {
+					hasMore = false;
+				} else {
+					allUnits = allUnits.concat(unitsPage.map(item => item.item));
+					from += pageSize;
+					
+					if (from > 10000) {
+						console.warn('Достигнут лимит загрузки единиц измерения');
+						hasMore = false;
+					}
+				}
+			}
+
+			const uniqueUnits = [...new Set(allUnits)].filter(Boolean).sort();
+			console.log('Найдено единиц измерения ВСЕГО:', uniqueUnits.length);
 			
 			this.populateSelect('purchase-unit', uniqueUnits, 'шт.', true);
 			
@@ -390,185 +492,162 @@ class ShoppingApp {
 		}
 	}
 
-	// ЗАПОЛНЕНИЕ SELECT ЭЛЕМЕНТА С ПРАВИЛЬНЫМИ АТРИБУТАМИ
-	populateSelect(selectId, values, defaultValue = '', isUnit = false) {
-		const select = document.getElementById(selectId);
-		if (!select) {
-			console.error('Элемент не найден:', selectId);
-			return;
-		}
-		
-		// Сохраняем текущее значение если есть
-		const currentValue = select.value;
-		
-		// Очищаем и создаем заново
-		select.innerHTML = '';
-		
-		// Добавляем заголовок для категорий
-		if (!isUnit) {
-			const defaultOption = document.createElement('option');
-			defaultOption.value = '';
-			defaultOption.textContent = 'Выберите категорию';
-			defaultOption.disabled = true;
-			defaultOption.selected = true;
-			select.appendChild(defaultOption);
-		}
-		
-		// Добавляем значения из базы
-		values.forEach(value => {
-			if (value && value.trim() !== '') {
-				const option = document.createElement('option');
-				option.value = value;
-				option.textContent = value;
-				select.appendChild(option);
-			}
-		});
-		
-		// Для единиц измерения добавляем стандартные значения если из базы мало данных
-		if (isUnit && values.length < 3) {
-			const defaultUnits = ['шт.', 'кг', 'г', 'л', 'мл', 'упак.', 'банка', 'бутылка', 'пачка'];
-			defaultUnits.forEach(unit => {
-				if (!values.includes(unit)) {
-					const option = document.createElement('option');
-					option.value = unit;
-					option.textContent = unit;
-					select.appendChild(option);
-				}
-			});
-		}
-		
-		// Восстанавливаем предыдущее значение если оно есть в новых опциях
-		if (currentValue && Array.from(select.options).some(opt => opt.value === currentValue)) {
-			select.value = currentValue;
-		} else if (isUnit && defaultValue) {
-			select.value = defaultValue;
-		}
-		
-		// Устанавливаем атрибут size для выпадающего списка если много элементов
-		if (values.length > 10) {
-			select.setAttribute('size', '6'); // Показывать 6 элементов с прокруткой
-		} else {
-			select.removeAttribute('size');
-		}
-		
-		console.log(`Заполнен ${selectId}: ${values.length} элементов`);
-	}
+    // ЗАПОЛНЕНИЕ SELECT ЭЛЕМЕНТА (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+    populateSelect(selectId, values, defaultValue = '', isUnit = false) {
+        const select = document.getElementById(selectId);
+        if (!select) {
+            console.error('Элемент не найден:', selectId);
+            return;
+        }
+        
+        const currentValue = select.value;
+        select.innerHTML = '';
+        
+        // УБИРАЕМ атрибут size чтобы был нормальный выпадающий список
+        select.removeAttribute('size');
+        
+        if (!isUnit) {
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Выберите категорию';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            select.appendChild(defaultOption);
+        }
+        
+        values.forEach(value => {
+            if (value && value.trim() !== '') {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            }
+        });
+        
+        if (isUnit && values.length < 3) {
+            const defaultUnits = ['шт.', 'кг', 'г', 'л', 'мл', 'упак.', 'банка', 'бутылка', 'пачка'];
+            defaultUnits.forEach(unit => {
+                if (!values.includes(unit)) {
+                    const option = document.createElement('option');
+                    option.value = unit;
+                    option.textContent = unit;
+                    select.appendChild(option);
+                }
+            });
+        }
+        
+        if (currentValue && Array.from(select.options).some(opt => opt.value === currentValue)) {
+            select.value = currentValue;
+        } else if (isUnit && defaultValue) {
+            select.value = defaultValue;
+        }
+        
+        console.log(`Заполнен ${selectId}: ${values.length} элементов`);
+    }
 
-	// РЕЗЕРВНЫЙ МЕТОД ДЛЯ СТАНДАРТНЫХ ЗНАЧЕНИЙ
-	loadDefaultCategoriesAndUnits() {
-		console.log('Используются стандартные категории и единицы');
-		
-		const defaultCategories = [
-			'Молочные продукты', 'Хлеб и выпечка', 'Мясо и птица', 
-			'Рыба и морепродукты', 'Овощи и фрукты', 'Бакалея',
-			'Напитки', 'Сладости', 'Бытовая химия', 'Личная гигиена',
-			'Электроника', 'Одежда', 'Обувь', 'Аксессуары', 'Другое'
-		];
-		
-		const defaultUnits = ['шт.', 'кг', 'г', 'л', 'мл', 'упак.', 'банка', 'бутылка'];
-		
-		this.populateSelect('purchase-category', defaultCategories, 'Выберите категорию');
-		this.populateSelect('purchase-unit', defaultUnits, 'шт.', true);
-	}
+    // ОСТАЛЬНЫЕ МЕТОДЫ остаются без изменений...
+    // (loadDefaultCategoriesAndUnits, setupFormEventListeners, createCalculateButton, 
+    // suggestCalculation, setupModalHandlers, showPurchaseForm, fillFormWithData, 
+    // resetForm, validateForm, savePurchase, deletePurchase, showNotification)
 
-    // ОБРАБОТЧИКИ СОБЫТИЙ ФОРМЫ - ИСПРАВЛЕННАЯ ЛОГИКА РАСЧЕТОВ
-	setupFormEventListeners() {
-		const form = document.getElementById('purchase-form');
-		const priceInput = document.getElementById('purchase-price');
-		const quantityInput = document.getElementById('purchase-quantity');
-		const amountInput = document.getElementById('purchase-amount');
-		
-		if (!form || !priceInput || !quantityInput || !amountInput) {
-			console.error('Элементы формы не найдены!');
-			return;
-		}
-		
-		// УБИРАЕМ авторасчет при изменении цены или количества
-		// Вместо этого добавляем кнопку для предложения расчета
-		
-		// Создаем кнопку для предложения расчета
-		this.createCalculateButton();
-		
-		// Отправка формы
-		form.addEventListener('submit', (e) => {
-			e.preventDefault();
-			this.savePurchase();
-		});
-		
-		// Установка сегодняшней даты по умолчанию
-		const dateInput = document.getElementById('purchase-date');
-		if (dateInput) {
-			dateInput.valueAsDate = new Date();
-		}
-	}
+    // РЕЗЕРВНЫЙ МЕТОД ДЛЯ СТАНДАРТНЫХ ЗНАЧЕНИЙ
+    loadDefaultCategoriesAndUnits() {
+        console.log('Используются стандартные категории и единицы');
+        
+        const defaultCategories = [
+            'Авто', 'Баня', 'Бензин', 'БытоТехника', 'Ветряк', 'Дерево', 'Инструмент', 'Коммуналка',
+            'Лакокрасочные', 'Мебель', 'Посуда', 'Продукты', 'Расходники', 'Сад', 'Сантехника',
+            'Собака', 'Стройматериалы', 'Текстиль', 'Химия', 'Электрика'
+        ];
+        
+        const defaultUnits = ['шт.', 'кг', 'л', 'мл', 'упак.'];
+        
+        this.populateSelect('purchase-category', defaultCategories, 'Выберите категорию');
+        this.populateSelect('purchase-unit', defaultUnits, 'шт.', true);
+    }
 
-	// СОЗДАНИЕ КНОПКИ ДЛЯ ПРЕДЛОЖЕНИЯ РАСЧЕТА
-	createCalculateButton() {
-		const amountGroup = document.getElementById('purchase-amount').closest('.form-group');
-		if (!amountGroup) return;
-		
-		// Создаем контейнер для кнопки
-		const buttonContainer = document.createElement('div');
-		buttonContainer.style.marginTop = '5px';
-		buttonContainer.style.display = 'flex';
-		buttonContainer.style.gap = '5px';
-		buttonContainer.style.alignItems = 'center';
-		
-		// Создаем кнопку расчета
-		const calcButton = document.createElement('button');
-		calcButton.type = 'button';
-		calcButton.textContent = '📐 Рассчитать';
-		calcButton.className = 'btn-secondary';
-		calcButton.style.padding = '4px 8px';
-		calcButton.style.fontSize = '11px';
-		calcButton.title = 'Предложить расчет на основе цены и количества';
-		
-		// Создаем подсказку
-		const hint = document.createElement('span');
-		hint.textContent = '(цена × количество)';
-		hint.style.fontSize = '10px';
-		hint.style.color = '#6c757d';
-		hint.style.fontStyle = 'italic';
-		
-		// Добавляем обработчик для кнопки расчета
-		calcButton.addEventListener('click', () => {
-			this.suggestCalculation();
-		});
-		
-		buttonContainer.appendChild(calcButton);
-		buttonContainer.appendChild(hint);
-		amountGroup.appendChild(buttonContainer);
-	}
+    // ОБРАБОТЧИКИ СОБЫТИЙ ФОРМЫ
+    setupFormEventListeners() {
+        const form = document.getElementById('purchase-form');
+        if (!form) {
+            console.error('Форма не найдена!');
+            return;
+        }
+        
+        this.createCalculateButton();
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.savePurchase();
+        });
+        
+        const dateInput = document.getElementById('purchase-date');
+        if (dateInput) {
+            dateInput.valueAsDate = new Date();
+        }
+    }
 
-	// ПРЕДЛОЖЕНИЕ РАСЧЕТА (не автоматическое)
-	suggestCalculation() {
-		const price = parseFloat(document.getElementById('purchase-price').value) || 0;
-		const quantity = parseFloat(document.getElementById('purchase-quantity').value) || 0;
-		const currentAmount = parseFloat(document.getElementById('purchase-amount').value) || 0;
-		
-		if (price > 0 && quantity > 0) {
-			const suggestedAmount = price * quantity;
-			
-			// Предлагаем расчет только если поле пустое или пользователь согласится
-			if (currentAmount === 0) {
-				document.getElementById('purchase-amount').value = suggestedAmount.toFixed(2);
-				this.showNotification(`Предложена стоимость: ${suggestedAmount.toFixed(2)} ₽`, 'info');
-			} else {
-				// Если уже есть значение, спрашиваем подтверждение
-				const confirmUpdate = confirm(
-					`Текущая стоимость: ${currentAmount.toFixed(2)} ₽\n` +
-					`Предлагаемая: ${suggestedAmount.toFixed(2)} ₽\n\n` +
-					`Заменить текущее значение?`
-				);
-				
-				if (confirmUpdate) {
-					document.getElementById('purchase-amount').value = suggestedAmount.toFixed(2);
-				}
-			}
-		} else {
-			this.showNotification('Укажите цену и количество для расчета', 'error');
-		}
-	}
+    // СОЗДАНИЕ КНОПКИ ДЛЯ ПРЕДЛОЖЕНИЯ РАСЧЕТА
+    createCalculateButton() {
+        const amountGroup = document.getElementById('purchase-amount')?.closest('.form-group');
+        if (!amountGroup) return;
+        
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.marginTop = '5px';
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.gap = '5px';
+        buttonContainer.style.alignItems = 'center';
+        
+        const calcButton = document.createElement('button');
+        calcButton.type = 'button';
+        calcButton.textContent = '📐 Рассчитать';
+        calcButton.className = 'btn-secondary';
+        calcButton.style.padding = '4px 8px';
+        calcButton.style.fontSize = '11px';
+        calcButton.title = 'Предложить расчет на основе цены и количества';
+        
+        const hint = document.createElement('span');
+        hint.textContent = '(цена × количество)';
+        hint.style.fontSize = '10px';
+        hint.style.color = '#6c757d';
+        hint.style.fontStyle = 'italic';
+        
+        calcButton.addEventListener('click', () => {
+            this.suggestCalculation();
+        });
+        
+        buttonContainer.appendChild(calcButton);
+        buttonContainer.appendChild(hint);
+        amountGroup.appendChild(buttonContainer);
+    }
+
+    // ПРЕДЛОЖЕНИЕ РАСЧЕТА
+    suggestCalculation() {
+        const price = parseFloat(document.getElementById('purchase-price').value) || 0;
+        const quantity = parseFloat(document.getElementById('purchase-quantity').value) || 0;
+        const currentAmount = parseFloat(document.getElementById('purchase-amount').value) || 0;
+        
+        if (price > 0 && quantity > 0) {
+            const suggestedAmount = price * quantity;
+            
+            if (currentAmount === 0) {
+                document.getElementById('purchase-amount').value = suggestedAmount.toFixed(2);
+                this.showNotification(`Предложена стоимость: ${suggestedAmount.toFixed(2)} ₽`, 'info');
+            } else {
+                const confirmUpdate = confirm(
+                    `Текущая стоимость: ${currentAmount.toFixed(2)} ₽\n` +
+                    `Предлагаемая: ${suggestedAmount.toFixed(2)} ₽\n\n` +
+                    `Заменить текущее значение?`
+                );
+                
+                if (confirmUpdate) {
+                    document.getElementById('purchase-amount').value = suggestedAmount.toFixed(2);
+                }
+            }
+        } else {
+            this.showNotification('Укажите цену и количество для расчета', 'error');
+        }
+    }
 
     // УПРАВЛЕНИЕ МОДАЛЬНЫМ ОКНОМ
     setupModalHandlers() {
@@ -576,10 +655,7 @@ class ShoppingApp {
         const closeBtn = document.querySelector('.close-modal');
         const cancelBtn = document.getElementById('cancel-purchase');
         
-        if (!modal || !closeBtn || !cancelBtn) {
-            console.error('Элементы модального окна не найдены!');
-            return;
-        }
+        if (!modal || !closeBtn || !cancelBtn) return;
         
         const closeModal = () => {
             modal.style.display = 'none';
@@ -589,7 +665,6 @@ class ShoppingApp {
         closeBtn.addEventListener('click', closeModal);
         cancelBtn.addEventListener('click', closeModal);
         
-        // Закрытие по клику вне модального окна
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
@@ -597,22 +672,17 @@ class ShoppingApp {
         });
     }
 
-    // ПОКАЗАТЬ ФОРМУ (ДОБАВИТЬ ИЛИ РЕДАКТИРОВАТЬ)
+    // ПОКАЗАТЬ ФОРМУ
     showPurchaseForm(purchaseData = null) {
         const modal = document.getElementById('purchase-modal');
         const title = document.getElementById('purchase-modal-title');
         
-        if (!modal || !title) {
-            console.error('Модальное окно не найдено!');
-            return;
-        }
+        if (!modal || !title) return;
         
         if (purchaseData) {
-            // Режим редактирования
             title.textContent = '✏️ Редактировать покупку';
             this.fillFormWithData(purchaseData);
         } else {
-            // Режим добавления
             title.textContent = '📝 Новая покупка';
             this.resetForm();
         }
@@ -620,55 +690,43 @@ class ShoppingApp {
         modal.style.display = 'block';
     }
 
-    // ОБНОВИТЕ метод fillFormWithData для корректного заполнения категорий:
-	fillFormWithData(purchaseData) {
-		document.getElementById('purchase-id').value = purchaseData.id || '';
-		document.getElementById('purchase-date').value = purchaseData.date || '';
-		document.getElementById('purchase-store').value = purchaseData.store_id || '';
-		document.getElementById('purchase-name').value = purchaseData.name || '';
-		
-		// Для категории - устанавливаем значение после загрузки списка
-		setTimeout(() => {
-			document.getElementById('purchase-category').value = purchaseData.gruppa || '';
-		}, 100);
-		
-		document.getElementById('purchase-price').value = purchaseData.price || '';
-		document.getElementById('purchase-quantity').value = purchaseData.quantity || '1';
-		
-		// Для единицы измерения - устанавливаем значение после загрузки списка
-		setTimeout(() => {
-			document.getElementById('purchase-unit').value = purchaseData.item || 'шт.';
-		}, 100);
-		
-		// Стоимость берем напрямую из базы (ручной ввод)
-		document.getElementById('purchase-amount').value = purchaseData.amount || '';
-		document.getElementById('purchase-characteristics').value = purchaseData.characteristic || '';
-	}
-
-    // РАСЧЕТ СУММЫ В ФОРМЕ
-    calculateFormTotal() {
-        const price = parseFloat(document.getElementById('purchase-price').value) || 0;
-        const quantity = parseFloat(document.getElementById('purchase-quantity').value) || 0;
-        const total = price * quantity;
-        document.getElementById('total-amount').textContent = total.toFixed(2);
+    // ЗАПОЛНЕНИЕ ФОРМЫ ДАННЫМИ
+    fillFormWithData(purchaseData) {
+        document.getElementById('purchase-id').value = purchaseData.id || '';
+        document.getElementById('purchase-date').value = purchaseData.date || '';
+        document.getElementById('purchase-store').value = purchaseData.store_id || '';
+        document.getElementById('purchase-name').value = purchaseData.name || '';
+        
+        setTimeout(() => {
+            document.getElementById('purchase-category').value = purchaseData.gruppa || '';
+        }, 100);
+        
+        document.getElementById('purchase-price').value = purchaseData.price || '';
+        document.getElementById('purchase-quantity').value = purchaseData.quantity || '1';
+        
+        setTimeout(() => {
+            document.getElementById('purchase-unit').value = purchaseData.item || 'шт.';
+        }, 100);
+        
+        document.getElementById('purchase-amount').value = purchaseData.amount || '';
+        document.getElementById('purchase-characteristics').value = purchaseData.characteristic || '';
     }
 
-    // СБРОС ФОРМЫ - ОБНОВЛЕННАЯ ВЕРСИЯ
-	resetForm() {
-		document.getElementById('purchase-form').reset();
-		document.getElementById('purchase-id').value = '';
-		document.getElementById('purchase-date').valueAsDate = new Date();
-		document.getElementById('purchase-quantity').value = '1';
-		document.getElementById('purchase-unit').value = 'шт.';
-		
-		// Очистка ошибок
-		document.querySelectorAll('.error-message').forEach(el => {
-			el.textContent = '';
-		});
-		document.querySelectorAll('.form-group').forEach(el => {
-			el.classList.remove('error');
-		});
-	}
+    // СБРОС ФОРМЫ
+    resetForm() {
+        document.getElementById('purchase-form').reset();
+        document.getElementById('purchase-id').value = '';
+        document.getElementById('purchase-date').valueAsDate = new Date();
+        document.getElementById('purchase-quantity').value = '1';
+        document.getElementById('purchase-unit').value = 'шт.';
+        
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.textContent = '';
+        });
+        document.querySelectorAll('.form-group').forEach(el => {
+            el.classList.remove('error');
+        });
+    }
 
     // ВАЛИДАЦИЯ ФОРМЫ
     validateForm() {
@@ -682,7 +740,6 @@ class ShoppingApp {
             { id: 'purchase-quantity', message: 'Укажите количество' }
         ];
         
-        // Сброс предыдущих ошибок
         fields.forEach(field => {
             const inputElement = document.getElementById(field.id);
             if (!inputElement) return;
@@ -693,14 +750,12 @@ class ShoppingApp {
             if (formGroup) formGroup.classList.remove('error');
             if (errorElement) errorElement.textContent = '';
             
-            // Проверка на заполненность
             if (!inputElement.value.trim()) {
                 if (formGroup) formGroup.classList.add('error');
                 if (errorElement) errorElement.textContent = field.message;
                 isValid = false;
             }
             
-            // Дополнительная проверка для числовых полей
             if (field.id.includes('price') || field.id.includes('quantity')) {
                 const value = parseFloat(inputElement.value);
                 if (isNaN(value) || value <= 0) {
@@ -714,63 +769,59 @@ class ShoppingApp {
         return isValid;
     }
 
-    // ОБНОВИТЕ метод savePurchase для использования ручного ввода стоимости:
-	async savePurchase() {
-		if (!this.validateForm()) {
-			this.showNotification('Пожалуйста, исправьте ошибки в форме', 'error');
-			return;
-		}
-		
-		try {
-			// Получаем выбранный магазин для названия
-			const storeId = parseInt(document.getElementById('purchase-store').value);
-			const selectedStore = this.storesCache.find(store => store.id === storeId);
-			
-			const formData = {
-				date: document.getElementById('purchase-date').value,
-				store_id: storeId,
-				shop: selectedStore ? selectedStore.shop : 'Неизвестный магазин',
-				name: document.getElementById('purchase-name').value,
-				gruppa: document.getElementById('purchase-category').value,
-				price: parseFloat(document.getElementById('purchase-price').value),
-				quantity: parseFloat(document.getElementById('purchase-quantity').value),
-				item: document.getElementById('purchase-unit').value,
-				characteristic: document.getElementById('purchase-characteristics').value,
-				amount: parseFloat(document.getElementById('purchase-amount').value) // ← Берем РУЧНОЙ ввод
-			};
-			
-			const purchaseId = document.getElementById('purchase-id').value;
-			let result;
-			
-			if (purchaseId) {
-				// Редактирование существующей записи
-				result = await supabase
-					.from('shops')
-					.update(formData)
-					.eq('id', purchaseId);
-			} else {
-				// Добавление новой записи
-				result = await supabase
-					.from('shops')
-					.insert([formData]);
-			}
-			
-			if (result.error) throw result.error;
-			
-			this.showNotification(
-				purchaseId ? 'Покупка обновлена!' : 'Покупка добавлена!', 
-				'success'
-			);
-			
-			// Закрываем модальное окно и обновляем таблицу
-			document.getElementById('purchase-modal').style.display = 'none';
-			this.refreshData();
-			
-		} catch (error) {
-			console.error('Ошибка сохранения покупки:', error);
-			this.showNotification('Ошибка при сохранении покупки: ' + error.message, 'error');
-		}
-	}
+    // СОХРАНЕНИЕ ПОКУПКИ
+    async savePurchase() {
+        if (!this.validateForm()) {
+            this.showNotification('Пожалуйста, исправьте ошибки в форме', 'error');
+            return;
+        }
+        
+        try {
+            const storeId = parseInt(document.getElementById('purchase-store').value);
+            const selectedStore = this.storesCache.find(store => store.id === storeId);
+            
+            const formData = {
+                date: document.getElementById('purchase-date').value,
+                store_id: storeId,
+                shop: selectedStore ? selectedStore.shop : 'Неизвестный магазин',
+                name: document.getElementById('purchase-name').value,
+                gruppa: document.getElementById('purchase-category').value,
+                price: parseFloat(document.getElementById('purchase-price').value),
+                quantity: parseFloat(document.getElementById('purchase-quantity').value),
+                item: document.getElementById('purchase-unit').value,
+                characteristic: document.getElementById('purchase-characteristics').value,
+                amount: parseFloat(document.getElementById('purchase-amount').value)
+            };
+            
+            const purchaseId = document.getElementById('purchase-id').value;
+            let result;
+            
+            if (purchaseId) {
+                result = await supabase
+                    .from('shops')
+                    .update(formData)
+                    .eq('id', purchaseId);
+            } else {
+                result = await supabase
+                    .from('shops')
+                    .insert([formData]);
+            }
+            
+            if (result.error) throw result.error;
+            
+            this.showNotification(
+                purchaseId ? 'Покупка обновлена!' : 'Покупка добавлена!', 
+                'success'
+            );
+            
+            document.getElementById('purchase-modal').style.display = 'none';
+            this.refreshData();
+            
+        } catch (error) {
+            console.error('Ошибка сохранения покупки:', error);
+            this.showNotification('Ошибка при сохранении покупки: ' + error.message, 'error');
+        }
+    }
 
     // УДАЛЕНИЕ ПОКУПКИ
     async deletePurchase(purchaseId) {
@@ -794,8 +845,7 @@ class ShoppingApp {
 
     // УВЕДОМЛЕНИЯ
     showNotification(message, type = 'info') {
-        // Временная реализация
-        alert(`[${type.toUpperCase()}] ${message}`);
+        window.notifications[type]?.(message) || window.notifications.info(message);
     }
 }
 

@@ -1,4 +1,4 @@
-// admin.js - Административная панель (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+// admin.js - Административная панель
 class AdminPanel {
     constructor() {
         this.citiesCache = null;
@@ -7,14 +7,28 @@ class AdminPanel {
 
     async init() {
         // Проверка аутентификации
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session) {
-            window.location.href = 'index.html';
-            return;
-        }
+        // Проверка аутентификации
+		const { data: { session } } = await supabase.auth.getSession();
+		
+		if (!session) {
+			window.location.href = 'index.html';
+			return;
+		}
 
-        console.log('Админ-панель для пользователя:', session.user.email);
+		// ПРОВЕРКА ПРАВ АДМИНИСТРАТОРА
+		const { data: profile, error: profileError } = await supabase
+			.from('profiles')
+			.select('role')
+			.eq('id', session.user.id)
+			.single();
+
+		if (profileError || !profile || profile.role !== 'admin') {
+			window.notifications.error('Недостаточно прав для доступа к админ-панели');
+			setTimeout(() => window.location.href = 'app.html', 2000);
+			return;
+		}
+
+		console.log('Админ-панель для администратора:', session.user.email);
         
         // Сначала загружаем кэш городов
         await this.loadCitiesCache();
@@ -381,8 +395,8 @@ class AdminPanel {
 
     // УВЕДОМЛЕНИЯ
     showNotification(message, type = 'info') {
-        alert(`[${type.toUpperCase()}] ${message}`);
-    }
+    window.notifications[type]?.(message) || window.notifications.info(message);
+	}
 }
 
 // ЗАПУСК АДМИН-ПАНЕЛИ

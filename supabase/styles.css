@@ -28,7 +28,9 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+/* ================================================== */
 /* === НАВИГАЦИЯ И КНОПКИ === */
+/* ================================================== */
 .app-nav {
     display: flex;
     gap: 10px;
@@ -104,7 +106,9 @@ body {
     padding: 8px 12px;
 }
 
+/* ================================================== */
 /* === АДМИН-ПАНЕЛЬ === */
+/* ================================================== */
 .tab-navigation {
     display: flex;
     gap: 5px;
@@ -561,4 +565,66 @@ body {
     color: #6c757d !important;
     font-style: italic !important;
     margin-left: 5px !important;
+}
+
+/* ================================================== */
+/* СТИЛИ ПАГИНАЦИИ */
+/* ================================================== */
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    flex-wrap: wrap;
+}
+
+.pagination-controls select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+}
+
+.page-info {
+    font-weight: 600;
+    color: #495057;
+    min-width: 250px;
+    text-align: center;
+}
+
+/* Индикатор загрузки для пагинации */
+.loading-indicator {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Адаптивность для пагинации */
+@media (max-width: 768px) {
+    .pagination-controls {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .page-info {
+        min-width: auto;
+        order: -1;
+    }
 }
