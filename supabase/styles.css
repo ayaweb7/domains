@@ -263,6 +263,94 @@ body {
 }
 
 /* ================================================== */
+/* СТИЛИ ДЛЯ АДМИН-ПАНЕЛИ */
+/* ================================================== */
+
+/* Индикаторы загрузки таблиц */
+.tabulator-table.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.tabulator-table.loading::after {
+    content: "Загрузка...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 100;
+}
+
+/* Индикатор сохранения строки */
+.tabulator-row.saving {
+    background-color: #fff3cd !important;
+}
+
+.tabulator-row.saving .edit-btn,
+.tabulator-row.saving .delete-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Улучшенные кнопки действий */
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    font-size: 16px;
+    margin: 0 2px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover:not(:disabled) {
+    background: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+.delete-btn:hover:not(:disabled) {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.1);
+}
+
+.edit-btn:disabled, .delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Анимация для уведомлений в админке */
+.admin-notification {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 4px;
+    animation: slideInRight 0.3s ease;
+}
+
+/* Адаптивность для админ-панели */
+@media (max-width: 768px) {
+    .admin-panel .tabulator-cell {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .admin-panel .edit-btn, 
+    .admin-panel .delete-btn {
+        padding: 3px 6px;
+        font-size: 14px;
+    }
+}
+
+/* ================================================== */
 /* КОМПАКТНАЯ ФОРМА ДОБАВЛЕНИЯ ПОКУПОК */
 /* ================================================== */
 

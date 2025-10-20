@@ -71,5 +71,82 @@
     <script src="auth.js"></script>
 	<script src="notifications.js"></script>
     <script src="admin.js"></script>
+	
+	<!-- Модальное окно для добавления магазина -->
+	<div id="add-shop-modal" class="modal">
+		<div class="modal-content compact-form">
+			<span class="close-modal" onclick="closeModal('add-shop-modal')">&times;</span>
+			<h3>➕ Добавить магазин</h3>
+			
+			<form id="add-shop-form">
+				<div class="form-grid">
+					<div class="form-group full-width">
+						<label>Название магазина *</label>
+						<input type="text" id="new-shop-name" required placeholder="Введите название">
+					</div>
+					
+					<div class="form-group">
+						<label>Город *</label>
+						<select id="new-shop-city" required>
+							<option value="">Выберите город</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<label>Улица</label>
+						<input type="text" id="new-shop-street" placeholder="Название улицы">
+					</div>
+					
+					<div class="form-group">
+						<label>Дом</label>
+						<input type="text" id="new-shop-house" placeholder="Номер дома">
+					</div>
+					
+					<div class="form-group full-width">
+						<label>Телефон</label>
+						<input type="text" id="new-shop-phone" placeholder="Номер телефона">
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<button type="submit" class="btn-primary">💾 Сохранить</button>
+					<button type="button" class="btn-secondary" onclick="closeModal('add-shop-modal')">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Модальное окно для добавления города -->
+	<div id="add-city-modal" class="modal">
+		<div class="modal-content compact-form">
+			<span class="close-modal" onclick="closeModal('add-city-modal')">&times;</span>
+			<h3>🏙️ Добавить город</h3>
+			
+			<form id="add-city-form">
+				<div class="form-grid">
+					<div class="form-group">
+						<label>Город (RU) *</label>
+						<input type="text" id="new-city-ru" required placeholder="Название на русском">
+					</div>
+					
+					<div class="form-group">
+						<label>Город (EN)</label>
+						<input type="text" id="new-city-en" placeholder="Название на английском">
+					</div>
+					
+					<div class="form-group">
+						<label>Код</label>
+						<input type="text" id="new-city-code" placeholder="Код города">
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<button type="submit" class="btn-primary">💾 Сохранить</button>
+					<button type="button" class="btn-secondary" onclick="closeModal('add-city-modal')">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
 </body>
 </html>
