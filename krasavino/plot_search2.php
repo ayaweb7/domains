@@ -131,7 +131,7 @@ $result->close(); // Товары, отсортированные по алфа�
 					<select id='acct_yr' name='acct_yr' size='7'><!---->
 						<option selected>Все годы</option>
 <?php
-						for ($y = 2013 ; $y < 2025 ; ++$y)
+						for ($y = 2013 ; $y < 2026 ; ++$y)
 							printf("<option>$y</option>");
 ?>						
 					</select>

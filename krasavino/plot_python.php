@@ -62,7 +62,7 @@ include ("blocks/header_admin.php");
 					<select id='acct_yr' name='acct_yr' size='7'><!---->
 						<option selected>все годы</option>
 <?php
-						for ($y = 2013 ; $y < 2023 ; ++$y)
+						for ($y = 2013 ; $y < 2026 ; ++$y)
 							printf("<option>$y</option>");
 ?>						
 					</select>
